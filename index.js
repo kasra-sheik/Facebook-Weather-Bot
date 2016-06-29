@@ -39,15 +39,20 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id
         if (event.message && event.message.text) {
             text = event.message.text
+
             if (text === 'hi') {
                 sendGenericMessage(sender)
                 continue
             }
-
+            if(text.substring(0,6) == "parrot") {
+                sendTextMessage(sender, text.substring(0, 200))
+                continue
+            }
             if(text == 'how are you today?') {
                 sendTextMessage(sender, "I'm not bad actually, welcome to mavatar!")
+                continue
             }
-            sendTextMessage(sender, "parrot: " + text.substring(0, 200))
+            //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
         }
         if (event.postback) {
             text = JSON.stringify(event.postback)
