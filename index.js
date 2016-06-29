@@ -13,12 +13,12 @@ app.use(bodyParser.json())
 
 // Index route
 app.get('/', function (req, res) {
-    res.send('Hello world, I am a chat bot')
+    res.send('Hello world, I am a chat bot..Lets do this!')
 })
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
-    if (req.query['hub.verify_token'] === 'Aha_Moment_Labs') {
+    if (req.query['hub.verify_token'] === 'parrotBot') {
         res.send(req.query['hub.challenge'])
     }
     res.send('Error, wrong token')
