@@ -1,7 +1,5 @@
 var express = require('express')
-const crypto = require('crypto');
 var bodyParser = require('body-parser')
-const fetch = require('node-fetch');
 var request = require('request')
 var app = express()
 
@@ -42,23 +40,16 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             text = event.message.text
 
+            if(text.substring(0,6) == "parrot") {
+                sendTextMessage(sender, text.substring(7,200))
+                continue
+
+            }
             if (text === 'hi') {
                 sendGenericMessage(sender)
                 continue
             }
-            if(text.substring(0,6) == "parrot") {
 
-                var num = 0
-                for(i = 0; i< text.length; i++) {
-                    if(text[i] == ' '){
-                        break
-                    }
-                    num++
-                    continue
-                }
-                sendTextMessage(sender, text.substring(num, 200))
-                continue
-            }
             if(text == 'how are you today?') {
                 sendTextMessage(sender, "I'm not bad actually, welcome to mavatar!")
                 continue
