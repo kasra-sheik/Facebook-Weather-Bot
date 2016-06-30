@@ -45,15 +45,20 @@ app.post('/webhook/', function (req, res) {
                 continue
 
             }
-            if (text === 'hi') {
+            else if (text === 'hi') {
                 sendGenericMessage(sender)
                 continue
             }
 
-            if(text == 'how are you today?') {
+            else if(text == 'how are you today?') {
                 sendTextMessage(sender, "I'm not bad actually, welcome to mavatar!")
                 continue
             }
+            else {
+                sendTextMessage(sender, "parrot doesn't understand yet.. parrot is simple!!!!!!")
+
+            }
+
             //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
         }
         if (event.postback) {
