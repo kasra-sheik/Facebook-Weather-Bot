@@ -113,9 +113,9 @@ function sendGenericMessage(sender) {
                         "url": "https://www.facebook.com/groups/aichatbots/",
                         "title": "Open in Browser"
                     }, {
-                        "type": "web_url",
-                        "url": "https://www.reddit.com/r/Chat_Bots/",
-                        "title": "Chatbots on Reddit"
+                        "type": "postback",
+                        "title": "Add to Cart",
+                        "payload":"Added to Cart!"
                     },{
                         "type": "web_url",
                         "url": "https://twitter.com/aichatbots",
