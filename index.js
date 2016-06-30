@@ -30,6 +30,16 @@ app.listen(app.get('port'), function() {
 })
 
 
+app.get('/test', function(req,res) {
+
+
+    var response = httpGetRequest("http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json")
+    var obj = JSON.parse(response)
+
+    res.send(obj.cityName)
+})
+
+
 // API End Point - added by Stefan
 
 //API IP 
@@ -42,13 +52,9 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             text = event.message.text
             if(text == 'generate') {
-                
-             
-                // var response = httpGetRequest("http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json")
-                // var obj = JSON.parse(response)
+                sendTextMessage(seder, "generating!")               
 
-
-                // sendTextMessage(sender, obj.cityName)
+                //sendTextMessage(sender, obj.cityName)
 
                
             }
