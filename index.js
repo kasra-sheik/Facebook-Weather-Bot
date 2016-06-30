@@ -45,7 +45,7 @@ app.post('/webhook/', function (req, res) {
                 continue
 
             }
-            else if (text === 'red dress') {
+            else if (text.includes('red dress')) {
                 sendGenericMessage(sender)
                 continue
             }
