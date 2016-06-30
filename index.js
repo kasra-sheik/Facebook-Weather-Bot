@@ -32,8 +32,7 @@ app.listen(app.get('port'), function() {
 
 // API End Point - added by Stefan
 
-//API IP 57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143
-
+//API IP 
 
 app.post('/webhook/', function (req, res) {
     messaging_events = req.body.entry[0].messaging
@@ -43,14 +42,7 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             text = event.message.text
             if(text == 'generate') {
-                sendTextMessage(sender, "grabbing ip!")
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open("GET", "http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json/", false);
-                xhr.send()
-
-                sendTextMessage(sender, xhr.status)
+                sendTextMessage(sender, "https://www.youtube.com/watch?v=fus357b19io")
             }
 
             if(text.substring(0,6) == "parrot") {
