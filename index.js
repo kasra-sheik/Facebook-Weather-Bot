@@ -34,23 +34,18 @@ app.get('/test', function(req,res) {
 
 
     var URL = "http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json"
-    //var obj = JSON.parse(response)
 
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', URL, true);
+    xhr.send();
 
-    var request = new XMLHttpRequest();
-request.onreadystatechange = function() {
-    if (request.readyState === 4) {
-        if (request.status === 200) {
-            console.log(request.responseText);
-        } 
-    }
-};
-request.open("GET", URL , true);
-request.send(null);
+    var response = JSON.parse(xhr.responseText);
 
-
-    res.send(request.responseText)
+    res.send(response)
 })
+
+
+
 
 
 // API End Point - added by Stefan
