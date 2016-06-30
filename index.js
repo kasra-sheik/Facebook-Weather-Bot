@@ -41,7 +41,7 @@ app.get('/test', function(req,res) {
 
     var response = JSON.parse(xhr.responseText);
 
-    res.send(response)
+    res.send("hello!")
 })
 
 
