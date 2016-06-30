@@ -1,5 +1,7 @@
 var express = require('express')
+const crypto = require('crypto');
 var bodyParser = require('body-parser')
+const fetch = require('node-fetch');
 var request = require('request')
 var app = express()
 
@@ -45,7 +47,7 @@ app.post('/webhook/', function (req, res) {
                 continue
             }
             if(text.substring(0,6) == "parrot") {
-                sendTextMessage(sender, "parrot: " + text.substring(6, 200))
+                sendTextMessage(sender, text.substring(6, 200))
                 continue
             }
             if(text == 'how are you today?') {
@@ -64,7 +66,7 @@ app.post('/webhook/', function (req, res) {
 })
 
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
-
+var 
 // function to echo back messages - added by Stefan
 
 function sendTextMessage(sender, text) {
