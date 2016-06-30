@@ -52,7 +52,7 @@ app.post('/webhook/', function (req, res) {
             }
             else if(text == 'buy') {
                 sendTextMessage(sender, "Thanks for your order! We'll let you know when your running shoes and cashmere sweater have shipped.")
-
+                continue
             }
             else if (text === 'hi') {
                 sendGenericMessage(sender)
