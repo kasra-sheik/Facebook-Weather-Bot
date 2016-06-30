@@ -116,17 +116,18 @@ function sendGenericMessage(sender) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "Ai Chat Bot Communities",
-                    "subtitle": "Communities to Follow",
-                    "image_url": "http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-930x659.jpg",
+                    "title": "Red Dress",
+                    "subtitle": "Sick and Clean",
+                    "image_url": "img/rd1.jpg",
                     "buttons": [{
-                        "type": "web_url",
-                        "url": "https://www.facebook.com/groups/aichatbots/",
-                        "title": "FB Chatbot Group"
+                        "type": "web-url",
+                        "url": "https://mavatar.com/catalog/product?category_order=0&no=12&order=3&prev_category=852&price_from=1&price_to=8&product_id=2304585",
+                        "title": "Open in Browser"
                     }, {
-                        "type": "web_url",
-                        "url": "https://www.reddit.com/r/Chat_Bots/",
-                        "title": "Chatbots on Reddit"
+                        "type": "postback",
+                        "title": "Add to Cart",
+                        "payload": "Added to Cart!"
+
                     },{
                         "type": "web_url",
                         "url": "https://twitter.com/aichatbots",
