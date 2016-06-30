@@ -105,13 +105,13 @@ function sendGenericMessage(sender) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "Ai Chat Bot Communities",
-                    "subtitle": "Communities to Follow",
+                    "title": "Macy's Red Dress",
+                    "subtitle": "Slick and Clean",
                     "image_url": "http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-930x659.jpg",
                     "buttons": [{
                         "type": "web_url",
                         "url": "https://www.facebook.com/groups/aichatbots/",
-                        "title": "FB Chatbot Group"
+                        "title": "Open in Browser"
                     }, {
                         "type": "web_url",
                         "url": "https://www.reddit.com/r/Chat_Bots/",
