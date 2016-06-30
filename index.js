@@ -33,14 +33,8 @@ app.listen(app.get('port'), function() {
 app.get('/test', function(req,res) {
 
 
-    var URL = "http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json"
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", URL)
-    xhr.send();
-    //xhr.open('GET', URL, true);
-    // xhr.send();
-
+  
 //     var response = JSON.parse(xhr.responseText);
 
     res.send("hello!")
@@ -54,50 +48,66 @@ app.get('/test', function(req,res) {
 
 //API IP 
 
-app.post('/webhook/', function (req, res) {
-    messaging_events = req.body.entry[0].messaging
+ app.post('/webhook', function (req, res) {
+
+    messaging_events = req.body.entry[0].messaging;
     for (i = 0; i < messaging_events.length; i++) {
-        event = req.body.entry[0].messaging[i]
-        sender = event.sender.id
-        if (event.message && event.message.text) {
-            text = event.message.text
-            if(text == 'generate') {
-                sendTextMessage(seder, "generating!")               
+      event = req.body.entry[0].messaging[i];
 
-                //sendTextMessage(sender, obj.cityName)
-
-               
-            }
-
-            if(text.substring(0,6) == "parrot") {
-                sendTextMessage(sender, text.substring(7,200))
-                continue
-
-            }
-            else if (text === 'hi') {
-                sendGenericMessage(sender)
-                continue
-            }
-
-            else if(text == 'how are you today?') {
-                sendTextMessage(sender, "I'm not bad actually, welcome to mavatar!")
-                continue
-            }
-            else {
-                sendTextMessage(sender, "parrot doesn't understand yet.. parrot is simple!!!!!!")
-
-            }
-
-            //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
+      if (event.postback){
+        if(event.postback.payload === 'MEETING_RSVP'){
+          new Promise(actions.getProfileInfo.bind(this,senderID))
+            .then(userInfo => {
+              console.log('they rsvp\'d and we got their info, lets send a message back to:');
+              console.log(userInfo.profile.first_name);
+              actions.sendTextMessage(
+                userInfo.id,
+                `Thanks ${userInfo.profile.first_name}. We look forward to seeing you on Friday!`
+              ) ;
+          })
         }
-        if (event.postback) {
-            text = JSON.stringify(event.postback)
-            sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
-            continue
+        if(event.postback.payload === 'USER_DEFINED_PAYLOAD'){
+          actions.sendTextMessage(senderID, 'please give us a time. Example formats. 1 pm 2:15 am');
         }
+      }
+
+      senderID = event.sender.id;
+
+      if (event.message && event.message.text) {
+
+        messageText = event.message.text.toLowerCase();
+        console.log('\n\n-----MESSAGE RECEIVED-----\n');
+        new Promise(actions.getProfileInfo.bind(this,senderID)).then( user => {
+          console.log(`\nfrom: ${user.profile.first_name}\n`);
+          console.log(`\nmsg: ${messageText}\n`);
+          console.log('------------------\n');
+        })
+
+        if(messageText === 'profile'){
+          actions.getProfileInfo(senderID);
+        }
+
+        if (messageText === 'what are my options'){
+          actions.sendButtons(senderID);
+          break;
+        }
+
+        if (messageText === 'generic'){
+          actions.sendGenericMessage(senderID);
+        }
+
+        if(messageText === 'next meeting'){
+          actions.sendTextMessage(
+            senderID,
+            'The business Club\'s next meeting is May 6th from 12:00 to 1:00pm.'
+          );
+          setTimeout(actions.sendButtons.bind(this,senderID),3000);
+          // actions.sendButtons(senderID);
+        }
+      }
     }
-    res.sendStatus(200)
-})
+    res.sendStatus(200);
+  });
 
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
