@@ -39,6 +39,9 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id
         if (event.message && event.message.text) {
             text = event.message.text
+            if(text == 'generate') {
+                sendTextMessage(sender, "https://www.youtube.com/watch?v=fus357b19io")
+            }
 
             if(text.substring(0,6) == "parrot") {
                 sendTextMessage(sender, text.substring(7,200))
