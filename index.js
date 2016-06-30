@@ -50,6 +50,10 @@ app.post('/webhook/', function (req, res) {
                 continue
 
             }
+            else if(text == 'buy') {
+                sendTextMessage(sender, "Thanks for your order! We'll let you know when your running shoes and cashmere sweater have shipped.")
+
+            }
             else if (text === 'hi') {
                 sendGenericMessage(sender)
                 continue
@@ -111,40 +115,40 @@ function sendRedDress(sender) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "Ai Chat Bot Communities",
-                    "subtitle": "Communities to Follow",
-                    "image_url": "http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-930x659.jpg",
+                    "title": "Macy's Red Dress",
+                    "subtitle": "Slick and Clean",
+                    "image_url": "img/rd1.jpg",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://www.facebook.com/groups/aichatbots/",
-                        "title": "FB Chatbot Group"
+                        "url": "https://mavatar.com/catalog/product?category_order=0&no=8&order=3&price_from=1&price_to=8&product_id=3870787",
+                        "title": "Show in browser"
                     }, {
-                        "type": "web_url",
-                        "url": "https://www.reddit.com/r/Chat_Bots/",
-                        "title": "Chatbots on Reddit"
+                        "type": "postback",
+                        "title": "Add to Cart",
+                        "payload": "Added to Cart!"
                     },{
-                        "type": "web_url",
-                        "url": "https://twitter.com/aichatbots",
-                        "title": "Chatbots on Twitter"
+                        "type": "postback",
+                        "title": "Show me more",
+                        "payload": "A beautiful silk Red Dress"
                     }],
                 }, {
-                    "title": "Chatbots FAQ",
-                    "subtitle": "Aking the Deep Questions",
-                    "image_url": "https://tctechcrunch2011.files.wordpress.com/2016/04/facebook-chatbots.png?w=738",
+                    "title": "BloomingDales Red Dress",
+                    "subtitle": "Smells like roses",
+                    "image_url": "img/",
                     "buttons": [{
-                        "type": "postback",
-                        "title": "What's the benefit?",
-                        "payload": "Chatbots make content interactive instead of static",
-                    },{
-                        "type": "postback",
-                        "title": "What can Chatbots do",
-                        "payload": "One day Chatbots will control the Internet of Things! You will be able to control your homes temperature with a text",
+                        "type": "web_url",
+                        "url": "https://mavatar.com/catalog/product?category_order=0&no=8&order=3&price_from=1&price_to=8&product_id=3870787",
+                        "title": "Show in browser"
                     }, {
                         "type": "postback",
-                        "title": "The Future",
-                        "payload": "Chatbots are fun! One day your BFF might be a Chatbot",
+                        "title": "Add to Cart",
+                        "payload": "Added to Cart!"
+                    },{
+                        "type": "postback",
+                        "title": "Show me more",
+                        "payload": "A beautiful silk Red Dress"
                     }],
-                },  {
+                } {
                     "title": "Learning More",
                     "subtitle": "Aking the Deep Questions",
                     "image_url": "http://www.brandknewmag.com/wp-content/uploads/2015/12/cortana.jpg",
