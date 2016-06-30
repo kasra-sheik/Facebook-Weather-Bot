@@ -107,7 +107,7 @@ function sendGenericMessage(sender) {
                 "elements": [{
                     "title": "Macy's Red Dress",
                     "subtitle": "Slick and Clean",
-                    "image_url": "http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-930x659.jpg",
+                    "image": "img/rd1.jpg",
                     "buttons": [{
                         "type": "web_url",
                         "url": "https://www.facebook.com/groups/aichatbots/",
@@ -115,7 +115,7 @@ function sendGenericMessage(sender) {
                     }, {
                         "type": "postback",
                         "title": "Add to Cart",
-                        sendTextMessage(sender, "Added to Cart")
+                        "payload":"Added to Cart!"
                     },{
                         "type": "web_url",
                         "url": "https://twitter.com/aichatbots",
