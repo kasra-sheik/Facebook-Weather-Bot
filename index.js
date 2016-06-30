@@ -49,7 +49,7 @@ request.open("GET", URL , true);
 request.send(null);
 
 
-    res.send(reqeust.responseText)
+    res.send(request.responseText)
 })
 
 
