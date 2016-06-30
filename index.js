@@ -37,7 +37,7 @@ app.get('/test', function(req,res) {
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', URL, true);
-    xhr.send();
+    // xhr.send();
 
 //     var response = JSON.parse(xhr.responseText);
 
