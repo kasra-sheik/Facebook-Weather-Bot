@@ -36,7 +36,7 @@ app.get('/test', function(req,res) {
     var URL = "http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json"
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', URL, true);
+    //xhr.open('GET', URL, true);
     // xhr.send();
 
 //     var response = JSON.parse(xhr.responseText);
