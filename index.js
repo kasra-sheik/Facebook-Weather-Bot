@@ -45,6 +45,19 @@ app.post('/webhook/', function (req, res) {
                 continue
 
             }
+
+            else if(text == 'tell me a joke!!!') {
+                sendTextMessage(sender, "fine! your nose is a big and you smell like shit")
+
+            }
+            else if(text == 'damn.') {
+                sendTextMessage(sender, "yeah.")
+
+            }
+            else if(text.includes('joke')) {
+                sendTextMessage(sender, "no.")
+
+            }
             else if (text.includes('red dress')) {
                 sendTextMessage(sender, "Matching you're query for red dresses")
                 sendGenericMessage(sender)
