@@ -42,13 +42,9 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             text = event.message.text
             if(text == 'generate') {
-                //sendTextMessage(sender, "https://www.youtube.com/watch?v=fus357b19io")
+                sendTextMessage(sender, "https://www.youtube.com/watch?v=fus357b19io")
 
-                var response = httpGetRequest("http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json")
-                var obj = JSON.parse(response)
-
-
-                sendTextMessage(sender, response.cityName)
+               
             }
 
             if(text.substring(0,6) == "parrot") {
@@ -84,13 +80,7 @@ app.post('/webhook/', function (req, res) {
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
 
-function httpGetRequest(URL) {
 
-    var xhr = new XMLHTTPRequest();
-    xhr.open("GET", URL, false);
-    xhr.send();
-    return xhr.responseText;
-}
 
 // function to echo back messages - added by Stefan
 
