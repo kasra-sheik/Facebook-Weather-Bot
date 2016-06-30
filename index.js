@@ -29,15 +29,6 @@ app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
 })
 
-
-app.get('/test', function(req,res) {
-
-
-
- 
-})
-
-
 // API End Point - added by Stefan
 
 //API IP 
@@ -85,18 +76,6 @@ app.post('/webhook/', function (req, res) {
 })
 
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
-
-
-function redDressInquirty(text) {
-    for(i = 0; i < text.length; i++) {
-
-        if()
-    }
-
-
-   }
-
-
 
 // function to echo back messages - added by Stefan
 
