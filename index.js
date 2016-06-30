@@ -84,20 +84,20 @@ app.get('/test', function(req,res) {
         })
 
         if(messageText === 'profile'){
-          actions.getProfileInfo(senderID);
+         getProfileInfo(senderID);
         }
 
         if (messageText === 'what are my options'){
-          actions.sendButtons(senderID);
+         sendButtons(senderID);
           break;
         }
 
         if (messageText === 'generic'){
-          actions.sendGenericMessage(senderID);
+          sendGenericMessage(senderID);
         }
 
         if(messageText === 'next meeting'){
-          actions.sendTextMessage(
+          sendTextMessage(
             senderID,
             'The business Club\'s next meeting is May 6th from 12:00 to 1:00pm.'
           );
