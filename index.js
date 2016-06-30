@@ -45,11 +45,11 @@ app.post('/webhook/', function (req, res) {
                 continue
 
             }
-            else if(text == 'red dress') {
-                sendRedDress(sender)
-                continue
+            // else if(text == 'red dress') {
+            //     sendRedDress(sender)
+            //     continue
 
-            }
+            // }
             else if(text == 'buy') {
                 sendTextMessage(sender, "Thanks for your order! We'll let you know when your running shoes and cashmere sweater have shipped.")
                 continue
