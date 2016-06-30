@@ -111,114 +111,147 @@ app.get('/test', function(req,res) {
 
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
-
-function httpGetRequest(URL) {
-
-   }
-
-
-
-// function to echo back messages - added by Stefan
-
-function sendTextMessage(sender, text) {
+module.exports = {
+  setWelcomeScreen: function(){
+    request({
+      url: `https://graph.facebook.com/v2.6/${PAGE_ID}/thread_settings?access_token=${token}`,
+      method: 'POST',
+      qs: {
+        'setting_type': 'call_to_actions',
+        'thread_state': 'new_thread',
+        'call_to_actions': [
+          {
+            'message': {
+              'text': 'Welcome to the Miramar Business Club\'s Page! Send us a message to learn more about what we do.'
+            }
+          }
+        ]
+      }
+    }, function(err, response, body){
+      if (err) console.log(err);
+      console.log('got a resonse, after setting welcome message');
+      console.log(JSON.stringify(body));
+    })
+  },
+  sendTextMessage: function (sender, text) {
     messageData = {
-        text:text
+      text:text
     }
     request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token:token},
+      method: 'POST',
+      json: {
+        recipient: {id:sender},
+        message: messageData,
+      }
     }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
+
+      console.log('messeage should be sent');
+
+      if (error) {
+        console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+        console.log('Error: ', response.body.error);
+      }
+    });
+  },
+  sendButtons: function (sender) {
+    var message = {
+      'attachment': {
+        'type':'template',
+        'payload':{
+          'template_type': 'button',
+          'text': 'See what we have planned',
+          'buttons': [
+            {
+              'type': 'web_url',
+              'title': 'View Agenda',
+              'url': 'https://docs.google.com/a/miramarsd.net/viewer?a=v&pid=sites&srcid=bWlyYW1hcnNkLm5ldHxidXNpbmVzc2NsdWJ8Z3g6NGQwZDZlNDdmNjQ3YmI2Ng'
+            },
+            {
+              'type': 'postback',
+              'title': 'RSVP',
+              'payload': 'MEETING_RSVP'
+            }
+          ]
         }
-    })
-}
-
-
-// Send an test message back as two cards.
-
-function sendGenericMessage(sender) {
-    messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
-                    "title": "Ai Chat Bot Communities",
-                    "subtitle": "Communities to Follow",
-                    "image_url": "http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-930x659.jpg",
-                    "buttons": [{
-                        "type": "web_url",
-                        "url": "https://www.facebook.com/groups/aichatbots/",
-                        "title": "FB Chatbot Group"
-                    }, {
-                        "type": "web_url",
-                        "url": "https://www.reddit.com/r/Chat_Bots/",
-                        "title": "Chatbots on Reddit"
-                    },{
-                        "type": "web_url",
-                        "url": "https://twitter.com/aichatbots",
-                        "title": "Chatbots on Twitter"
-                    }],
-                }, {
-                    "title": "Chatbots FAQ",
-                    "subtitle": "Aking the Deep Questions",
-                    "image_url": "https://tctechcrunch2011.files.wordpress.com/2016/04/facebook-chatbots.png?w=738",
-                    "buttons": [{
-                        "type": "postback",
-                        "title": "What's the benefit?",
-                        "payload": "Chatbots make content interactive instead of static",
-                    },{
-                        "type": "postback",
-                        "title": "What can Chatbots do",
-                        "payload": "One day Chatbots will control the Internet of Things! You will be able to control your homes temperature with a text",
-                    }, {
-                        "type": "postback",
-                        "title": "The Future",
-                        "payload": "Chatbots are fun! One day your BFF might be a Chatbot",
-                    }],
-                },  {
-                    "title": "Learning More",
-                    "subtitle": "Aking the Deep Questions",
-                    "image_url": "http://www.brandknewmag.com/wp-content/uploads/2015/12/cortana.jpg",
-                    "buttons": [{
-                        "type": "postback",
-                        "title": "AIML",
-                        "payload": "Checkout Artificial Intelligence Mark Up Language. Its easier than you think!",
-                    },{
-                        "type": "postback",
-                        "title": "Machine Learning",
-                        "payload": "Use python to teach your maching in 16D space in 15min",
-                    }, {
-                        "type": "postback",
-                        "title": "Communities",
-                        "payload": "Online communities & Meetups are the best way to stay ahead of the curve!",
-                    }],
-                }]  
-            } 
-        }
+      }
     }
     request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token:token},
+      method: 'POST',
+      json: {
+        recipient: {id:sender},
+        message: message,
+      }
     }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
+      if (error) {
+        console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+        console.log('Error: ', response.body.error);
+      }
+    });
+  },
+  getProfileInfo: function(sender, resolve, reject){
+    request({
+      url: 'https://graph.facebook.com/v2.6/'+sender+'?fields=first_name,last_name,profile_pic',
+      qs: {access_token:token},
+      method: 'GET',
+    }, function(err, response, body){
+      if (err) console.log(err);
+      const profile = JSON.parse(body);
+      resolve({id: sender, profile: profile});
+    }.bind(this));
+  },
+  sendGenericMessage: function(sender) {
+    messageData = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "First card",
+            "subtitle": "Element #1 of an hscroll",
+            "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+            "buttons": [{
+              "type": "web_url",
+              "url": "https://www.messenger.com/",
+              "title": "Web url"
+            }, {
+              "type": "postback",
+              "title": "Postback",
+              "payload": "Payload for first element in a generic bubble",
+            }],
+          },{
+            "title": "Second card",
+            "subtitle": "Element #2 of an hscroll",
+            "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+            "buttons": [{
+              "type": "postback",
+              "title": "Postback",
+              "payload": "Payload for second element in a generic bubble",
+            }],
+          }]
         }
-    })
+      }
+    };
+    request({
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token:token},
+      method: 'POST',
+      json: {
+        recipient: {id:sender},
+        message: messageData,
+      }
+    }, function(error, response, body) {
+      if (error) {
+        console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+        console.log('Error: ', response.body.error);
+      }
+    });
+  }
 }
 
