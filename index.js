@@ -34,224 +34,251 @@ app.get('/test', function(req,res) {
 
 
 
-  
-//     var response = JSON.parse(xhr.responseText);
-
-    res.send("hello!")
+ 
 })
-
-
-
 
 
 // API End Point - added by Stefan
 
 //API IP 
 
- app.post('/webhook', function (req, res) {
-
-    messaging_events = req.body.entry[0].messaging;
+app.post('/webhook/', function (req, res) {
+    messaging_events = req.body.entry[0].messaging
     for (i = 0; i < messaging_events.length; i++) {
-      event = req.body.entry[0].messaging[i];
+        event = req.body.entry[0].messaging[i]
+        sender = event.sender.id
+        if (event.message && event.message.text) {
+            text = event.message.text
+            if(text.substring(0,6) == "parrot") {
+                sendTextMessage(sender, text.substring(7,200))
+                continue
 
-      if (event.postback){
-        if(event.postback.payload === 'MEETING_RSVP'){
-          new Promise(actions.getProfileInfo.bind(this,senderID))
-            .then(userInfo => {
-              console.log('they rsvp\'d and we got their info, lets send a message back to:');
-              console.log(userInfo.profile.first_name);
-              actions.sendTextMessage(
-                userInfo.id,
-                `Thanks ${userInfo.profile.first_name}. We look forward to seeing you on Friday!`
-              ) ;
-          })
+            }
+            else if(text == 'red dress') {
+                sendRedDress(sender)
+                continue
+
+            }
+            else if (text === 'hi') {
+                sendGenericMessage(sender)
+                continue
+            }
+
+            else if(text == 'how are you today?') {
+                sendTextMessage(sender, "I'm not bad actually, welcome to mavatar!")
+                continue
+            }
+            else {
+                sendTextMessage(sender, "parrot doesn't understand yet.. parrot is simple!!!!!!")
+
+            }
+
+            //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
         }
-        if(event.postback.payload === 'USER_DEFINED_PAYLOAD'){
-          actions.sendTextMessage(senderID, 'please give us a time. Example formats. 1 pm 2:15 am');
+        if (event.postback) {
+            text = JSON.stringify(event.postback)
+            sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+            continue
         }
-      }
-
-      senderID = event.sender.id;
-
-      if (event.message && event.message.text) {
-
-        messageText = event.message.text.toLowerCase();
-        console.log('\n\n-----MESSAGE RECEIVED-----\n');
-        new Promise(actions.getProfileInfo.bind(this,senderID)).then( user => {
-          console.log(`\nfrom: ${user.profile.first_name}\n`);
-          console.log(`\nmsg: ${messageText}\n`);
-          console.log('------------------\n');
-        })
-
-        if(messageText === 'profile'){
-         getProfileInfo(senderID);
-        }
-
-        if (messageText === 'what are my options'){
-         sendButtons(senderID);
-          break;
-        }
-
-        if (messageText === 'generic'){
-          sendGenericMessage(senderID);
-        }
-
-        if(messageText === 'next meeting'){
-          sendTextMessage(
-            senderID,
-            'The business Club\'s next meeting is May 6th from 12:00 to 1:00pm.'
-          );
-          setTimeout(actions.sendButtons.bind(this,senderID),3000);
-          // actions.sendButtons(senderID);
-        }
-      }
     }
-    res.sendStatus(200);
-  });
+    res.sendStatus(200)
+})
 
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
-module.exports = {
-  setWelcomeScreen: function(){
+
+function redDressInquirty(text) {
+    for(i = 0; i < text.length; i++) {
+
+        if()
+    }
+
+
+   }
+
+
+
+// function to echo back messages - added by Stefan
+
+function sendTextMessage(sender, text) {
+    messageData = {
+        text:text
+    }
     request({
-      url: `https://graph.facebook.com/v2.6/${PAGE_ID}/thread_settings?access_token=${token}`,
-      method: 'POST',
-      qs: {
-        'setting_type': 'call_to_actions',
-        'thread_state': 'new_thread',
-        'call_to_actions': [
-          {
-            'message': {
-              'text': 'Welcome to the Miramar Business Club\'s Page! Send us a message to learn more about what we do.'
-            }
-          }
-        ]
-      }
-    }, function(err, response, body){
-      if (err) console.log(err);
-      console.log('got a resonse, after setting welcome message');
-      console.log(JSON.stringify(body));
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
     })
-  },
-  sendTextMessage: function (sender, text) {
+}
+
+
+// Send an test message back as two cards.
+
+
+function sendRedDress(sender) {
     messageData = {
-      text:text
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Ai Chat Bot Communities",
+                    "subtitle": "Communities to Follow",
+                    "image_url": "http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-930x659.jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.facebook.com/groups/aichatbots/",
+                        "title": "FB Chatbot Group"
+                    }, {
+                        "type": "web_url",
+                        "url": "https://www.reddit.com/r/Chat_Bots/",
+                        "title": "Chatbots on Reddit"
+                    },{
+                        "type": "web_url",
+                        "url": "https://twitter.com/aichatbots",
+                        "title": "Chatbots on Twitter"
+                    }],
+                }, {
+                    "title": "Chatbots FAQ",
+                    "subtitle": "Aking the Deep Questions",
+                    "image_url": "https://tctechcrunch2011.files.wordpress.com/2016/04/facebook-chatbots.png?w=738",
+                    "buttons": [{
+                        "type": "postback",
+                        "title": "What's the benefit?",
+                        "payload": "Chatbots make content interactive instead of static",
+                    },{
+                        "type": "postback",
+                        "title": "What can Chatbots do",
+                        "payload": "One day Chatbots will control the Internet of Things! You will be able to control your homes temperature with a text",
+                    }, {
+                        "type": "postback",
+                        "title": "The Future",
+                        "payload": "Chatbots are fun! One day your BFF might be a Chatbot",
+                    }],
+                },  {
+                    "title": "Learning More",
+                    "subtitle": "Aking the Deep Questions",
+                    "image_url": "http://www.brandknewmag.com/wp-content/uploads/2015/12/cortana.jpg",
+                    "buttons": [{
+                        "type": "postback",
+                        "title": "AIML",
+                        "payload": "Checkout Artificial Intelligence Mark Up Language. Its easier than you think!",
+                    },{
+                        "type": "postback",
+                        "title": "Machine Learning",
+                        "payload": "Use python to teach your maching in 16D space in 15min",
+                    }, {
+                        "type": "postback",
+                        "title": "Communities",
+                        "payload": "Online communities & Meetups are the best way to stay ahead of the curve!",
+                    }],
+                }]  
+            } 
+        }
     }
     request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token:token},
-      method: 'POST',
-      json: {
-        recipient: {id:sender},
-        message: messageData,
-      }
-    }, function(error, response, body) {
-
-      console.log('messeage should be sent');
-
-      if (error) {
-        console.log('Error sending message: ', error);
-      } else if (response.body.error) {
-        console.log('Error: ', response.body.error);
-      }
-    });
-  },
-  sendButtons: function (sender) {
-    var message = {
-      'attachment': {
-        'type':'template',
-        'payload':{
-          'template_type': 'button',
-          'text': 'See what we have planned',
-          'buttons': [
-            {
-              'type': 'web_url',
-              'title': 'View Agenda',
-              'url': 'https://docs.google.com/a/miramarsd.net/viewer?a=v&pid=sites&srcid=bWlyYW1hcnNkLm5ldHxidXNpbmVzc2NsdWJ8Z3g6NGQwZDZlNDdmNjQ3YmI2Ng'
-            },
-            {
-              'type': 'postback',
-              'title': 'RSVP',
-              'payload': 'MEETING_RSVP'
-            }
-          ]
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
         }
-      }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+
+}
+
+function sendGenericMessage(sender) {
+    messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Ai Chat Bot Communities",
+                    "subtitle": "Communities to Follow",
+                    "image_url": "http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-930x659.jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.facebook.com/groups/aichatbots/",
+                        "title": "FB Chatbot Group"
+                    }, {
+                        "type": "web_url",
+                        "url": "https://www.reddit.com/r/Chat_Bots/",
+                        "title": "Chatbots on Reddit"
+                    },{
+                        "type": "web_url",
+                        "url": "https://twitter.com/aichatbots",
+                        "title": "Chatbots on Twitter"
+                    }],
+                }, {
+                    "title": "Chatbots FAQ",
+                    "subtitle": "Aking the Deep Questions",
+                    "image_url": "https://tctechcrunch2011.files.wordpress.com/2016/04/facebook-chatbots.png?w=738",
+                    "buttons": [{
+                        "type": "postback",
+                        "title": "What's the benefit?",
+                        "payload": "Chatbots make content interactive instead of static",
+                    },{
+                        "type": "postback",
+                        "title": "What can Chatbots do",
+                        "payload": "One day Chatbots will control the Internet of Things! You will be able to control your homes temperature with a text",
+                    }, {
+                        "type": "postback",
+                        "title": "The Future",
+                        "payload": "Chatbots are fun! One day your BFF might be a Chatbot",
+                    }],
+                },  {
+                    "title": "Learning More",
+                    "subtitle": "Aking the Deep Questions",
+                    "image_url": "http://www.brandknewmag.com/wp-content/uploads/2015/12/cortana.jpg",
+                    "buttons": [{
+                        "type": "postback",
+                        "title": "AIML",
+                        "payload": "Checkout Artificial Intelligence Mark Up Language. Its easier than you think!",
+                    },{
+                        "type": "postback",
+                        "title": "Machine Learning",
+                        "payload": "Use python to teach your maching in 16D space in 15min",
+                    }, {
+                        "type": "postback",
+                        "title": "Communities",
+                        "payload": "Online communities & Meetups are the best way to stay ahead of the curve!",
+                    }],
+                }]  
+            } 
+        }
     }
     request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token:token},
-      method: 'POST',
-      json: {
-        recipient: {id:sender},
-        message: message,
-      }
-    }, function(error, response, body) {
-      if (error) {
-        console.log('Error sending message: ', error);
-      } else if (response.body.error) {
-        console.log('Error: ', response.body.error);
-      }
-    });
-  },
-  getProfileInfo: function(sender, resolve, reject){
-    request({
-      url: 'https://graph.facebook.com/v2.6/'+sender+'?fields=first_name,last_name,profile_pic',
-      qs: {access_token:token},
-      method: 'GET',
-    }, function(err, response, body){
-      if (err) console.log(err);
-      const profile = JSON.parse(body);
-      resolve({id: sender, profile: profile});
-    }.bind(this));
-  },
-  sendGenericMessage: function(sender) {
-    messageData = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "First card",
-            "subtitle": "Element #1 of an hscroll",
-            "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-            "buttons": [{
-              "type": "web_url",
-              "url": "https://www.messenger.com/",
-              "title": "Web url"
-            }, {
-              "type": "postback",
-              "title": "Postback",
-              "payload": "Payload for first element in a generic bubble",
-            }],
-          },{
-            "title": "Second card",
-            "subtitle": "Element #2 of an hscroll",
-            "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-            "buttons": [{
-              "type": "postback",
-              "title": "Postback",
-              "payload": "Payload for second element in a generic bubble",
-            }],
-          }]
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
         }
-      }
-    };
-    request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token:token},
-      method: 'POST',
-      json: {
-        recipient: {id:sender},
-        message: messageData,
-      }
     }, function(error, response, body) {
-      if (error) {
-        console.log('Error sending message: ', error);
-      } else if (response.body.error) {
-        console.log('Error: ', response.body.error);
-      }
-    });
-  }
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
 }
 
