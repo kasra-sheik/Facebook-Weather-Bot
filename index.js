@@ -131,22 +131,18 @@ function sendGenericMessage(sender) {
                         "payload":"Added to Cart!"
                     }, ],
                 },  {
-                    "title": "Learning More",
-                    "subtitle": "Aking the Deep Questions",
-                    "image_url": "http://www.brandknewmag.com/wp-content/uploads/2015/12/cortana.jpg",
+                    "title": "Sak's Fifth Avenue Dress",
+                    "subtitle": "Will make you shine! ",
+                    "image_url": "https://s32.postimg.org/6fksu5wz9/rd3.jpg",
                     "buttons": [{
-                        "type": "postback",
-                        "title": "AIML",
-                        "payload": "Checkout Artificial Intelligence Mark Up Language. Its easier than you think!",
+                       "type": "web_url",
+                        "url": "https://mavatar.com/catalog/product?category_order=0&no=8&order=3&price_from=1&price_to=8&product_id=3870787",
+                        "title": "Open in Browser"
                     },{
                         "type": "postback",
-                        "title": "Machine Learning",
-                        "payload": "Use python to teach your maching in 16D space in 15min",
-                    }, {
-                        "type": "postback",
-                        "title": "Communities",
-                        "payload": "Online communities & Meetups are the best way to stay ahead of the curve!",
-                    }],
+                        "title": "Add to Cart",
+                        "payload":"Added to Cart!"
+                    }, ],
                 }]  
             } 
         }
