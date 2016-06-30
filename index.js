@@ -45,9 +45,10 @@ app.post('/webhook/', function (req, res) {
                 //sendTextMessage(sender, "https://www.youtube.com/watch?v=fus357b19io")
 
                 var response = httpGetRequest("http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json")
+                var obj = JSON.parse(response)
 
 
-                sendTextMessage(sender, response)
+                sendTextMessage(sender, response.cityName)
             }
 
             if(text.substring(0,6) == "parrot") {
