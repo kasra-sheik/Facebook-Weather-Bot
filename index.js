@@ -33,10 +33,23 @@ app.listen(app.get('port'), function() {
 app.get('/test', function(req,res) {
 
 
-    //var response = httpGetRequest("http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json")
+    var URL = "http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json"
     //var obj = JSON.parse(response)
 
-    res.send("test it is!")
+
+    var request = new XMLHttpRequest();
+request.onreadystatechange = function() {
+    if (request.readyState === 4) {
+        if (request.status === 200) {
+            console.log(request.responseText);
+        } 
+    }
+};
+request.open("GET", URL , true);
+request.send(null);
+
+
+    res.send(reqeust.responseText)
 })
 
 
@@ -92,13 +105,9 @@ app.post('/webhook/', function (req, res) {
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
 
-// function httpGetRequest(URL) {
+function httpGetRequest(URL) {
 
-//     var xhr = new XMLHTTPRequest();
-//     xhr.open("GET", URL, false);
-//     xhr.send();
-//     return xhr.responseText;
-// }
+   }
 
 
 
