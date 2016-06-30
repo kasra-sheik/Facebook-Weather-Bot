@@ -44,6 +44,13 @@ app.post('/webhook/', function (req, res) {
             text = event.message.text
             if(text == 'generate') {
                 sendTextMessage(sender, "grabbing ip!")
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open("GET", "http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json/", false);
+                xhr.send()
+
+                sendTextMessage(sender, xhr.status)
             }
 
             if(text.substring(0,6) == "parrot") {
