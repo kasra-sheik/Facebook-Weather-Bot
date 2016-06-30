@@ -116,11 +116,7 @@ function sendGenericMessage(sender) {
                         "type": "postback",
                         "title": "Add to Cart",
                         "payload":"Added to Cart!"
-                    },{
-                        "type": "web_url",
-                        "url": "https://twitter.com/aichatbots",
-                        "title": "Chatbots on Twitter"
-                    }],
+                    },],
                 }, {
                     "title": "Chatbots FAQ",
                     "subtitle": "Aking the Deep Questions",
