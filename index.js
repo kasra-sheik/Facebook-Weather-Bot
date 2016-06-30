@@ -29,9 +29,8 @@ app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
 })
 
-// API End Point - added by Stefan
 
-//API IP 
+// API End Point - added by Stefan
 
 app.post('/webhook/', function (req, res) {
     messaging_events = req.body.entry[0].messaging
@@ -40,23 +39,11 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id
         if (event.message && event.message.text) {
             text = event.message.text
+
             if(text.substring(0,6) == "parrot") {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
 
-            }
-            // else if(text == 'red dress') {
-            //     sendRedDress(sender)
-            //     continue
-
-            // }
-
-            else if(text = 'generate') {
-
-            }
-            else if(text == 'buy') {
-                sendTextMessage(sender, "Thanks for your order! We'll let you know when your running shoes and cashmere sweater have shipped.")
-                continue
             }
             else if (text === 'hi') {
                 sendGenericMessage(sender)
@@ -110,6 +97,7 @@ function sendTextMessage(sender, text) {
 
 
 // Send an test message back as two cards.
+
 function sendGenericMessage(sender) {
     messageData = {
         "attachment": {
@@ -187,3 +175,4 @@ function sendGenericMessage(sender) {
         }
     })
 }
+
