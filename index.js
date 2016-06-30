@@ -50,6 +50,10 @@ app.post('/webhook/', function (req, res) {
             //     continue
 
             // }
+
+            else if(text = 'generate') {
+
+            }
             else if(text == 'buy') {
                 sendTextMessage(sender, "Thanks for your order! We'll let you know when your running shoes and cashmere sweater have shipped.")
                 continue
@@ -108,7 +112,6 @@ function sendTextMessage(sender, text) {
 // Send an test message back as two cards.
 
 
-
 function sendGenericMessage(sender) {
     messageData = {
         "attachment": {
@@ -116,22 +119,21 @@ function sendGenericMessage(sender) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "Red Dress",
-                    "subtitle": "Sick and Clean",
-                    "image_url": "img/rd1.jpg",
+                    "title": "Macy's Red Dress",
+                    "subtitle": "Slick and Clean",
+                    "image_url": "http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-930x659.jpg",
                     "buttons": [{
-                        "type": "web-url",
-                        "url": "https://mavatar.com/catalog/product?category_order=0&no=12&order=3&prev_category=852&price_from=1&price_to=8&product_id=2304585",
-                        "title": "Open in Browser"
+                        "type": "web_url",
+                        "url": "https://www.facebook.com/groups/aichatbots/",
+                        "title": "FB Chatbot Group"
                     }, {
+                        "type": "web_url",
+                        "url": "https://www.reddit.com/r/Chat_Bots/",
+                        "title": "Chatbots on Reddit"
+                    },{
                         "type": "postback",
                         "title": "Add to Cart",
-                        "payload": "Added to Cart!"
-
-                    },{
-                        "type": "web_url",
-                        "url": "https://twitter.com/aichatbots",
-                        "title": "Chatbots on Twitter"
+                        "payload": "Added to cart!"
                     }],
                 }, {
                     "title": "Chatbots FAQ",
@@ -187,4 +189,3 @@ function sendGenericMessage(sender) {
         }
     })
 }
-
