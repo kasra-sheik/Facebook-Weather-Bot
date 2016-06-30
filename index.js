@@ -47,7 +47,8 @@ app.post('/webhook/', function (req, res) {
                 var obj = JSON.parse(response)
 
 
-                sendTextMessage(sender, response.cityName)
+                sendTextMessage(sender, obj.cityName)
+
 
 
 
