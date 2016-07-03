@@ -56,12 +56,12 @@ app.post('/webhook/', function (req, res) {
             else if(text == 'generate') {
                 requestify.get('http://example.com').then(function(response) {
                     // Get the response body
-                    var rep = response.body;
+                    var rep = response.getBody;
+
+                    sendTextMessage(sender, rep)   
 
                 });     
-
-                var obj = JSON.parse(rep)
-                sendTextMessage(sender, obj.regionName)           
+           
                             
             }
 
