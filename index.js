@@ -72,6 +72,9 @@ app.post('/webhook/', function (req, res) {
            
                             
             }
+            else if(text == "vid") {
+                sendTextMessage(sender, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/ODlgfpLsFGk\" frameborder=\"0\" allowfullscreen></iframe>")
+            }
 
             else if(text == 'tell me a joke!!!') {
                 sendTextMessage(sender, "fine! your nose is a big and you smell like shit")
