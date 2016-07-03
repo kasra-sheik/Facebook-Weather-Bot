@@ -90,17 +90,9 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == "vid") {
-                sendTextMessage(sender, "https://www.youtube.com/embed/ODlgfpLsFGk")
+                sendVideo(sender)
             }
 
-            else if(text == 'tell me a joke!!!') {
-                sendTextMessage(sender, "fine! your nose is a big and you smell like shit")
-
-            }
-            else if(text == 'damn.') {
-                sendTextMessage(sender, "yeah.")
-
-            }
             else if(text.includes('joke')) {
                 sendTextMessage(sender, "no.")
 
@@ -160,6 +152,34 @@ function sendTextMessage(sender, text) {
     })
 }
 
+function sendVideo(sender) {
+    messageData = {
+        "message": {
+            "attachment": {
+                "type":"video",, 
+                "payload":{
+                    "url":"https://www.youtube.com/watch?v=fus357b19io"
+                }
+            }
+        }
+
+    }
+  request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
 
 // Send an test message back as two cards.
 
