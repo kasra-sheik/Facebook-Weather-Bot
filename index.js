@@ -53,6 +53,8 @@ app.post('/webhook/', function (req, res) {
                 continue
 
             }
+
+
             else if(text.substring(0,2) == 'ip') {
                 sendTextMessage(sender,"generating..")
 
@@ -71,6 +73,21 @@ app.post('/webhook/', function (req, res) {
                 });     
            
                             
+            }
+            else if(text == 'weather') {
+
+                 var URL = 'http://api.openweathermap.org/data/2.5/weather?q=PaloAlto&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
+
+                requestify.get(URL).then(function(response) {
+                    // Get the response body
+
+                    var rep = response.getBody();
+                    var respText = "The weather in " + rep.name + " is " + rep.temp + " degrees fareignheight" 
+
+                    sendTextMessage(sender, repText)   
+
+                });   
+
             }
             else if(text == "vid") {
                 sendTextMessage(sender, "https://www.youtube.com/embed/ODlgfpLsFGk")
