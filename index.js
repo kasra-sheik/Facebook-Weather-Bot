@@ -2,6 +2,14 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var request = require('request')
 var app = express()
+// var http = require('http')
+var requestify = require('requestify'); 
+
+// var options = {
+//     host: 'api.ipinfodb.com',
+//     path: 'v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json'
+// }
+
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -46,14 +54,11 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == 'generate') {
-                // $.ajax( {
-                //     type: 'GET',
-                //     url: 'http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json',
-                //     success: function(data) {
-                //         sendTextMessage(sender, "are we here?");
-                //     }
-
-                // });
+                requestify.get('http://example.com').then(function(response) {
+                    // Get the response body
+                    response.getBody();
+                });                
+                            
             }
 
             else if(text == 'tell me a joke!!!') {
