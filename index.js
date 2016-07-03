@@ -53,12 +53,16 @@ app.post('/webhook/', function (req, res) {
                 continue
 
             }
-            else if(text == 'generate') {
-                requestify.get('http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json').then(function(response) {
+            else if(text.substring(0,2) == 'ip') {
+                sendTextMessage(sender,"generating..")
+
+                var ip =text.substring(3,12)
+                var URL = 'http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=' + ip + '&format=json'
+
+                requestify.get(URL).then(function(response) {
                     // Get the response body
 
                     var rep = response.getBody();
-                    sendTextMessage(sender,"generating..")
 
 
                     sendTextMessage(sender, rep.regionName)   
