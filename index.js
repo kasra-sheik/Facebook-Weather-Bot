@@ -2,13 +2,10 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var request = require('request')
 var app = express()
-// var http = require('http')
-var requestify = require('requestify'); 
+var requestify = require('requestify');
+const fetch = require('node-fetch'); 
+const crypto = require('crypto');
 
-// var options = {
-//     host: 'api.ipinfodb.com',
-//     path: 'v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json'
-// }
 
 
 app.set('port', (process.env.PORT || 5000))
@@ -90,19 +87,7 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == "vid") {
-                    curl -X POST -H "Content-Type: application/json" -d '{
-                  "recipient":{
-                    "id":"USER_ID"
-                  },
-                  "message":{
-                    "attachment":{
-                      "type":"video",
-                      "payload":{
-                        "url":"https://petersapparel.com/bin/clip.mp4"
-                      }
-                    }
-                  }
-                }' "https://graph.facebook.com/v2.6/me/messages?access_token=PAGE_ACCESS_TOKEN"    
+                    
             }
 
             else if(text == 'tell me a joke!!!') {
