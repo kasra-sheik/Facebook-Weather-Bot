@@ -63,7 +63,7 @@ app.post('/webhook/', function (req, res) {
                     // Get the response body
 
                     var rep = response.getBody();
-                    var repText = "The IP you requested is from " + rep.cityName + ", " + rep.regionName + rep.countryName + ", " + rep.zipCode
+                    var repText = "The IP you requested is from " + rep.cityName + ", " + rep.regionName + ", " + rep.zipCode
 
 
                     sendTextMessage(sender, repText)   
