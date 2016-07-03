@@ -56,9 +56,10 @@ app.post('/webhook/', function (req, res) {
             else if(text == 'generate') {
                 requestify.get('http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json').then(function(response) {
                     // Get the response body
+
+                    var rep = response.getBody();
                     sendTextMessage(sender,"generating..")
 
-                    var rep = response.getBody;
 
                     sendTextMessage(sender, rep.regionName)   
 
