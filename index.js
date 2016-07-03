@@ -91,6 +91,10 @@ app.post('/webhook/', function (req, res) {
             else if (text.includes('red dress')) {
                 sendTextMessage(sender, "Matching you're query for red dresses")
                 sendGenericMessage(sender)
+
+                if(text == "\"Added to Cart!\"") {
+                    sendTextMessage(sender, "Added to Cart!")
+                }
                 continue
             }
 
