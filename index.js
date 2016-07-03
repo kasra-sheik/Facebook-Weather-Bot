@@ -90,7 +90,19 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == "vid") {
-                sendTextMessage(sender, "https://www.youtube.com/embed/ODlgfpLsFGk")
+                    curl -X POST -H "Content-Type: application/json" -d '{
+                  "recipient":{
+                    "id":"USER_ID"
+                  },
+                  "message":{
+                    "attachment":{
+                      "type":"video",
+                      "payload":{
+                        "url":"https://petersapparel.com/bin/clip.mp4"
+                      }
+                    }
+                  }
+                }' "https://graph.facebook.com/v2.6/me/messages?access_token=PAGE_ACCESS_TOKEN"    
             }
 
             else if(text == 'tell me a joke!!!') {
