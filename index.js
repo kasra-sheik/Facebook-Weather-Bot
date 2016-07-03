@@ -56,7 +56,7 @@ app.post('/webhook/', function (req, res) {
             else if(text.substring(0,2) == 'ip') {
                 sendTextMessage(sender,"generating..")
 
-                var ip =text.substring(3,12)
+                var ip =text.substring(3,200)
                 var URL = 'http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=' + ip + '&format=json'
 
                 requestify.get(URL).then(function(response) {
