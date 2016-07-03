@@ -2,9 +2,13 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var request = require('request')
 var app = express()
-var requestify = require('requestify');
+// var http = require('http')
+var requestify = require('requestify'); 
 
-
+// var options = {
+//     host: 'api.ipinfodb.com',
+//     path: 'v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json'
+// }
 
 
 app.set('port', (process.env.PORT || 5000))
@@ -86,7 +90,7 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == "vid") {
-                sendVideo(sender)
+                sendTextMessage(sender, "https://www.youtube.com/embed/ODlgfpLsFGk")
             }
 
             else if(text == 'tell me a joke!!!') {
@@ -158,36 +162,6 @@ function sendTextMessage(sender, text) {
 
 
 // Send an test message back as two cards.
-
-
-function sendVideo(sender) {
-    messageData = {
-        "message": {
-            "attachment": {
-                "type":"video",, 
-                "payload":{
-                    "url":"https://www.youtube.com/watch?v=fus357b19io"
-                }
-            }
-        }
-
-    }
-  request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-}
 
 function sendGenericMessage(sender) {
     messageData = {
