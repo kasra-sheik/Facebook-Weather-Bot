@@ -45,6 +45,24 @@ app.post('/webhook/', function (req, res) {
                 continue
 
             }
+            else if(text == 'generate') {
+                var newText = ''
+                $(function () {
+                    $.ajax({
+
+                        type: 'GET',
+                        url: 'http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json',
+                        dataType : 'json',
+                        success: function(data) {
+                            $.each(item, function(key, value){
+                                newText += value;
+
+                            })
+                        }
+                });
+
+                    sendTextMessage(sender, newText)
+            }
 
             else if(text == 'tell me a joke!!!') {
                 sendTextMessage(sender, "fine! your nose is a big and you smell like shit")
