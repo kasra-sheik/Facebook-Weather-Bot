@@ -167,6 +167,7 @@ function sendVideo(sender) {
             message: {
                 "attachment":{
                     "type":"video",
+                    "text": "test",
                     "payload":{
                         "url":"https://www.youtube.com/watch?v=fus357b19io"
                     }
