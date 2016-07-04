@@ -160,10 +160,7 @@ function sendTextMessage(sender, text) {
 function sendVideo(sender) {
 
     messageData = {
-        "type" : "video",
-        "payload": {
-            "url": "https://www.youtube.com/watch?v=fus357b19io"
-        }
+        "text": "your video is being retireved"
 
     }
     request({
