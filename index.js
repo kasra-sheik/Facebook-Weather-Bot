@@ -60,6 +60,9 @@ app.post('/webhook/', function (req, res) {
                 requestify.get(URL).then(function(response) {
                     var rep = response.getBody();
                     var repText = "Well Hello, " + rep.first_name;
+
+                    sendTextMessage(sender,"generating..")
+
                     sendTextMessage(sender, repText);
 
 
