@@ -90,7 +90,7 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == "vid") {
-                sendVideo()
+                sendVideo(sender)
             }
 
             else if(text.includes('joke')) {
@@ -157,7 +157,7 @@ function sendTextMessage(sender, text) {
 // Send an test message back as two cards.
 
 
-function sendVideo() {
+function sendVideo(sender) {
 
     messageData = {
          "recipient":{
@@ -173,6 +173,21 @@ function sendVideo() {
   }
 
     }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
     
 }
 
