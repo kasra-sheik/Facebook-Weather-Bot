@@ -160,7 +160,6 @@ function sendTextMessage(sender, text) {
 function sendVideo(sender) {
     messageData {
         "attachment": {
-            "type":"template",
             "payload":{
                 "url":"https://www.youtube.com/watch?v=fus357b19io"
             }
