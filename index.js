@@ -160,14 +160,12 @@ function sendTextMessage(sender, text) {
 function sendVideo(sender) {
 
     messageData = {
-  "message":{
-    "attachment":{
-      "type":"video",
-      "payload":{
-        "url":"https://www.youtube.com/watch?v=fus357b19io"
-      }
-    }
-  }
+        "attachment": {
+            "type:" "video",
+            "payload":{
+                "url": "https://www.youtube.com/watch?v=fus357b19io"
+            }
+        }
 
     }
     request({
