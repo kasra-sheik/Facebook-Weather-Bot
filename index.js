@@ -67,9 +67,15 @@ app.post('/webhook/', function (req, res) {
             else if(text.toLowerCase() == 'what is the weather?') {
                 sendTextMessage(sender, "Where exactly?")
             }
-            else if(text.substring(0,2) == 'in') {
+            else if(text.substring(0,2) == 'in' || text.includes("what is the weather in")) {
 
-                var place = text.substring(3,200)
+                if(text.substring(0,2) == 'in') {
+                    var place = text.substring(3,200)
+
+                }
+                else {
+                    var place = text.substring(22,300)
+                }
                 var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + place + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
 
 
