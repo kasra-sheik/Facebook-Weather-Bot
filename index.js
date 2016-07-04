@@ -157,31 +157,16 @@ function sendTextMessage(sender, text) {
 // Send an test message back as two cards.
 
 
-function sendVideo(sender) {
+function sendVideo() {
 
     "message":{
         "attachment":{
             "type":"video",
             "payload":{
-                "url":"https://www.youtube.com/watch?v=fus357b19io"
+                "url": "https://www.youtube.com/watch?v=fus357b19io"
             }
         }
     }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
 }
 
 function sendGenericMessage(sender) {
