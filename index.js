@@ -52,8 +52,7 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
             }
-
-            if(text == 'hi') {
+            else if(text == 'hi') {
                 var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
                  requestify.get(URL).then(function(response) {
                     // Get the response body
@@ -65,7 +64,26 @@ app.post('/webhook/', function (req, res) {
 
                 });   
             }
+            else if(text.toLowerCase() == 'what is the weather?') {
+                sendTextMessage(sender, "Where exactly?")
+            }
+            if(text.substring(0,2) == 'in') {
 
+                var place = text.substring(3,200)
+                var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + place + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
+
+
+                 requestify.get(URL).then(function(response) {
+                    // Get the response body
+
+                    var rep = response.getBody();
+                    var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fareignheight" 
+
+                    sendTextMessage(sender, respText)   
+
+                });   
+
+            }
 
             else if(text.substring(0,2) == 'ip') {
                 sendTextMessage(sender,"generating..")
