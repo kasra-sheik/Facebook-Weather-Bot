@@ -156,9 +156,9 @@ function sendImg(sender) {
 
     messageData = {
         "attachment": {
-            "type":"video",
+            "type":"file",
             "payload": {
-                "url":"https://www.youtube.com/watch?v=p7Ei_2gzD5I"
+                "url":"https://manuals.info.apple.com/MANUALS/1000/MA1565/en_US/iphone_user_guide.pdf"
             }
         }
     }
