@@ -90,7 +90,7 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == "vid") {
-                sendTextMessage(sender, "hello")
+                sendVideo()
             }
 
             else if(text.includes('joke')) {
