@@ -158,21 +158,23 @@ function sendTextMessage(sender, text) {
 
 
 function sendVideo(sender) {
-    request({
+    messageData {
+        "attachment": {
+            "type":"video",
+            "payload":{
+                "url":"https://www.youtube.com/watch?v=fus357b19io"
+            }
+
+        }
+    }
+
+      request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token:token},
         method: 'POST',
         json: {
             recipient: {id:sender},
-            message: {
-                "attachment":{
-                    "type":"video",
-                    "text": "test",
-                    "payload":{
-                        "url":"https://www.youtube.com/watch?v=fus357b19io"
-                    }
-                }
-            }
+            message: messageData,
         }
     }, function(error, response, body) {
         if (error) {
