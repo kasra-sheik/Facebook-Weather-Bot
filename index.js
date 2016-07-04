@@ -90,7 +90,7 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == "vid") {
-                //sendVideo(sender)
+                sendVideo(sender)
             }
 
             else if(text.includes('joke')) {
@@ -157,10 +157,10 @@ function sendTextMessage(sender, text) {
 // Send an test message back as two cards.
 
 
-// function sendVideo(sender) {
+function sendVideo(sender) {
    
     
-// }
+}
 
 function sendGenericMessage(sender) {
     messageData = {
