@@ -108,18 +108,7 @@ app.post('/webhook/', function (req, res) {
                     sendTextMessage(sender, repText)   
 
                 });     
-
-
-                /*
-
-
-                APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial
-
-
-                */
-           
-                            
-            }
+                                        }
             else if(text == "img") {
                 sendImg(sender)
             }
@@ -167,9 +156,9 @@ function sendImg(sender) {
 
     messageData = {
         "attachment": {
-            "type":"image",
+            "type":"video",
             "payload": {
-                "url":"https://s32.postimg.org/ypwiy4qyd/rd2.jpg"
+                "url":"https://www.youtube.com/watch?v=p7Ei_2gzD5I"
             }
         }
     }
