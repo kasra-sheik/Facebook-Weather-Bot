@@ -61,7 +61,7 @@ app.post('/webhook/', function (req, res) {
                     var rep = response.getBody();
                     var repText = "Well Hello, " + rep.first_name;
 
-                    sendTextMessage(sender,"generating..")
+                    sendTextMessage(sender, rep.first_name)
 
                     sendTextMessage(sender, repText);
 
