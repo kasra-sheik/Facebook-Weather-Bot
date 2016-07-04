@@ -79,6 +79,7 @@ app.post('/webhook/', function (req, res) {
                 var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + place + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
 
 
+
                  requestify.get(URL).then(function(response) {
                     // Get the response body
 
@@ -107,26 +108,20 @@ app.post('/webhook/', function (req, res) {
                     sendTextMessage(sender, repText)   
 
                 });     
+
+
+                /*
+
+
+                APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial
+
+
+                */
            
                             
             }
-            else if(text == 'weather') {
-
-                 var URL = 'http://api.openweathermap.org/data/2.5/weather?q=PaloAlto&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
-
-                requestify.get(URL).then(function(response) {
-                    // Get the response body
-
-                    var rep = response.getBody();
-                    var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fareignheight" 
-
-                    sendTextMessage(sender, respText)   
-
-                });   
-
-            }
-            else if(text == "vid") {
-                sendVideo(sender)
+            else if(text == "img") {
+                sendImg(sender)
             }
 
             else if(text.includes('joke')) {
@@ -167,6 +162,36 @@ var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p
 
 // function to echo back messages - added by Stefan
 
+
+function sendImg(sender) {
+
+    messageData = {
+        "attachment": {
+            "type":"image",
+            "payload": {
+                "url":"https://s32.postimg.org/ypwiy4qyd/rd2.jpg"
+            }
+        }
+    }
+
+     request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+
+}
+
 function sendTextMessage(sender, text) {
     messageData = {
         text:text
@@ -192,11 +217,6 @@ function sendTextMessage(sender, text) {
 
 // Send an test message back as two cards.
 
-
-function sendVideo(sender) {
-   
-    
-}
 
 function sendGenericMessage(sender) {
     messageData = {
