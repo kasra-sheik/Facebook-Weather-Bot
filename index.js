@@ -157,17 +157,17 @@ function sendTextMessage(sender, text) {
 // Send an test message back as two cards.
 
 
-function sendVideo() {
+// function sendVideo() {
 
-    "message":{
-        "attachment":{
-            "type":"video",
-            "payload":{
-                "url": "https://www.youtube.com/watch?v=fus357b19io"
-            }
-        }
-    }
-}
+//     "message":{
+//         "attachment":{
+//             "type":"video",
+//             "payload":{
+//                 "url": "https://www.youtube.com/watch?v=fus357b19io"
+//             }
+//         }
+//     }
+// }
 
 function sendGenericMessage(sender) {
     messageData = {
