@@ -51,7 +51,11 @@ app.post('/webhook/', function (req, res) {
             if(text.substring(0,6) == "parrot") {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
+            }
 
+            if(text == 'hi') {
+
+                sendTextMessage(sender, sender)
             }
 
 
