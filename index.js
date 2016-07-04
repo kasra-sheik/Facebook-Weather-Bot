@@ -155,12 +155,19 @@ var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p
 function sendImg(sender) {
 
     messageData = {
-        "attachment": {
-            "type":"file",
-            "payload": {
-                "url":"https://manuals.info.apple.com/MANUALS/1000/MA1565/en_US/iphone_user_guide.pdf"
-            }
-        }
+        "text":"Pick a color:",
+    "quick_replies":[
+      {
+        "content_type":"text",
+        "title":"Red",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+      },
+      {
+        "content_type":"text",
+        "title":"Green",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+      }
+    ]
     }
 
      request({
