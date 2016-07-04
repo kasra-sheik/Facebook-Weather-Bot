@@ -160,9 +160,6 @@ function sendTextMessage(sender, text) {
 function sendVideo(sender) {
 
     messageData = {
-         "recipient":{
-    "id":"USER_ID"
-  },
   "message":{
     "attachment":{
       "type":"video",
