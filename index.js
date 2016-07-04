@@ -83,7 +83,7 @@ app.post('/webhook/', function (req, res) {
                     // Get the response body
 
                     var rep = response.getBody();
-                    var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fareignheight" 
+                    var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
 
                     sendTextMessage(sender, respText)   
 
