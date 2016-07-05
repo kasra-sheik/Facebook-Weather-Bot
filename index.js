@@ -53,8 +53,8 @@ app.post('/webhook/', function (req, res) {
             if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
 
-                if(postback_text == "Macy's Red Dress") {
-                    sendTextMessage(sender, "this is a test!");
+                if(postback_text == "\"Macy's Red Dress!\"") {
+                    sendTextMessage(sender, "One Item: " + postback_text + "Added to Cart!");
                 }
                 else if(postback_text == "\"cart_payload\"") {
 
