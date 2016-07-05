@@ -137,7 +137,12 @@ app.post('/webhook/', function (req, res) {
                     // Get the response body
 
                     var rep = response.getBody();
-                    sendTextMessage(sender, rep.list[0].dt)
+                    //sendTextMessage(sender, rep.list[0].dt)
+                    var forecastObject = []
+                    for(i = 0; i < rep.list.length; i++) {
+                        forecastObject.push(rep.list[i]);
+                    }
+                    sendTextMessage(sender, forecastObject.length)
 
 
                     // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
