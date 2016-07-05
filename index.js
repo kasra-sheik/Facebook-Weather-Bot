@@ -241,17 +241,14 @@ function forecastBuilder(sender, forecastObject) {
         });
     }
 
-    sendTextMessage(sender, "here is the size: " + forecast.length);
+    //sendTextMessage(sender, "here is the size: " + forecast.length);
 
    messageData = {
         "attachment": {
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                forecast
-
-                
-                   
+                "elements" = forecast    
             } 
         }
     }
