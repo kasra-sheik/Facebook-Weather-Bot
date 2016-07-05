@@ -65,6 +65,24 @@ app.post('/webhook/', function (req, res) {
             else if(text.toLowerCase() == 'what is the weather?') {
                 sendTextMessage(sender, "Where exactly?")
             }
+
+
+              else if(text == 'info') {
+                //function...
+
+                var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
+                 requestify.get(URL).then(function(response) {
+                    // Get the response body
+                    var rep = response.getBody();
+                    //var repText = "Hello, " + rep.first_name 
+                    //sendTextMessage(sender, repText)
+                    startInfo(sender, rep.first_name);
+
+                });   
+
+
+
+            }
             else if(text.substring(0,2) == 'in' || text.includes("what is the weather in")) {
 
                 if(text.substring(0,2) == 'in') {
@@ -89,24 +107,6 @@ app.post('/webhook/', function (req, res) {
                 });   
 
             }
-
-            else if(text == 'info') {
-                //function...
-
-                var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
-                 requestify.get(URL).then(function(response) {
-                    // Get the response body
-                    var rep = response.getBody();
-                    //var repText = "Hello, " + rep.first_name 
-                    //sendTextMessage(sender, repText)
-                    startInfo(sender, rep.first_name);
-
-                });   
-
-
-
-            }
-
 
             else if(text.substring(0,2) == 'ip') {
                 sendTextMessage(sender,"generating..")
