@@ -248,7 +248,17 @@ function forecastBuilder(sender, forecastObject) {
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": forecast
+                "elements": [{
+                    forecast[0]
+                },
+                {
+
+                    forecast[1]
+
+                }
+
+
+                ]
                    
             } 
         }
