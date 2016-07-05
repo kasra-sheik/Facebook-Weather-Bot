@@ -183,13 +183,13 @@ function startInfo(sender, name) {
             "content_type": "text",
             "title": "Shop",
             "payload": "shop_payload"
-            }
+            },
 
             {
             "content_type": "text",
             "title": "View User Carts",
             "payload": "cart_payload"
-            }
+            },
              {
             "content_type": "text",
             "title": "Hottest Deals",
