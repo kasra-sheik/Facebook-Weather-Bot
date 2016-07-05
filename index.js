@@ -226,7 +226,7 @@ function forecastBuilder(sender, forecastObject) {
 
     var forecast = {
 
-        weather: []
+
     }
     for(var i in forecastObject) {
         var day = forecastObject[i];
@@ -234,7 +234,7 @@ function forecastBuilder(sender, forecastObject) {
 
         //do handeling for image url processing
 
-        forecast.weather.push({
+        forecast.push({
             "title": day.temp.day,
             "subtitle": day.weather.description
 
