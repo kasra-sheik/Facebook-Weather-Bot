@@ -443,7 +443,7 @@ function testReceipt(sender) {
             console.log('Error: ', response.body.error)
         }
     })
-}
+
 
 
 
