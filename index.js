@@ -137,6 +137,7 @@ app.post('/webhook/', function (req, res) {
                     // Get the response body
 
                     var rep = response.getBody();
+                    sendTextMessage(sender, rep.length)
 
                     for(i = 0; i < rep.length; i++) {
 
