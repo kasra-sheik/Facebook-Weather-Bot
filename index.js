@@ -45,14 +45,21 @@ app.post('/webhook/', function (req, res) {
     for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
+
+        var cart_items = []
         if (event.message && event.message.text) {
 
 
             if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
 
-                if(postback_text == "\"shop_payload\"") {
+                if(postback_text == "Macy's Red Dress") {
                     sendTextMessage(sender, "this is a test!");
+                }
+                else if(postback_text == "\"cart_payload\"") {
+
+
+                    sendTextMessage(sender, "One item added to cart...")
                 }
             }
             text = event.message.text
@@ -175,11 +182,7 @@ app.post('/webhook/', function (req, res) {
 
             //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
         }
-        if (event.postback) {
-            text = JSON.stringify(event.postback)
-            sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
-            continue
-        }
+        
     }
     res.sendStatus(200)
 })
@@ -312,7 +315,7 @@ function sendGenericMessage(sender) {
                     }, {
                         "type": "postback",
                         "title": "Add to Cart",
-                        "payload":"Added to Cart!"
+                        "payload":"Macy's Red Dress!"
                     },],
                 }, {
                     "title": "Bloomingdale's Red Dress ",
