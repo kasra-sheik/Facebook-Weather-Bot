@@ -319,7 +319,7 @@ function sendGenericMessage(sender) {
                     }, {
                         "type": "postback",
                         "title": "Add to Cart",
-                        "payload":"dress"
+                        "payload":"cart_payload"
                     },],
                 }, {
                     "title": "Bloomingdale's Red Dress ",
