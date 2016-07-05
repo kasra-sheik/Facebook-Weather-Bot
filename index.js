@@ -374,10 +374,10 @@ function testReceipt(sender) {
       "type":"template",
       "payload":{
         "template_type":"receipt",
-        "recipient_name":"Stephane Crozatier",
+        "recipient_name":"Kasra Sheik",
         "order_number":"12345678902",
         "currency":"USD",
-        "payment_method":"Visa 2345",        
+        "payment_method":"Visa 3456",        
         "order_url":"http://petersapparel.parseapp.com/order?order_id=123456",
         "timestamp":"1428444852", 
         "elements":[
@@ -399,10 +399,10 @@ function testReceipt(sender) {
           }
         ],
         "address":{
-          "street_1":"1 Hacker Way",
+          "street_1":"GSV LABS",
           "street_2":"",
-          "city":"Menlo Park",
-          "postal_code":"94025",
+          "city":"Redwood City",
+          "postal_code":"94062",
           "state":"CA",
           "country":"US"
         },
