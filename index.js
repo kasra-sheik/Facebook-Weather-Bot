@@ -157,7 +157,7 @@ app.post('/webhook/', function (req, res) {
                 continue
             }
 
-            else if(text == 'shop') {
+            else if(text == 'Shop') {
 
                 sendTextMessage("Browse through mavatar's entire shop platform... try Something like \"Red Dress\" to get started ")
                 sendGenericMessage(sender)
