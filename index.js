@@ -118,15 +118,38 @@ app.post('/webhook/', function (req, res) {
                     var rep = response.getBody();
 
 
-                    if(rep.main.temp > 0) {
-                        sendTextMessage(sender, "fack")
-                    }
+                    // if(rep.main.temp > 0) {
+                    //     sendTextMessage(sender, "fack")
+                    // }
                     var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
 
                     sendTextMessage(sender, respText)   
 
                 });   
 
+            }
+            else if(text == "forecast") {
+
+                var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=palo%20alto&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=16"
+
+
+                 requestify.get(URL).then(function(response) {
+                    // Get the response body
+
+                    var rep = response.getBody();
+
+                    for(i = 0; i < rep.length; i++) {
+
+                        sendTextMessage(sender, rep[i].main.temp);
+                    }
+
+
+                    // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
+
+                    // sendTextMessage(sender, respText)  
+                    sendTextMessage(sender, "we got here at least!");
+
+                });   
             }
 
             else if(text.substring(0,2) == 'ip') {
