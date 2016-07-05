@@ -250,7 +250,7 @@ function forecastBuilder(sender, forecastObject) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "yo",
+                    "title": "yo"
                 }]
 
 
