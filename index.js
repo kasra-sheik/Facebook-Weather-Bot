@@ -272,6 +272,7 @@ function forecastBuilder(sender, forecastObject) {
             console.log('Error: ', response.body.error)
         }
     })
+    sendTextMessage(sender, "RIGHT HERE BITCH"); 
 
 
 
