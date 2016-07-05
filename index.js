@@ -137,12 +137,12 @@ app.post('/webhook/', function (req, res) {
                     // Get the response body
 
                     var rep = response.getBody();
-                    //sendTextMessage(sender, rep.list[0].dt)
+                    //fetching the result and then putting in an array of json objects.
                     var forecastObject = []
                     for(i = 0; i < rep.list.length; i++) {
                         forecastObject.push(rep.list[i]);
                     }
-                    sendTextMessage(sender, forecastObject.length)
+                    forecastBuilder(sender, forecastObject);
 
 
                     // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
@@ -219,6 +219,60 @@ var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p
 
 // function to echo back messages - added by Stefan
 
+
+function forecastBuilder(sender, forecastObject) {
+    sendTextMessage(sender, "your forecast for the next 16 days"); 
+
+
+    var forecast = {
+
+        weather: []
+    }
+    for(var i in forecastObject) {
+        var day = forecastObject[i];
+
+
+        //do handeling for image url processing
+
+        forecast.weather.push({
+            "title": day.temp.day,
+            "subtitle": day.weather.description
+
+        });
+    }
+
+    sendTextMessage(sender, "here is the size: " + forecast.length);
+
+   messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": forecast
+                   
+            } 
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+
+
+
+
+}
 function startInfo(sender, name) {
 
     messageData = {
