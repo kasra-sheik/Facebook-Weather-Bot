@@ -424,11 +424,9 @@ function testReceipt(sender) {
         ]
       }
     }
-
-
-
-    }
-      request({
+}
+      
+ request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token:token},
         method: 'POST',
@@ -443,7 +441,6 @@ function testReceipt(sender) {
             console.log('Error: ', response.body.error)
         }
     })
-
 
 
 
