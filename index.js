@@ -248,7 +248,12 @@ function forecastBuilder(sender, forecastObject) {
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements":forecast   
+                "elements"[{
+
+                    "title": "hello",
+                    "subtitle":"hi there"
+
+                }]  
             } 
         }
     }
