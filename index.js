@@ -109,6 +109,11 @@ app.post('/webhook/', function (req, res) {
                     // Get the response body
 
                     var rep = response.getBody();
+
+
+                    if(rep.main.temp > 0) {
+                        sendTextMessage("fack")
+                    }
                     var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
 
                     sendTextMessage(sender, respText)   
