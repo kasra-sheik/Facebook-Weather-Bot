@@ -90,6 +90,15 @@ app.post('/webhook/', function (req, res) {
 
             }
 
+            else if(text == 'info') {
+                //function...
+
+
+
+
+            }
+
+
             else if(text.substring(0,2) == 'ip') {
                 sendTextMessage(sender,"generating..")
 
@@ -152,6 +161,40 @@ app.post('/webhook/', function (req, res) {
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
 // function to echo back messages - added by Stefan
+
+function startInfo(sender, name) {
+
+    messageData = {
+
+        "text": "Hello" + name + ", Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?" 
+        "quick_replies": [ {
+            "content_type": "text",
+            "title": "Shop",
+            "payload": "shop_payload"
+
+
+
+        }
+        ]
+    }
+     request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+
+
+}
 
 
 function sendImg(sender) {
