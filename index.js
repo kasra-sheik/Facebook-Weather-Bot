@@ -150,6 +150,9 @@ app.post('/webhook/', function (req, res) {
 
             else if(text == 'shop') {
 
+                sendTextMessage("Browse through mavatar's entire shop platform... try Something like \"Red Dress\" to get started ")
+                sendGenericMessage(sender)
+
             }
             else {
                 sendTextMessage(sender, "parrot doesn't understand yet.. parrot is simple!!!!!!")
@@ -175,16 +178,26 @@ function startInfo(sender, name) {
 
     messageData = {
 
-        "text": "Hello" + name + ", Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?",
-        "quick_replies": [ {
+        "text": "Hello " + name + ", Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?",
+        "quick_replies": [{
             "content_type": "text",
             "title": "Shop",
             "payload": "shop_payload"
+            }
+
+            {
+            "content_type": "text",
+            "title": "View User Carts",
+            "payload": "cart_payload"
+            }
+             {
+            "content_type": "text",
+            "title": "Hottest Deals",
+            "payload": "cart_payload"
+            }
 
 
-
-        }
-        ]
+            ]
     }
      request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
