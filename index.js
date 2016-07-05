@@ -46,6 +46,15 @@ app.post('/webhook/', function (req, res) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
         if (event.message && event.message.text) {
+
+
+            if(event.postback) {
+                var postback_text = JSON.stringify(event.postback.payload)
+
+                if(postback_text == "\"shop_payload\"") {
+                    sendTextMessage(sender, "this is a test!");
+                }
+            }
             text = event.message.text
 
             if(text.substring(0,6) == "parrot") {
