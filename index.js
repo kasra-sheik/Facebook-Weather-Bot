@@ -252,6 +252,7 @@ function forecastBuilder(sender, forecastObject) {
                 "elements":forecast
 
 
+            }
         }
     }
      request({
