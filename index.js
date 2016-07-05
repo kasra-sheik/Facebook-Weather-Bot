@@ -136,13 +136,8 @@ app.post('/webhook/', function (req, res) {
                  requestify.get(URL).then(function(response) {
                     // Get the response body
 
-                    var rep = response.body;
-                    sendTextMessage(sender, rep.length)
-
-                    for(i = 0; i < rep.length; i++) {
-
-                        sendTextMessage(sender, rep[i].main.temp);
-                    }
+                    var rep = response.getBody();
+                    sendTextMessage(sender, rep[0].temp.day)
 
 
                     // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
