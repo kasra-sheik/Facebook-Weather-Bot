@@ -224,10 +224,16 @@ function forecastBuilder(sender, forecastObject) {
     sendTextMessage(sender, "your forecast for" + forecastObject.length + "days"); 
 
 
-    // var forecast = {
+     var forecast = [{
+        "title": "16 Day Forecast",
+        "subtitle":"Slide Right to See Your 16 day Forecast"
 
 
-    // }
+
+     }]
+
+
+    
     // for(i = 0; i < forecastObject.length; i++) {
     //     var day = forecastObject[i]
     //     forecast.push( {
@@ -240,28 +246,20 @@ function forecastBuilder(sender, forecastObject) {
 // 
 
 
-    // var forecast = [{}]
-    // for(var i in forecastObject) {
-    //     var day = forecastObject[i];
+    var forecast = [{}]
+    for(var i in forecastObject) {
+        var day = forecastObject[i];
 
 
-    //     //do handeling for image url processing
+        //do handeling for image url processing
 
-    //     forecast.push({
-    //         "title": day.temp.day,
-    //         "subtitle": "this is a test",
+        forecast.push({
+            "title": day.temp.day,
+            "subtitle": "this is a test",
 
-    //     });
-    // }
+        });
+    }
 
-elementTest = [{
-    "title": "testes",
-    "subtitle": "fuck",
-
-}
-
-
-] 
 
 for(i = 0; i < 5; i++) {
 elementTest.push({
@@ -276,7 +274,7 @@ elementTest.push({
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": elementTest 
+                "elements": forecast
             } 
         }
     }
