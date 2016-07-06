@@ -194,7 +194,6 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == 'checkout') {
-                sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
                 askMessageTracking(sender)
 
             }
@@ -222,9 +221,15 @@ app.post('/webhook/', function (req, res) {
                     sendTextMessage(sender, "One item added to cart...")
                 }
                 else if(event.postback == "\"update\"") {
+
+                    sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
+
                     sendTestReceipt(sender)
                 }
                  else if(event.postback == "\"dupdate\"") {
+
+                    sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
+
                     sendTestReceipt(sender)
                 }
             }
