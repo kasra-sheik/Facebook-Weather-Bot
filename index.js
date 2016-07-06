@@ -230,9 +230,10 @@ function forecastBuilder(sender, forecastObject) {
     }
     for(i = 0; i < forecastObject.length; i++) {
         var day = forecastObject[i]
+        forecast.push( {
 
-        sendTextMessage(sender, day.weather.speed)
-        break
+            "title": day.temp.day,
+        });
 
 
     }
@@ -259,15 +260,7 @@ function forecastBuilder(sender, forecastObject) {
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": [{
-                    "title": "Macy's Red Dress",
-                    "subtitle": "Slick and Clean",
-                },
-              {
-                    "title": "Sak's Fifth Avenue Dress",
-                    "subtitle": "Will make you shine! ",
-                    "image_url": "https://s32.postimg.org/6fksu5wz9/rd3.jpg",
-                }]  
+                "elements": forecast
             } 
         }
     }
