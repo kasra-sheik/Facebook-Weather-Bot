@@ -164,9 +164,7 @@ app.post('/webhook/', function (req, res) {
             else if(text == "img") {
                 sendImg(sender)
             }
-            if(text.includes('update')) {
-                sendTextMessage(sender, "test")
-            }
+
             else if(text.includes('joke')) {
                 sendTextMessage(sender, "no.")
 
@@ -196,8 +194,10 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == 'checkout') {
+                sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
                 askMessageTracking(sender)
 
+                testReceipt(sender)
             }
             else {
                 sendTextMessage(sender, "I didn't recognize your request.. search info for some ideas on how to get started")
@@ -222,20 +222,7 @@ app.post('/webhook/', function (req, res) {
 
                     sendTextMessage(sender, "One item added to cart...")
                 }
-                // else if(event.postback == "update") {
 
-                //     sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
-
-                //     sendTestReceipt(sender)
-                // }
-                //  else if(event.postback == "\"dupdate\"") {
-
-                //     sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
-
-                //     sendTestReceipt(sender)
-                // }
-            
-                sendTextMessage(sender,"payload recieved")
             }
 
         
@@ -250,38 +237,22 @@ function askMessageTracking(sender) {
 
 
      messageData = {
-        "text": "Would you like to recieve message updates on your shipment? (You can change this at any time)",
+        "text": "Would you like to recieve message updates on your shipment? (You can change this at any time)"
         "quick_replies": [{
             "content_type": "text",
-            "title": "update",
+            "title": "update me",
             "payload": "update"
             },
 
             {
             "content_type": "text",
-            "title": "don't update",
+            "title": "don't update me ",
             "payload": "dupdate"
             },
+            
+
             ]
     }
-
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-
-
 
 
 }
@@ -371,7 +342,7 @@ elementTest.shift()
             console.log('Error: ', response.body.error)
         }
     })
-    //sendTextMessage(sender, "RIGHT HERE BITCH"); 
+    sendTextMessage(sender, "RIGHT HERE BITCH"); 
 
 
 
