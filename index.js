@@ -41,12 +41,13 @@ app.listen(app.get('port'), function() {
 // API End Point - added by Stefan
 
 app.post('/webhook/', function (req, res) {
+    var cart_items = []
+
     messaging_events = req.body.entry[0].messaging
     for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
 
-        var cart_items = []
         if (event.message && event.message.text) {
             text = event.message.text
 
