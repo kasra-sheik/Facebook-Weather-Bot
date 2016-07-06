@@ -237,20 +237,22 @@ function forecastBuilder(sender, forecastObject) {
 
 
     // }
+// 
 
 
-    // for(var i in forecastObject) {
-    //     var day = forecastObject[i];
+    var forecast = [{}]
+    for(var i in forecastObject) {
+        var day = forecastObject[i];
 
 
-    //     //do handeling for image url processing
+        //do handeling for image url processing
 
-    //     forecast.push({
-    //         "title": day.temp.day,
-    //         "subtitle": day.weather.description
+        forecast.push({
+            "title": day.temp.day,
+            "subtitle": "this is a test",
 
-    //     });
-    // }
+        });
+    }
 
 elementTest = [{
    "title": "Macy's Red Dress",
@@ -272,7 +274,7 @@ elementTest = [{
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": elementTest  
+                "elements": forecast  
             } 
         }
     }
