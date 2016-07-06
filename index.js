@@ -224,19 +224,19 @@ function forecastBuilder(sender, forecastObject) {
     sendTextMessage(sender, "your forecast for" + forecastObject.length + "days"); 
 
 
-    var forecast = {
+    // var forecast = {
 
 
-    }
-    for(i = 0; i < forecastObject.length; i++) {
-        var day = forecastObject[i]
-        forecast.push( {
+    // }
+    // for(i = 0; i < forecastObject.length; i++) {
+    //     var day = forecastObject[i]
+    //     forecast.push( {
 
-            "title": day.temp.day
-        });
+    //         "title": day.temp.day
+    //     });
 
 
-    }
+    // }
 
 
     // for(var i in forecastObject) {
