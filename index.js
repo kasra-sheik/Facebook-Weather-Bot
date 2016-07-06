@@ -38,6 +38,7 @@ app.listen(app.get('port'), function() {
 })
 
  var cart_items = []
+ messageTrack = false
 // API End Point - added by Stefan
 
 app.post('/webhook/', function (req, res) {
@@ -126,13 +127,13 @@ app.post('/webhook/', function (req, res) {
 
                     var rep = response.getBody();
                     //fetching the result and then putting in an array of json objects.
-                    var forecastObject = []
-                    for(i = 0; i < rep.list.length; i++) {
-                        forecastObject.push(rep.list[i]);
-                    }
+                    // var forecastObject = []
+                    // for(i = 0; i < rep.list.length; i++) {
+                    //     forecastObject.push(rep.list[i]);
+                    // }
 
-                    sendTextMessage(sender, "okay this is a test" + rep.list[0].weather[0].description)
-                    forecastBuilder(sender, forecastObject);
+                    // sendTextMessage(sender, "okay this is a test" + rep.list[0].weather[0].description)
+                    forecastBuilder(sender, rep);
 
 
                     // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
@@ -193,6 +194,8 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == 'checkout') {
+                sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
+                askMessageTracking(sender)
 
                 testReceipt(sender)
             }
@@ -209,7 +212,7 @@ app.post('/webhook/', function (req, res) {
                 var postback_text = JSON.stringify(event.postback.payload)
 
                 if(postback_text == "\"Macy's Red Dress\"" || postback_text == "\"Bloomingdale's Red Dress\"" || postback_text == "\"Sak's Fifth Avenue Dress\"" ) {
-                    sendTextMessage(sender, "I added " + postback_text + " to your cart");
+                    sendTextMessage(sender, "Great! I added " + postback_text + " to your cart. When you're ready to checkout and pay for your order just enter \"checkout\"");
                     cart_items.push("test")
                     sendTextMessage(sender, "this is the size: " + cart_items.length)
 
@@ -229,11 +232,35 @@ app.post('/webhook/', function (req, res) {
 
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
-// function to echo back messages - added by Stefan
+
+function askMessageTracking(sender) {
 
 
-function forecastBuilder(sender, forecastObject) {
-    sendTextMessage(sender, "your forecast for" + forecastObject.length + "days"); 
+     messageData = {
+        "text": "Would you like to recieve message updates on your shipment? (You can change this at any time)",
+        "quick_replies": [{
+            "content_type": "text",
+            "title": "update me",
+            "payload": "update"
+            },
+
+            {
+            "content_type": "text",
+            "title": "don't update me ",
+            "payload": "dupdate"
+            },
+            ]
+    }
+
+
+}
+function forecastBuilder(sender, response) {
+    var forecastObject = []
+    for(i = 0; i < response.list.length; i++) {
+        forecastObject.push(response.list[i]);
+    }
+
+    sendTextMessage(sender, "Alright, here's your forecast for the next " + forecastObject.length + " days"); 
 
 
      var forecast = [{
@@ -277,7 +304,7 @@ function forecastBuilder(sender, forecastObject) {
     }
 
 
-for(i = 0; i < 5; i++) {
+for(i = 0; i < forecastObject; i++) {
 
 
 elementTest.push({
