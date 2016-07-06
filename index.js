@@ -228,18 +228,18 @@ function forecastBuilder(sender, forecastObject) {
 
 
     }
-    for(var i in forecastObject) {
-        var day = forecastObject[i];
+    // for(var i in forecastObject) {
+    //     var day = forecastObject[i];
 
 
-        //do handeling for image url processing
+    //     //do handeling for image url processing
 
-        forecast.push({
-            "title": day.temp.day,
-            "subtitle": day.weather.description
+    //     forecast.push({
+    //         "title": day.temp.day,
+    //         "subtitle": day.weather.description
 
-        });
-    }
+    //     });
+    // }
 
 
 
