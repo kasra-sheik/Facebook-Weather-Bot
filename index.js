@@ -254,19 +254,8 @@ function forecastBuilder(sender, forecastObject) {
         });
     }
 
-elementTest = [{
-   "title": "Macy's Red Dress",
-    "subtitle":"yes",
-},
-{
-    "title": "Sak's Fifth Avenue Dress",
-    "subtitle": "Will make you shine! ",
-    "image_url": "https://s32.postimg.org/6fksu5wz9/rd3.jpg",
-}
+elementTest = [{}] 
 
-
-
-]
 
 elementTest.push({
     "title": "test",
