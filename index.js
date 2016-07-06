@@ -240,21 +240,23 @@ function forecastBuilder(sender, forecastObject) {
 // 
 
 
-    var forecast = [{}]
-    for(var i in forecastObject) {
-        var day = forecastObject[i];
+    // var forecast = [{}]
+    // for(var i in forecastObject) {
+    //     var day = forecastObject[i];
 
 
-        //do handeling for image url processing
+    //     //do handeling for image url processing
 
-        forecast.push({
-            "title": day.temp.day,
-            "subtitle": "this is a test",
+    //     forecast.push({
+    //         "title": day.temp.day,
+    //         "subtitle": "this is a test",
 
-        });
-    }
+    //     });
+    // }
 
-elementTest = [{}] 
+elementTest = [{
+    
+}] 
 
 
 elementTest.push({
