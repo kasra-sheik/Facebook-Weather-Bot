@@ -195,14 +195,16 @@ app.post('/webhook/', function (req, res) {
             if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
 
-                if(postback_text == "\"dress\"") {
-                    sendTextMessage(sender, "One Item: " + "Macy's Red Dress" + " Added to Cart!");
-                }
-                else if(event.postback == "\"cart_payload\"") {
+                // if(postback_text == "\"dress\"") {
+                //     sendTextMessage(sender, "One Item: " + "Macy's Red Dress" + " Added to Cart!");
+                // }
+                // else if(event.postback == "\"cart_payload\"") {
 
 
-                    sendTextMessage(sender, "One item added to cart...")
-                }
+                //     sendTextMessage(sender, "One item added to cart...")
+                // }
+
+                sendTextMessage(sender, "here it is: " postback_text)
             }
 
             //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
