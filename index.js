@@ -224,19 +224,19 @@ function forecastBuilder(sender, forecastObject) {
     sendTextMessage(sender, "your forecast for" + forecastObject.length + "days"); 
 
 
-    // var forecast = {
+    var forecast = {
 
 
-    // }
-    // for(i = 0; i < forecastObject.length; i++) {
-    //     var day = forecastObject[i]
-    //     forecast.push( {
+    }
+    for(i = 0; i < forecastObject.length; i++) {
+        var day = forecastObject[i]
+        forecast.push( {
 
-    //         "title": day.temp.day,
-    //     });
+            "title": day.temp.day
+        });
 
 
-    // }
+    }
 
 
     // for(var i in forecastObject) {
@@ -261,8 +261,13 @@ function forecastBuilder(sender, forecastObject) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title":"hello"
-                }]
+                    "title": "Macy's Red Dress",
+                },
+              {
+                    "title": "Sak's Fifth Avenue Dress",
+                    "subtitle": "Will make you shine! ",
+                    "image_url": "https://s32.postimg.org/6fksu5wz9/rd3.jpg",
+                }]  
             } 
         }
     }
