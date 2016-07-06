@@ -231,7 +231,7 @@ function forecastBuilder(sender, forecastObject) {
     for(i = 0; i < forecastObject.length; i++) {
         var day = forecastObject[i]
 
-        sendTextMessage(sender, day.temp.day)
+        sendTextMessage(sender, day.weather.description)
         break
 
 
