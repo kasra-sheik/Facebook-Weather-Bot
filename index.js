@@ -266,8 +266,10 @@ function forecastBuilder(sender, forecastObject) {
 
 
 for(i = 0; i < 5; i++) {
+
+
 elementTest.push({
-    "title": "test",
+    "title": forecastObject[i].temp.day,
     "subtitle": i,
 })
 }
