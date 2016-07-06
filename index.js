@@ -194,6 +194,7 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == 'checkout') {
+                sendImg(sender)
             }
             else if(text.includes('update')) {
 
@@ -378,7 +379,7 @@ function startInfo(sender, name) {
 function sendImg(sender) {
 
     messageData = {
-        "text":"Do you want me to send you updates on your shipment? (You can change this at any time)",
+        "text":"Pick a color:",
     "quick_replies":[
       {
         "content_type":"text",
