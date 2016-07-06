@@ -247,29 +247,10 @@ function forecastBuilder(sender, response) {
         forecastObject.push(response.list[i]);
     }
 
-    sendTextMessage(sender, "Alright, here's your forecast for the next " + forecastObject.length + " days"); 
-
-
-     var forecast = [{
-        "title": "16 Day Forecast",
-        "subtitle":"Slide Right to See Your 16 day Forecast",
-
-
-
-     }]
-
-
-    
-    // for(i = 0; i < forecastObject.length; i++) {
-    //     var day = forecastObject[i]
-    //     forecast.push( {
-
-    //         "title": day.temp.day
-    //     });
-
-
-    // }
-// 
+    sendTextMessage(sender, "Alright, here's your forecast in " + place +  " for the next " + forecastObject.length + " days"); 
+    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    var d = new Date();
+    var n = d.getDay();
 
     elementTest = [{
         "title": "this is a test",
@@ -278,35 +259,15 @@ function forecastBuilder(sender, response) {
     }]
 
 
-    for(i = 0; i < forecastObject.length; i++) {
-        var day = forecastObject[i];
-
-
-        //do handeling for image url processing
-
-        forecast.push({
-            "title": day.weather[0].description,
-            "subtitle": "High: " + day.temp.max + " Low: " + day.temp.min + " Average: " + day.temp.day,
-
-        });
-    }
-
-
-
-//image handeling: URL 
-
-/*
-https://s32.postimg.org/imipaskup/cloudy.jpg
-https://s32.postimg.org/ftphqrki9/rainy.jpg
-https://s32.postimg.org/9u1qn3zpt/sunny.jpg
-*/
-
 
 for(i = 0; i < forecastObject.length; i++) {
 
+if(n == 6){n = 0;}
 var day = forecastObject[i];
 var description = day.weather[0].description
 var imageUrl = ""
+
+//image handeling
 if(description.includes("rain")) {
     imageUrl = "https://s32.postimg.org/ftphqrki9/rainy.jpg"
 }
@@ -318,10 +279,11 @@ else {
 }
 
 elementTest.push({
-    "title": day.weather[0].description,
+    "title": days[n] + ": " + day.weather[0].description,
     "subtitle": "High: " + day.temp.max + " Low: " + day.temp.min + " Average: " + day.temp.day,
     "image_url": imageUrl
 })
+ n++;
 }
 
 
