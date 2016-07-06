@@ -200,16 +200,15 @@ app.post('/webhook/', function (req, res) {
          if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
 
-                // if(postback_text == "\"dress\"") {
-                //     sendTextMessage(sender, "One Item: " + "Macy's Red Dress" + " Added to Cart!");
-                // }
-                // else if(event.postback == "\"cart_payload\"") {
+                if(postback_text == "\"Macy's Red Dress\"" || postback_text == "\"Bloomingdale's Red Dress\"" || postback_text == "\"Sak's Fifth Avenue Dress\"" ) {
+                    sendTextMessage(sender, "One Item: " + postback_text + " Added to Cart!");
+                }
+                else if(event.postback == "\"cart_payload\"") {
 
 
-                //     sendTextMessage(sender, "One item added to cart...")
-                // }
+                    sendTextMessage(sender, "One item added to cart...")
+                }
 
-                sendTextMessage(sender, "hello")
             }
 
         
@@ -433,10 +432,10 @@ function sendGenericMessage(sender) {
                     }, {
                         "type": "postback",
                         "title": "Add to Cart",
-                        "payload":"cart_payload"
+                        "payload":"Macy's Red Dress"
                     },],
                 }, {
-                    "title": "Bloomingdale's Red Dress ",
+                    "title": "Bloomingdale's Red Dress",
                     "subtitle": "Smells Like Roses",
                     "image_url": "https://s32.postimg.org/ypwiy4qyd/rd2.jpg",
                     "buttons": [{
@@ -446,7 +445,7 @@ function sendGenericMessage(sender) {
                     },{
                         "type": "postback",
                         "title": "Add to Cart",
-                        "payload":"Added to Cart!"
+                        "payload":"Bloomingdale's Red Dress"
                     }, ],
                 },  {
                     "title": "Sak's Fifth Avenue Dress",
@@ -459,7 +458,7 @@ function sendGenericMessage(sender) {
                     },{
                         "type": "postback",
                         "title": "Add to Cart",
-                        "payload":"Added to Cart!"
+                        "payload":"Sak's Fifth Avenue Dress"
                     }, ],
                 }]  
             } 
