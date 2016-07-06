@@ -379,7 +379,7 @@ function startInfo(sender, name) {
 function sendImg(sender) {
 
     messageData = {
-        "text":"Pick a color:",
+        "text":"Would you like me to send you updates on your shipment? (You can change this anytime)",
     "quick_replies":[
       {
         "content_type":"text",
