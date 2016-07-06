@@ -255,8 +255,8 @@ function forecastBuilder(sender, forecastObject) {
     // }
 
 elementTest = [{
-    "title": "",
-    "subtitle": "",
+    "title": "testes",
+    "subtitle": "fuck",
 
 }
 
