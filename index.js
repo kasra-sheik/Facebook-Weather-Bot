@@ -197,7 +197,6 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
                 askMessageTracking(sender)
 
-                testReceipt(sender)
             }
             else {
                 sendTextMessage(sender, "I didn't recognize your request.. search info for some ideas on how to get started")
@@ -240,13 +239,13 @@ function askMessageTracking(sender) {
         "text": "Would you like to recieve message updates on your shipment? (You can change this at any time)",
         "quick_replies": [{
             "content_type": "text",
-            "title": "update me",
+            "title": "yes",
             "payload": "update"
             },
 
             {
             "content_type": "text",
-            "title": "don't update me ",
+            "title": "no",
             "payload": "dupdate"
             },
             ]
@@ -267,6 +266,9 @@ function askMessageTracking(sender) {
             console.log('Error: ', response.body.error)
         }
     })
+
+                    testReceipt(sender)
+
 
 
 }
