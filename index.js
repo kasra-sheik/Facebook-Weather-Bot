@@ -294,8 +294,8 @@ for(i = 0; i < forecastObject.length; i++) {
 
 
 elementTest.push({
-    "title": forecastObject[i].temp.day,
-    "subtitle": day.weather[0].description,
+    "title": day.weather[0].description,
+    "subtitle": "High: " + day.temp.max + " Low: " + day.temp.min + " Average: " + day.temp.day,
 })
 }
 
