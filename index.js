@@ -273,6 +273,7 @@ function forecastBuilder(sender, response) {
     elementTest = [{
         "title": "this is a test",
         "subtitle": "this is another test",
+        "image_url": "https://s32.postimg.org/ftphqrki9/rainy.jpg",
     }]
 
 
@@ -290,13 +291,35 @@ function forecastBuilder(sender, response) {
     }
 
 
+
+//image handeling: URL 
+
+/*
+https://s32.postimg.org/imipaskup/cloudy.jpg
+https://s32.postimg.org/ftphqrki9/rainy.jpg
+https://s32.postimg.org/9u1qn3zpt/sunny.jpg
+*/
+
+
 for(i = 0; i < forecastObject.length; i++) {
 
 var day = forecastObject[i];
+var description = day.weather[0].description
+var imageUrl = ""
+if(description.includes("rain")) {
+    imageUrl = "https://s32.postimg.org/ftphqrki9/rainy.jpg"
+}
+else if(description.includes("cloud")) {
+    imageUrl = "https://s32.postimg.org/imipaskup/cloudy.jpg"
+}
+else {
+    imageUrl = "https://s32.postimg.org/9u1qn3zpt/sunny.jpg"
+}
 
 elementTest.push({
     "title": day.weather[0].description,
     "subtitle": "High: " + day.temp.max + " Low: " + day.temp.min + " Average: " + day.temp.day,
+    "image_url": imageUrl
 })
 }
 
