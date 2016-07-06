@@ -196,9 +196,9 @@ app.post('/webhook/', function (req, res) {
             else if(text == 'checkout') {
                 sendImg(sender)
             }
-            else if(text.includes('update')) {
+            else if(text.includes('Update')) {
 
-                  sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment. And if you'd like me  ")
+                  sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
 
                 testReceipt(sender)
             }
