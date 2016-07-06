@@ -221,13 +221,16 @@ var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p
 
 
 function forecastBuilder(sender, forecastObject) {
-    sendTextMessage(sender, "your forecast for the next 16 days"); 
+    sendTextMessage(sender, "your forecast for" + forecastObject.length + "days"); 
 
 
     var forecast = {
 
 
     }
+
+
+
     // for(var i in forecastObject) {
     //     var day = forecastObject[i];
 
