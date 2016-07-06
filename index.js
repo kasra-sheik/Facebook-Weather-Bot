@@ -2,15 +2,13 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var request = require('request')
 var app = express()
+// var http = require('http')
 var requestify = require('requestify'); 
 
 // var options = {
 //     host: 'api.ipinfodb.com',
 //     path: 'v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json'
 // }
-
-
-
 
 
 app.set('port', (process.env.PORT || 5000))
@@ -48,8 +46,6 @@ app.listen(app.get('port'), function() {
 
 app.post('/webhook/', function (req, res) {
    
-
-    setGreetingText(sender)
 
     messaging_events = req.body.entry[0].messaging
     for (i = 0; i < messaging_events.length; i++) {
@@ -579,32 +575,4 @@ function testReceipt(sender) {
 
 
 }
-function setGreetingText(sender) {
 
-    messageData = {
-        "setting_type": "greeting",
-        "greeting": {
-            "text": "Welcome to ParrotBot type info to get started.."
-        }
-
-
-    }
-
-
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-
-}
