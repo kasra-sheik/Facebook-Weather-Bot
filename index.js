@@ -198,7 +198,7 @@ app.post('/webhook/', function (req, res) {
                 if(postback_text == "\"dress\"") {
                     sendTextMessage(sender, "One Item: " + "Macy's Red Dress" + " Added to Cart!");
                 }
-                else if(postback_text == "\"cart_payload\"") {
+                else if(event.postback == "\"cart_payload\"") {
 
 
                     sendTextMessage(sender, "One item added to cart...")
