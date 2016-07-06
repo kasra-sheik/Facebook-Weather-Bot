@@ -221,7 +221,12 @@ app.post('/webhook/', function (req, res) {
 
                     sendTextMessage(sender, "One item added to cart...")
                 }
-
+                else if(event.postback == "\"update\"") {
+                    sendTestReceipt(sender)
+                }
+                 else if(event.postback == "\"dupdate\"") {
+                    sendTestReceipt(sender)
+                }
             }
 
         
@@ -267,7 +272,6 @@ function askMessageTracking(sender) {
         }
     })
 
-                    testReceipt(sender)
 
 
 
