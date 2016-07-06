@@ -196,7 +196,7 @@ app.post('/webhook/', function (req, res) {
                 //sendGenericMessage(sender)
 
             }
-            else if(text == 'checkout') {
+            else if(text.lower.includes('checkout')) {
                 sendImg(sender)
             }
             else if(text.includes('Update')) {
