@@ -41,6 +41,7 @@ app.listen(app.get('port'), function() {
  var messageTrack = false
  var forecast = false
  var location = ""
+ var place = ""
 // API End Point - added by Stefan
 
 app.post('/webhook/', function (req, res) {
@@ -97,7 +98,7 @@ app.post('/webhook/', function (req, res) {
 
                 }
                 else {
-                    var place = text.substring(22,300)
+                    place = text.substring(22,300)
                 }
                 var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + place + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
 
@@ -121,7 +122,7 @@ app.post('/webhook/', function (req, res) {
             }
             else if(text == "forecast") {
 
-                var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=palo%20alto&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"
+                var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + place + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"
 
 
                  requestify.get(URL).then(function(response) {
@@ -350,7 +351,6 @@ elementTest.shift()
             console.log('Error: ', response.body.error)
         }
     })
-    sendTextMessage(sender, "RIGHT HERE BITCH"); 
 
 
 
