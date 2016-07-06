@@ -292,6 +292,7 @@ function forecastBuilder(sender, response) {
 
 for(i = 0; i < forecastObject.length; i++) {
 
+var day = forecastObject[i];
 
 elementTest.push({
     "title": day.weather[0].description,
