@@ -50,6 +50,23 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             text = event.message.text
 
+
+             if(event.postback) {
+                var postback_text = JSON.stringify(event.postback.payload)
+
+                // if(postback_text == "\"dress\"") {
+                //     sendTextMessage(sender, "One Item: " + "Macy's Red Dress" + " Added to Cart!");
+                // }
+                // else if(event.postback == "\"cart_payload\"") {
+
+
+                //     sendTextMessage(sender, "One item added to cart...")
+                // }
+
+                sendTextMessage(sender, "hello")
+            }
+
+
             if(text.substring(0,6) == "parrot") {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
@@ -192,20 +209,6 @@ app.post('/webhook/', function (req, res) {
 
             }
 
-            if(event.postback) {
-                var postback_text = JSON.stringify(event.postback.payload)
-
-                // if(postback_text == "\"dress\"") {
-                //     sendTextMessage(sender, "One Item: " + "Macy's Red Dress" + " Added to Cart!");
-                // }
-                // else if(event.postback == "\"cart_payload\"") {
-
-
-                //     sendTextMessage(sender, "One item added to cart...")
-                // }
-
-                sendTextMessage(sender, "hello")
-            }
 
             //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
         }
