@@ -183,7 +183,13 @@ app.post('/webhook/', function (req, res) {
             else if(text == "Add to Cart") {
                 sendTextMessage(sender, "Great...I added your item ")
             }
+            else if(text == "what is in my cart?") {
+                sendTextMessage(sender,"Right now here are the items in your cart: ")
+                for(i = 0; i < cart_items.length; i++) {
+                    sendTextMessage(sender, cart_items[i])
+                }
 
+            }
             else if(text == 'how are you today?') {
                 sendTextMessage(sender, "I'm not bad actually, welcome to mavatar!")
                 continue
