@@ -41,7 +41,7 @@ app.listen(app.get('port'), function() {
  var messageTrack = false
  var forecast = false
  var location = ""
- var place = ""
+ var place
 // API End Point - added by Stefan
 
 app.post('/webhook/', function (req, res) {
@@ -94,7 +94,7 @@ app.post('/webhook/', function (req, res) {
             else if(text.substring(0,2) == 'in' || text.includes("what is the weather in")) {
 
                 if(text.substring(0,2) == 'in') {
-                    var place = text.substring(3,200)
+                    place = text.substring(3,200)
 
                 }
                 else {
