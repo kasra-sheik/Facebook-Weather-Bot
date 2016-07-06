@@ -253,7 +253,7 @@ function forecastBuilder(sender, forecastObject) {
         //do handeling for image url processing
 
         forecast.push({
-            "title": day.temp.day,
+            "title": "testing",
             "subtitle": "this is a test",
 
         });
