@@ -185,6 +185,9 @@ app.post('/webhook/', function (req, res) {
                 }
 
             }
+            else if(text == "check place") {
+                sendTextMessage(sender, place)
+            }
             else if(text == 'how are you today?') {
                 sendTextMessage(sender, "I'm not bad actually, welcome to mavatar!")
                 continue
@@ -196,7 +199,7 @@ app.post('/webhook/', function (req, res) {
                 //sendGenericMessage(sender)
 
             }
-            else if(text.toLowerCase().includes('checkout')) {
+            else if(text.includes('checkout')) {
                 sendImg(sender)
             }
             else if(text.includes('Update')) {
