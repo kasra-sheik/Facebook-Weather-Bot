@@ -219,7 +219,7 @@ app.post('/webhook/', function (req, res) {
 
                 if(postback_text == "\"Macy's Red Dress\"" || postback_text == "\"Bloomingdale's Red Dress\"" || postback_text == "\"Sak's Fifth Avenue Dress\"" ) {
                     sendTextMessage(sender, "Great! I added " + postback_text + " to your cart. When you're ready to checkout and pay for your order just enter \"checkout\"");
-                    cart_items.push("test")
+                    cart_items.push(postback_text)
 
                 }
                 else if(event.postback == "\"cart_payload\"") {
