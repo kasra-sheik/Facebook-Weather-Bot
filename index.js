@@ -208,7 +208,7 @@ app.post('/webhook/', function (req, res) {
 
                 if(postback_text == "\"Macy's Red Dress\"" || postback_text == "\"Bloomingdale's Red Dress\"" || postback_text == "\"Sak's Fifth Avenue Dress\"" ) {
                     sendTextMessage(sender, "I added " + postback_text + " to your cart");
-                    cart_items.push(postback_text)
+                    cart_items.push("test")
 
                 }
                 else if(event.postback == "\"cart_payload\"") {
