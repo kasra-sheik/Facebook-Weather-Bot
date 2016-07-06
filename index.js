@@ -38,7 +38,9 @@ app.listen(app.get('port'), function() {
 })
 
  var cart_items = []
- messageTrack = false
+ var messageTrack = false
+ var forecast = false
+ var location = ""
 // API End Point - added by Stefan
 
 app.post('/webhook/', function (req, res) {
@@ -138,8 +140,7 @@ app.post('/webhook/', function (req, res) {
 
                     // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
 
-                    // sendTextMessage(sender, respText)  
-                    sendTextMessage(sender, "we got here at least!");
+                  
 
                 });   
             }
@@ -283,7 +284,7 @@ function forecastBuilder(sender, response) {
 
         forecast.push({
             "title": day.temp.day,
-            "subtitle": "this is a test",
+            "subtitle": day.weather[0].description,
 
         });
     }
@@ -294,7 +295,7 @@ for(i = 0; i < forecastObject; i++) {
 
 elementTest.push({
     "title": forecastObject[i].temp.day,
-    "subtitle": i,
+    "subtitle": day.weather[0].description,
 })
 }
 
