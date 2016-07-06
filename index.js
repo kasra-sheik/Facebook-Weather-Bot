@@ -247,9 +247,14 @@ function askMessageTracking(sender) {
             {
             "content_type": "text",
             "title": "don't update me ",
-            "payload": "dupdate"
+            "payload": "don'tt"
             },
-            
+             {
+            "content_type": "text",
+            "title": "Hottest Deals",
+            "payload": "cart_payload"
+            }
+
 
             ]
     }
