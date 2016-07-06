@@ -290,7 +290,7 @@ function forecastBuilder(sender, response) {
     }
 
 
-for(i = 0; i < forecastObject; i++) {
+for(i = 0; i < forecastObject.length; i++) {
 
 
 elementTest.push({
