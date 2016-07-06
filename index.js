@@ -250,13 +250,13 @@ function askMessageTracking(sender) {
      messageData = {
         "text": "Would you like to recieve message updates on your shipment? (You can change this at any time)",
         "quick_replies": [{
-            "content_type": "text",
+            "content_type": "postback",
             "title": "yes",
             "payload": "update"
             },
 
             {
-            "content_type": "text",
+            "content_type": "postback",
             "title": "no",
             "payload": "dupdate"
             },
