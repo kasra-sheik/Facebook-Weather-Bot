@@ -169,6 +169,11 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, "Matching you're query for red dresses")
                 sendGenericMessage(sender)
             }
+            else if(text.includes("show me my cart")) {
+                //we would search and regenerate items?? or grab data from mavatar website
+
+                sendTextMessage(sender, cart_items.length)
+            }
             else if(text == "Add to Cart") {
                 sendTextMessage(sender, "Great...I added your item ")
             }
@@ -189,7 +194,7 @@ app.post('/webhook/', function (req, res) {
                 testReceipt(sender)
             }
             else {
-                sendTextMessage(sender, "parrot doesn't understand yet.. parrot is simple!!!!!!")
+                sendTextMessage(sender, "I didn't recognize your request.. ")
 
             }
 
@@ -202,6 +207,8 @@ app.post('/webhook/', function (req, res) {
 
                 if(postback_text == "\"Macy's Red Dress\"" || postback_text == "\"Bloomingdale's Red Dress\"" || postback_text == "\"Sak's Fifth Avenue Dress\"" ) {
                     sendTextMessage(sender, "I added " + postback_text + " to your cart");
+                    cart_items.push(postback_text)
+
                 }
                 else if(event.postback == "\"cart_payload\"") {
 
