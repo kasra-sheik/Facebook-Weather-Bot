@@ -224,22 +224,22 @@ function forecastBuilder(sender, forecastObject) {
     sendTextMessage(sender, "your forecast for the next 16 days"); 
 
 
-    // var forecast = {
+    var forecast = {
 
 
-    // }
-    // for(var i in forecastObject) {
-    //     var day = forecastObject[i];
+    }
+    for(var i in forecastObject) {
+        var day = forecastObject[i];
 
 
-    //     //do handeling for image url processing
+        //do handeling for image url processing
 
-    //     forecast.push({
-    //         "title": day.temp.day,
-    //         "subtitle": day.weather.description
+        forecast.push({
+            "title": day.temp.day,
+            "subtitle": day.weather.description
 
-    //     });
-    // }
+        });
+    }
 
 
 
