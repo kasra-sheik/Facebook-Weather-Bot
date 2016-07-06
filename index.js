@@ -505,6 +505,7 @@ function sendGenericMessage(sender) {
 }
 
 function testReceipt(sender) {
+    sendTextMessage(sender, "Here's your order summary..")
     messageData = {
          "attachment":{
       "type":"template",
