@@ -382,12 +382,12 @@ function sendImg(sender) {
     "quick_replies":[
       {
         "content_type":"text",
-        "title":"Update Me",
+        "title":"Red",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
       },
       {
         "content_type":"text",
-        "title":"Don't Update Me",
+        "title":"Green",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
       }
     ]
