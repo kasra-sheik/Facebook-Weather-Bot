@@ -246,14 +246,14 @@ function forecastBuilder(sender, forecastObject) {
 // 
 
 
-    for(var i in forecastObject) {
+    for(i = 0; i < forecastObject.length; i++) {
         var day = forecastObject[i];
 
 
         //do handeling for image url processing
 
         forecast.push({
-            "title": "testing",
+            "title": day.temp.day,
             "subtitle": "this is a test",
 
         });
