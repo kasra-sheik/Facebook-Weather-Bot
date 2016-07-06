@@ -194,7 +194,7 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == 'checkout') {
-                askMessageTrack(sender)
+                sendImg(sender)
             }
             else if(text.includes('update')) {
 
@@ -238,45 +238,6 @@ var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p
 
 function askMessageTrack(sender) {
 
- messageData = {
-
-        "text": "Hello " + name + ", Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?",
-        "quick_replies": [{
-            "content_type": "text",
-            "title": "Shop",
-            "payload": "shop_payload"
-            },
-
-            {
-            "content_type": "text",
-            "title": "View User Carts",
-            "payload": "cart_payload"
-            },
-             {
-            "content_type": "text",
-            "title": "Hottest Deals",
-            "payload": "cart_payload"
-            }
-
-
-            ]
-    }
-     request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-    
 }
 function forecastBuilder(sender, response) {
     var forecastObject = []
