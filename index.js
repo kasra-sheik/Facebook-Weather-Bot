@@ -118,7 +118,7 @@ app.post('/webhook/', function (req, res) {
             }
             else if(text == "forecast") {
 
-                var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=palo%20alto&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=16"
+                var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=palo%20alto&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"
 
 
                  requestify.get(URL).then(function(response) {
@@ -130,6 +130,8 @@ app.post('/webhook/', function (req, res) {
                     for(i = 0; i < rep.list.length; i++) {
                         forecastObject.push(rep.list[i]);
                     }
+
+                    sendTextMessage(sender, "okay this is a test" + rep.list[0].description)
                     forecastBuilder(sender, forecastObject);
 
 
@@ -170,7 +172,7 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, "Matching you're query for red dresses")
                 sendGenericMessage(sender)
             }
-            else if(text.includes("show me my cart")) {
+            else if(text.includes("my cart")) {
                 //we would search and regenerate items?? or grab data from mavatar website
 
                 sendTextMessage(sender, cart_items.length)
@@ -195,7 +197,7 @@ app.post('/webhook/', function (req, res) {
                 testReceipt(sender)
             }
             else {
-                sendTextMessage(sender, "I didn't recognize your request.. ")
+                sendTextMessage(sender, "I didn't recognize your request.. search info for some ideas on how to get started")
 
             }
 
