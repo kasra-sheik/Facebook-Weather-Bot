@@ -284,7 +284,7 @@ function forecastBuilder(sender, response) {
 
         forecast.push({
             "title": day.weather[0].description,
-            "subtitle": "High: " + day.temp.max + " Low: " + day.temp.min + " Average: " day.temp.day,
+            "subtitle": "High: " + day.temp.max + " Low: " + day.temp.min + " Average: " + day.temp.day,
 
         });
     }
