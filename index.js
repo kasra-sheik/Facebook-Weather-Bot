@@ -120,7 +120,7 @@ app.post('/webhook/', function (req, res) {
                 });   
 
             }
-            else if(text == "forecast") {
+            else if(text.includes("forecast")) {
 
                 var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + place + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"
 
