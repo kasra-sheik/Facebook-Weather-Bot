@@ -331,7 +331,7 @@ function startInfo(sender, name) {
 
             {
             "content_type": "text",
-            "title": "View User Carts",
+            "title": "View Carts",
             "payload": "cart_payload"
             },
              {
