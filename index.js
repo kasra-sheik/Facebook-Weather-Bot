@@ -226,7 +226,7 @@ function forecastBuilder(sender, forecastObject) {
 
      var forecast = [{
         "title": "16 Day Forecast",
-        "subtitle":"Slide Right to See Your 16 day Forecast"
+        "subtitle":"Slide Right to See Your 16 day Forecast",
 
 
 
