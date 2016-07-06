@@ -194,8 +194,7 @@ app.post('/webhook/', function (req, res) {
 
             }
             else if(text == 'checkout') {
-                sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
-                askMessageTracking(sender)
+                sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment. And if you'd like me  ")
 
                 testReceipt(sender)
             }
@@ -233,34 +232,7 @@ app.post('/webhook/', function (req, res) {
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
 
-function askMessageTracking(sender) {
 
-
-     messageData = {
-        "text": "Would you like to recieve message updates on your shipment? (You can change this at any time)"
-        "quick_replies": [{
-            "content_type": "text",
-            "title": "update me",
-            "payload": "update"
-            },
-
-            {
-            "content_type": "text",
-            "title": "don't update me ",
-            "payload": "don'tt"
-            },
-             {
-            "content_type": "text",
-            "title": "Hottest Deals",
-            "payload": "cart_payload"
-            }
-
-
-            ]
-    }
-
-
-}
 function forecastBuilder(sender, response) {
     var forecastObject = []
     for(i = 0; i < response.list.length; i++) {
