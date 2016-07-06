@@ -268,7 +268,7 @@ function forecastBuilder(sender, forecastObject) {
 for(i = 0; i < 5; i++) {
 elementTest.push({
     "title": "test",
-    "subtitle": "one more test",
+    "subtitle": i,
 })
 }
 
