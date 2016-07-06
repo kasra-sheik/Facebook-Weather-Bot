@@ -131,7 +131,7 @@ app.post('/webhook/', function (req, res) {
                         forecastObject.push(rep.list[i]);
                     }
 
-                    sendTextMessage(sender, "okay this is a test" + rep.weather[0])
+                    sendTextMessage(sender, "okay this is a test" + rep.list[0].weather)
                     forecastBuilder(sender, forecastObject);
 
 
