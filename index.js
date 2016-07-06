@@ -51,22 +51,6 @@ app.post('/webhook/', function (req, res) {
             text = event.message.text
 
 
-             if(event.postback) {
-                var postback_text = JSON.stringify(event.postback.payload)
-
-                // if(postback_text == "\"dress\"") {
-                //     sendTextMessage(sender, "One Item: " + "Macy's Red Dress" + " Added to Cart!");
-                // }
-                // else if(event.postback == "\"cart_payload\"") {
-
-
-                //     sendTextMessage(sender, "One item added to cart...")
-                // }
-
-                sendTextMessage(sender, "hello")
-            }
-
-
             if(text.substring(0,6) == "parrot") {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
@@ -184,21 +168,6 @@ app.post('/webhook/', function (req, res) {
             else if (text.includes('red dress')) {
                 sendTextMessage(sender, "Matching you're query for red dresses")
                 sendGenericMessage(sender)
-
-                    if(event.postback) {
-                var postback_text = JSON.stringify(event.postback.payload)
-
-                // if(postback_text == "\"dress\"") {
-                //     sendTextMessage(sender, "One Item: " + "Macy's Red Dress" + " Added to Cart!");
-                // }
-                // else if(event.postback == "\"cart_payload\"") {
-
-
-                //     sendTextMessage(sender, "One item added to cart...")
-                // }
-
-                sendTextMessage(sender, "hello")
-            }
             }
             else if(text == "Add to Cart") {
                 sendTextMessage(sender, "Great...I added your item ")
@@ -227,6 +196,22 @@ app.post('/webhook/', function (req, res) {
 
             //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
         }
+
+         if(event.postback) {
+                var postback_text = JSON.stringify(event.postback.payload)
+
+                // if(postback_text == "\"dress\"") {
+                //     sendTextMessage(sender, "One Item: " + "Macy's Red Dress" + " Added to Cart!");
+                // }
+                // else if(event.postback == "\"cart_payload\"") {
+
+
+                //     sendTextMessage(sender, "One item added to cart...")
+                // }
+
+                sendTextMessage(sender, "hello")
+            }
+
         
     }
     res.sendStatus(200)
