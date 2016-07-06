@@ -245,11 +245,10 @@ function forecastBuilder(sender, forecastObject) {
     // }
 // 
 
-    // elementTest = [{
-    //     "title": "this is a test",
-    //     "subtitle": "this is another test",
-    // }]
-    elementTest = [{}]
+    elementTest = [{
+        "title": "this is a test",
+        "subtitle": "this is another test",
+    }]
 
 
     for(i = 0; i < forecastObject.length; i++) {
@@ -275,6 +274,8 @@ elementTest.push({
 })
 }
 
+
+elementTest.shift()
 
  messageData = {
         "attachment": {
