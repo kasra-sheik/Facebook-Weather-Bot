@@ -164,7 +164,13 @@ app.post('/webhook/', function (req, res) {
             else if(text == "img") {
                 sendImg(sender)
             }
+            if(text.includes('update')) {
 
+                    sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
+
+                    sendTestReceipt(sender)
+
+            }
             else if(text.includes('joke')) {
                 sendTextMessage(sender, "no.")
 
@@ -250,14 +256,14 @@ function askMessageTracking(sender) {
      messageData = {
         "text": "Would you like to recieve message updates on your shipment? (You can change this at any time)",
         "quick_replies": [{
-            "content_type": "postback",
-            "title": "yes",
+            "content_type": "text",
+            "title": "update",
             "payload": "update"
             },
 
             {
-            "content_type": "postback",
-            "title": "no",
+            "content_type": "text",
+            "title": "don't update",
             "payload": "dupdate"
             },
             ]
