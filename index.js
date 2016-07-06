@@ -283,9 +283,8 @@ function forecastBuilder(sender, response) {
         //do handeling for image url processing
 
         forecast.push({
-            "title": day.temp.day,
-            "subtitle": day.weather[0].description,
-            "subtitle": "is it possible to have another one?",
+            "title": day.weather[0].description,
+            "subtitle": "High: " + day.temp.max + " Low: " + day.temp.min + " Average: " day.temp.day,
 
         });
     }
