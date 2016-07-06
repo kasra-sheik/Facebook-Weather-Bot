@@ -245,6 +245,11 @@ function forecastBuilder(sender, forecastObject) {
     // }
 // 
 
+    elementTest = [{
+        "title": "this is a test",
+        "subtitle": "this is another test",
+    }]
+
 
     for(i = 0; i < forecastObject.length; i++) {
         var day = forecastObject[i];
@@ -273,7 +278,7 @@ elementTest.push({
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": forecast
+                "elements": elementTest
             } 
         }
     }
