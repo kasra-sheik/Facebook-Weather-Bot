@@ -246,7 +246,6 @@ function forecastBuilder(sender, forecastObject) {
 // 
 
 
-    var forecast = [{}]
     for(var i in forecastObject) {
         var day = forecastObject[i];
 
