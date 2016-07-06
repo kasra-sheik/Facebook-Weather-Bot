@@ -255,24 +255,20 @@ function forecastBuilder(sender, forecastObject) {
     // }
 
 elementTest = [{
-    "title": "test",
-    "subtitle": "one more test",
-
-},
-{
-    "title": "testTwo",
-    "subtitle": "one more test heh",
+    "title": "",
+    "subtitle": "",
 
 }
 
 
 ] 
 
-
+for(i = 0; i < 5; i++) {
 elementTest.push({
     "title": "test",
     "subtitle": "one more test",
 })
+}
 
 
  messageData = {
