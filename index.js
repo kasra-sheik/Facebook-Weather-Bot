@@ -383,7 +383,7 @@ function sendImg(sender) {
     "quick_replies":[
       {
         "content_type":"text",
-        "title":"Red",
+        "title":"Blue",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
       },
       {
