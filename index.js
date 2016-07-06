@@ -204,7 +204,7 @@ app.post('/webhook/', function (req, res) {
                 //     sendTextMessage(sender, "One item added to cart...")
                 // }
 
-                sendTextMessage(sender, "here it is: " + postback_text)
+                sendTextMessage(sender, "hello")
             }
 
             //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
