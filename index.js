@@ -244,55 +244,61 @@ function forecastBuilder(sender, forecastObject) {
 
 
 
-
-    // messageData = {
-    //     "attachment": {
-    //         "type": "template",
-    //         "payload": {
-    //             "template_type": "generic",
-    //             "elements": [{
-    //                 "title": "yo"
-    //             }]
-
-
-    //         }
-    //     }
-    // }
+ messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Macy's Red Dress",
+                    "subtitle": "Slick and Clean",
+                    "image_url": "https://s32.postimg.org/4dc1rhfmt/rd1.jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://mavatar.com/catalog/product?category_order=0&no=12&order=3&prev_category=852&price_from=1&price_to=8&product_id=2304585",
+                        "title": "Open in Browser"
+                    }, {
+                        "type": "postback",
+                        "title": "Add to Cart",
+                        "payload":"cart_payload"
+                    },],
+                }, {
+                    "title": "Bloomingdale's Red Dress ",
+                    "subtitle": "Smells Like Roses",
+                    "image_url": "https://s32.postimg.org/ypwiy4qyd/rd2.jpg",
+                    "buttons": [{
+                       "type": "web_url",
+                        "url": "https://mavatar.com/catalog/product?category_order=0&no=12&order=3&prev_category=852&price_from=1&price_to=8&product_id=2304585",
+                        "title": "Open in Browser"
+                    },{
+                        "type": "postback",
+                        "title": "Add to Cart",
+                        "payload":"Added to Cart!"
+                    }, ],
+                },  {
+                    "title": "Sak's Fifth Avenue Dress",
+                    "subtitle": "Will make you shine! ",
+                    "image_url": "https://s32.postimg.org/6fksu5wz9/rd3.jpg",
+                    "buttons": [{
+                       "type": "web_url",
+                        "url": "https://mavatar.com/catalog/product?category_order=0&no=8&order=3&price_from=1&price_to=8&product_id=3870787",
+                        "title": "Open in Browser"
+                    },{
+                        "type": "postback",
+                        "title": "Add to Cart",
+                        "payload":"Added to Cart!"
+                    }, ],
+                }]  
+            } 
+        }
+    }
      request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token:token},
         method: 'POST',
         json: {
             recipient: {id:sender},
-            message: 
- "message":{
-    "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-          {
-            "title":"Welcome to Peter\'s Hats",
-            "image_url":"http://petersapparel.parseapp.com/img/item100-thumb.png",
-            "subtitle":"We\'ve got the right hat for everyone.",
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"https://petersapparel.parseapp.com/view_item?item_id=100",
-                "title":"View Website"
-              },
-              {
-                "type":"postback",
-                "title":"Start Chatting",
-                "payload":"USER_DEFINED_PAYLOAD"
-              }              
-            ]
-          }
-        ]
-      }
-    }
-  }
-,
+            message: messageData,
         }
     }, function(error, response, body) {
         if (error) {
