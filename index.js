@@ -245,10 +245,11 @@ function forecastBuilder(sender, forecastObject) {
     // }
 // 
 
-    elementTest = [{
-        "title": "this is a test",
-        "subtitle": "this is another test",
-    }]
+    // elementTest = [{
+    //     "title": "this is a test",
+    //     "subtitle": "this is another test",
+    // }]
+    elementTest = [{}]
 
 
     for(i = 0; i < forecastObject.length; i++) {
