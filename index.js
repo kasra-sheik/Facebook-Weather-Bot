@@ -262,6 +262,7 @@ function forecastBuilder(sender, forecastObject) {
                 "template_type": "generic",
                 "elements": [{
                     "title": "Macy's Red Dress",
+                    "subtitle":"yes",
                 },
               {
                     "title": "Sak's Fifth Avenue Dress",
