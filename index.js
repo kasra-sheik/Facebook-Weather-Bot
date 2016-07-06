@@ -37,11 +37,11 @@ app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
 })
 
-
+ var cart_items = []
 // API End Point - added by Stefan
 
 app.post('/webhook/', function (req, res) {
-    var cart_items = []
+   
 
     messaging_events = req.body.entry[0].messaging
     for (i = 0; i < messaging_events.length; i++) {
