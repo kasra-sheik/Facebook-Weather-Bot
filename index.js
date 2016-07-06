@@ -48,20 +48,6 @@ app.post('/webhook/', function (req, res) {
 
         var cart_items = []
         if (event.message && event.message.text) {
-
-
-            if(event.postback) {
-                var postback_text = JSON.stringify(event.postback.payload)
-
-                if(postback_text == "\"dress\"") {
-                    sendTextMessage(sender, "One Item: " + "Macy's Red Dress" + " Added to Cart!");
-                }
-                else if(postback_text == "\"cart_payload\"") {
-
-
-                    sendTextMessage(sender, "One item added to cart...")
-                }
-            }
             text = event.message.text
 
             if(text.substring(0,6) == "parrot") {
@@ -181,11 +167,9 @@ app.post('/webhook/', function (req, res) {
             else if (text.includes('red dress')) {
                 sendTextMessage(sender, "Matching you're query for red dresses")
                 sendGenericMessage(sender)
-
-                if(text == "\"Added to Cart!\"") {
-                    sendTextMessage(sender, "Added to Cart!")
-                }
-                continue
+            }
+            else if(text == "Add to Cart") {
+                sendTextMessage(sender, "Great...I added your item ")
             }
 
             else if(text == 'how are you today?') {
@@ -195,7 +179,7 @@ app.post('/webhook/', function (req, res) {
 
             else if(text == 'Shop') {
 
-                sendTextMessage(sender,"Browse through mavatar's entire shop platform... try Something like \"Red Dress\" to get started ")
+                sendTextMessage(sender,"Browse through mavatar's entire shop platform... try something like \" Show me a Red Dress\" to get started ")
                 //sendGenericMessage(sender)
 
             }
@@ -206,6 +190,19 @@ app.post('/webhook/', function (req, res) {
             else {
                 sendTextMessage(sender, "parrot doesn't understand yet.. parrot is simple!!!!!!")
 
+            }
+
+            if(event.postback) {
+                var postback_text = JSON.stringify(event.postback.payload)
+
+                if(postback_text == "\"dress\"") {
+                    sendTextMessage(sender, "One Item: " + "Macy's Red Dress" + " Added to Cart!");
+                }
+                else if(postback_text == "\"cart_payload\"") {
+
+
+                    sendTextMessage(sender, "One item added to cart...")
+                }
             }
 
             //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
