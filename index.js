@@ -67,9 +67,9 @@ app.post('/webhook/', function (req, res) {
 
                requestify.get(URL).then(function(response) {
                     // Get the response body
-                    var rep = response.getBody();
-                    var repText = "Hello, " + rep.entities.location[0].value
-                    sendTextMessage(sender, repText)
+                    // var rep = response.getBody();
+                    // var repText = "Hello, " + rep.entities.location[0].value
+                    // sendTextMessage(sender, repText)
 
                 }); 
 
