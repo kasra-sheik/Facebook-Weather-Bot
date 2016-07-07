@@ -65,13 +65,13 @@ app.post('/webhook/', function (req, res) {
             var witURL = "https://api.wit.ai/message?v=20160707&q=" + urlTestText + "&access_token=P3FOKDQK5E3MKIPS7OH6ZBJ6DYCPSAQN"
             
 
-               requestify.get(URL).then(function(response) {
-                    // Get the response body
-                    // var rep = response.getBody();
-                    // var repText = "Hello, " + rep.entities.location[0].value
-                    // sendTextMessage(sender, repText)
+               // requestify.get(URL).then(function(response) {
+               //      // Get the response body
+               //      // var rep = response.getBody();
+               //      // var repText = "Hello, " + rep.entities.location[0].value
+               //      // sendTextMessage(sender, repText)
 
-                }); 
+               //  }); 
 
 
 
