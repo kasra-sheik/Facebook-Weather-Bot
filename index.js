@@ -81,7 +81,7 @@ app.post('/webhook/', function (req, res) {
                         location = rep.entities.location[0].value
                     }
                     
-                    sendTextMessage(sender, "Here is the intent: " + intent)
+                    sendTextMessage(sender, "Here is the location: " + location)
 
 
                     }
