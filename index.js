@@ -42,6 +42,7 @@ app.listen(app.get('port'), function() {
  var forecast = false
  var location = ""
  var place
+ var intent
 // API End Point - added by Stefan
 
 app.post('/webhook/', function (req, res) {
@@ -68,9 +69,19 @@ app.post('/webhook/', function (req, res) {
                requestify.get(witURL).then(function(response) {
                     // Get the response body
                     var rep = response.getBody();
-                    var repText = rep.entities.location[0]
-                    sendTextMessage(sender, repText.value)
-                    sendTextMessage(sender, "we are here!")
+
+
+                    if(rep.entities.length > 0) {
+                        if("intent" in rep.entities) {
+                            sendTextMessage(sender, rep.entities.intent[0].value)
+                        }
+
+                     
+
+
+
+                     }
+                  
 
                 }); 
 
