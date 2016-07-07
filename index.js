@@ -71,7 +71,7 @@ app.post('/webhook/', function (req, res) {
                     var rep = response.getBody();
                    
 
-                    if(rep.entities.length > 0) {
+                    if("entities" in rep) {
                      sendTextMessage(sender, "lets give this a try" + rep.entities.intent.length)
 
                     if(rep.entities.intent.length > 0) {
