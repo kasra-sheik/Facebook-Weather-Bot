@@ -59,7 +59,7 @@ app.post('/webhook/', function (req, res) {
             for(i = 0; i < urlTestText.length; i++) {
 
                 if(text[i] == " ") {
-                   urlTestText.replaceAt(i,"+")
+                   urlTestText = urlTestText.replaceAt(i,"+")
                 }
             }
             sendTextMessage(sender, urlTestText)
@@ -588,9 +588,9 @@ function testReceipt(sender) {
     })
 
 
+}
 
-
-
-
+String.prototype.replaceAt=function(index, character) {
+    return this.substr(0, index) + character + this.substr(index+character.length);
 }
 
