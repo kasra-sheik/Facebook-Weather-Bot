@@ -73,7 +73,7 @@ app.post('/webhook/', function (req, res) {
 
                     if(rep.entities.length > 0) {
                         if(intent in rep.entities) {
-                            sendTextMessage(sender, rep.entities.intent[0].value)
+                            sendTextMessage(sender, "here is a test")
                         }
 
                      
