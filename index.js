@@ -56,34 +56,35 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             text = event.message.text
 
-            var urlTestText = text
-            for(i = 0; i < urlTestText.length; i++) {
+          //   var urlTestText = text
+          //   for(i = 0; i < urlTestText.length; i++) {
 
-                if(text[i] == " ") {
-                   urlTestText = urlTestText.replaceAt(i,"+")
-                }
-            }
-          var witURL = "https://api.wit.ai/message?v=20160707&q=" + urlTestText + "&access_token=P3FOKDQK5E3MKIPS7OH6ZBJ6DYCPSAQN"
+          //       if(text[i] == " ") {
+          //          urlTestText = urlTestText.replaceAt(i,"+")
+          //       }
+          //   }
+          // var witURL = "https://api.wit.ai/message?v=20160707&q=" + urlTestText + "&access_token=P3FOKDQK5E3MKIPS7OH6ZBJ6DYCPSAQN"
             
 
-               requestify.get(witURL).then(function(response) {
-                    // Get the response body
-                    var rep = response.getBody();
+          //      requestify.get(witURL).then(function(response) {
+          //           // Get the response body
+          //           var rep = response.getBody();
 
 
-                    if(rep.entities.length > 0) {
-                        if("intent" in rep.entities) {
-                            sendTextMessage(sender, "here is a test")
-                        }
+          //           if(rep.entities.length > 0) {
+                    
 
-                     
+          //           if(rep.entities.intent.length > 0) {
+          //               intent = rep.entities.intent[0].value
+          //           }
+          //           if(intent == "weather") {
+          //               if(rep.entities.)
 
-
-
-                     }
+          //           }
+          //   }
                   
 
-                }); 
+          //       }); 
 
 
 
