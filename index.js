@@ -72,22 +72,19 @@ app.post('/webhook/', function (req, res) {
                    
 
                     if("entities" in rep) {
-                     sendTextMessage(sender, "lets give this a try" + rep.entities.intent.length)
+                        if("intent" in rep.entities) {
+                            sendTextMessage(sender, "this worked.." + rep.entities.intent.length)
+
+                            intent = rep.entities.intent[0].value
+                        }
 
 
-                     if("intent" in rep.entities) {
-                        sendTextMessage(sender, "this is a test..")
-                     }
-
-                    if(rep.entities.intent.length > 0) {
-                        intent = rep.entities.intent[0].value
-
-                    }
-                    if(rep.entities.location.length > 0) {
-                        location = rep.entities.location[0].value
-                    }
                     
-                    sendTextMessage(sender, "Here is the location: " + location)
+
+                    // if(rep.entities.location.length > 0) {
+                    //     location = rep.entities.location[0].value
+                    // }
+                    
 
 
                     }
