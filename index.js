@@ -63,13 +63,13 @@ app.post('/webhook/', function (req, res) {
                 }
             }
             sendTextMessage(sender, urlTestText)
-            var witURL = "https://api.wit.ai/message?v=20160707&q=" + text + "&access_token=P3FOKDQK5E3MKIPS7OH6ZBJ6DYCPSAQN"
-            requestify.get(URL).then(function(reponse) {
-                var rep = response.getBody(); 
-                if(rep.)
+            // var witURL = "https://api.wit.ai/message?v=20160707&q=" + text + "&access_token=P3FOKDQK5E3MKIPS7OH6ZBJ6DYCPSAQN"
+            // requestify.get(URL).then(function(reponse) {
+            //     var rep = response.getBody(); 
+            //     if(rep.)
 
 
-            });
+            // });
 
 
 
