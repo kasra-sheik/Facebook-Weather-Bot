@@ -59,7 +59,7 @@ app.post('/webhook/', function (req, res) {
             for(i = 0; i < urlTestText.length; i++) {
 
                 if(text[i] == " ") {
-                    sendTextMessage(sender, "I found a space" +  i)
+                    urlTestText[i] = "+"
                 }
             }
             sendTextMessage(sender, urlTestText)
