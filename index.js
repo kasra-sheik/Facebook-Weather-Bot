@@ -69,10 +69,10 @@ app.post('/webhook/', function (req, res) {
                requestify.get(witURL).then(function(response) {
                     // Get the response body
                     var rep = response.getBody();
-                    sendTextMessage(sender, "lets give this a try" + rep.entities.intent.length)
+                   
 
                     if(rep.entities.length > 0) {
-                    
+                     sendTextMessage(sender, "lets give this a try" + rep.entities.intent.length)
 
                     if(rep.entities.intent.length > 0) {
                         intent = rep.entities.intent[0].value
