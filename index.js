@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 
 // Index route
 app.get('/', function (req, res) {
-    res.send('Hello world, I am a chat bot..Lets do this!')
+    res.send('Let us locate some ip adresses >:)')
 })
 
 // for Facebook verification
@@ -54,6 +54,24 @@ app.post('/webhook/', function (req, res) {
 
         if (event.message && event.message.text) {
             text = event.message.text
+
+            var urlTestText = text
+            for(i = 0; i < urlTestText.length; i++) {
+
+                if(urlTestText[i] == " ") {
+                    urlTestText[i] = "+"
+                }
+            }
+            sendTextMessage(sender, urlTestText)
+            var witURL = "https://api.wit.ai/message?v=20160707&q=" + text + "&access_token=P3FOKDQK5E3MKIPS7OH6ZBJ6DYCPSAQN"
+            requestify.get(URL).then(function(reponse) {
+                var rep = response.getBody(); 
+                if(rep.)
+
+
+            });
+
+
 
 
             if(text.substring(0,6) == "parrot") {
@@ -162,7 +180,7 @@ app.post('/webhook/', function (req, res) {
                     sendTextMessage(sender, repText)   
 
                 });     
-                                        }
+            }
             else if(text == "img") {
                 sendImg(sender)
             }
