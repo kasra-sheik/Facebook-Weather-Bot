@@ -73,9 +73,20 @@ app.post('/webhook/', function (req, res) {
 
                     if("entities" in rep) {
                         if("intent" in rep.entities) {
-                            sendTextMessage(sender, "this worked.." + rep.entities.intent.length)
-
                             intent = rep.entities.intent[0].value
+                        }
+                        //grab weather
+                        if(intent == "weather") {
+                            if("location" in rep.entities) {
+                                location = rep.entities.location[0].value
+                                weather(sender, location)
+
+                            }
+                            else {
+
+                                sendTextMessage(sender, "Where exactly?")
+                            }
+
                         }
 
 
@@ -100,158 +111,158 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
             }
-            else if(text == 'hi' || text == 'hello' || text == 'hey' || text == 'whats up' || text == 'howdy') {
-                var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
-                 requestify.get(URL).then(function(response) {
-                    // Get the response body
-                    var rep = response.getBody();
-                    var repText = "Hello, " + rep.first_name 
-                    sendTextMessage(sender, repText)   
+            // else if(text == 'hi' || text == 'hello' || text == 'hey' || text == 'whats up' || text == 'howdy') {
+            //     var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
+            //      requestify.get(URL).then(function(response) {
+            //         // Get the response body
+            //         var rep = response.getBody();
+            //         var repText = "Hello, " + rep.first_name 
+            //         sendTextMessage(sender, repText)   
 
-                });   
-            }
-            else if(text.toLowerCase() == 'what is the weather?') {
-                sendTextMessage(sender, "Where exactly?")
-            }
-
-
-              else if(text == 'info') {
-                //function...
-
-                var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
-                 requestify.get(URL).then(function(response) {
-                    // Get the response body
-                    var rep = response.getBody();
-                    //var repText = "Hello, " + rep.first_name 
-                    //sendTextMessage(sender, repText)
-                    startInfo(sender, rep.first_name);
-
-                });   
+            //     });   
+            // }
+            // else if(text.toLowerCase() == 'what is the weather?') {
+            //     sendTextMessage(sender, "Where exactly?")
+            // }
 
 
+            //   else if(text == 'info') {
+            //     //function...
 
-            }
-            else if(text.substring(0,2) == 'in' || text.includes("what is the weather in")) {
+            //     var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
+            //      requestify.get(URL).then(function(response) {
+            //         // Get the response body
+            //         var rep = response.getBody();
+            //         //var repText = "Hello, " + rep.first_name 
+            //         //sendTextMessage(sender, repText)
+            //         startInfo(sender, rep.first_name);
 
-                if(text.substring(0,2) == 'in') {
-                    place = text.substring(3,200)
-
-                }
-                else {
-                    place = text.substring(22,300)
-                }
-                var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + place + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
+            //     });   
 
 
 
-                 requestify.get(URL).then(function(response) {
-                    // Get the response body
+            // }
+            // else if(text.substring(0,2) == 'in' || text.includes("what is the weather in")) {
 
-                    var rep = response.getBody();
+            //     if(text.substring(0,2) == 'in') {
+            //         place = text.substring(3,200)
 
-
-                    // if(rep.main.temp > 0) {
-                    //     sendTextMessage(sender, "fack")
-                    // }
-                    var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
-
-                    sendTextMessage(sender, respText)   
-
-                });   
-
-            }
-            else if(text.includes("forecast")) {
-
-                var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + place + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"
+            //     }
+            //     else {
+            //         place = text.substring(22,300)
+            //     }
+            //     var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + place + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
 
 
-                 requestify.get(URL).then(function(response) {
-                    // Get the response body
 
-                    var rep = response.getBody();
-                    //fetching the result and then putting in an array of json objects.
-                    // var forecastObject = []
-                    // for(i = 0; i < rep.list.length; i++) {
-                    //     forecastObject.push(rep.list[i]);
-                    // }
+            //      requestify.get(URL).then(function(response) {
+            //         // Get the response body
 
-                    // sendTextMessage(sender, "okay this is a test" + rep.list[0].weather[0].description)
-                    forecastBuilder(sender, rep);
+            //         var rep = response.getBody();
 
 
-                    // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
+            //         // if(rep.main.temp > 0) {
+            //         //     sendTextMessage(sender, "fack")
+            //         // }
+            //         var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
+
+            //         sendTextMessage(sender, respText)   
+
+            //     });   
+
+            // }
+            // else if(text.includes("forecast")) {
+
+            //     var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + place + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"
+
+
+            //      requestify.get(URL).then(function(response) {
+            //         // Get the response body
+
+            //         var rep = response.getBody();
+            //         //fetching the result and then putting in an array of json objects.
+            //         // var forecastObject = []
+            //         // for(i = 0; i < rep.list.length; i++) {
+            //         //     forecastObject.push(rep.list[i]);
+            //         // }
+
+            //         // sendTextMessage(sender, "okay this is a test" + rep.list[0].weather[0].description)
+            //         forecastBuilder(sender, rep);
+
+
+            //         // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
 
                   
 
-                });   
-            }
+            //     });   
+            // }
 
-            else if(text.substring(0,2) == 'ip') {
-                sendTextMessage(sender,"generating..")
+            // else if(text.substring(0,2) == 'ip') {
+            //     sendTextMessage(sender,"generating..")
 
-                var ip =text.substring(3,200)
-                var URL = 'http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=' + ip + '&format=json'
+            //     var ip =text.substring(3,200)
+            //     var URL = 'http://api.ipinfodb.com/v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=' + ip + '&format=json'
 
-                requestify.get(URL).then(function(response) {
-                    // Get the response body
+            //     requestify.get(URL).then(function(response) {
+            //         // Get the response body
 
-                    var rep = response.getBody();
-                    var repText = "The IP you requested is from " + rep.cityName + ", " + rep.regionName + ", " + rep.zipCode
+            //         var rep = response.getBody();
+            //         var repText = "The IP you requested is from " + rep.cityName + ", " + rep.regionName + ", " + rep.zipCode
 
 
-                    sendTextMessage(sender, repText)   
+            //         sendTextMessage(sender, repText)   
 
-                });     
-            }
-            else if(text == "img") {
-                sendImg(sender)
-            }
+            //     });     
+            // }
+            // else if(text == "img") {
+            //     sendImg(sender)
+            // }
 
-            else if(text.includes('joke')) {
-                sendTextMessage(sender, "no.")
+            // else if(text.includes('joke')) {
+            //     sendTextMessage(sender, "no.")
 
-            }
-            else if (text.includes('red dress')) {
-                sendTextMessage(sender, "Matching you're query for red dresses")
-                sendGenericMessage(sender)
-            }
-            else if(text == "Add to Cart") {
-                sendTextMessage(sender, "Great...I added your item ")
-            }
-            else if(text == "what is in my cart?") {
-                sendTextMessage(sender,"Right now here are the items in your cart: ")
-                for(i = 0; i < cart_items.length; i++) {
-                    sendTextMessage(sender, cart_items[i])
-                }
+            // }
+            // else if (text.includes('red dress')) {
+            //     sendTextMessage(sender, "Matching you're query for red dresses")
+            //     sendGenericMessage(sender)
+            // }
+            // else if(text == "Add to Cart") {
+            //     sendTextMessage(sender, "Great...I added your item ")
+            // }
+            // else if(text == "what is in my cart?") {
+            //     sendTextMessage(sender,"Right now here are the items in your cart: ")
+            //     for(i = 0; i < cart_items.length; i++) {
+            //         sendTextMessage(sender, cart_items[i])
+            //     }
 
-            }
-            else if(text == "check place") {
-                sendTextMessage(sender, place)
-            }
-            else if(text == 'how are you today?') {
-                sendTextMessage(sender, "I'm not bad actually, welcome to mavatar!")
-                continue
-            }
+            // }
+            // else if(text == "check place") {
+            //     sendTextMessage(sender, place)
+            // }
+            // else if(text == 'how are you today?') {
+            //     sendTextMessage(sender, "I'm not bad actually, welcome to mavatar!")
+            //     continue
+            // }
 
-            else if(text == 'Shop') {
+            // else if(text == 'Shop') {
 
-                sendTextMessage(sender,"Browse through mavatar's entire shop platform... try something like \" Show me a Red Dress\" to get started ")
-                //sendGenericMessage(sender)
+            //     sendTextMessage(sender,"Browse through mavatar's entire shop platform... try something like \" Show me a Red Dress\" to get started ")
+            //     //sendGenericMessage(sender)
 
-            }
-            else if(text.includes('checkout')) {
-                sendImg(sender)
-            }
-            else if(text.includes('Update')) {
+            // }
+            // else if(text.includes('checkout')) {
+            //     sendImg(sender)
+            // }
+            // else if(text.includes('Update')) {
 
-                  sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
+            //       sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
 
-                testReceipt(sender)
-            }
-            else {
-                sendTextMessage(sender, "I didn't recognize your request.. search info for some ideas on how to get started")
+            //     testReceipt(sender)
+            // }
+            // else {
+            //     sendTextMessage(sender, "I didn't recognize your request.. search info for some ideas on how to get started")
 
-            }
+            // }
 
 
             //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
@@ -281,7 +292,21 @@ app.post('/webhook/', function (req, res) {
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
 
-function askMessageTrack(sender) {
+function weather(sender, location) { 
+    var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + location + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
+
+    requestify.get(URL).then(function(response) {
+                    // Get the response body
+
+        var rep = response.getBody();
+
+
+        var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
+
+        sendTextMessage(sender, respText)   
+
+    }); 
+
 
 }
 function forecastBuilder(sender, response) {
