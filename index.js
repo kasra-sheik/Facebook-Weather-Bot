@@ -81,7 +81,8 @@ app.post('/webhook/', function (req, res) {
                         location = rep.entities.location[0].value
                     }
                     
-                    
+                    sendTextMessage(sender, "Here is the intent: " + intent)
+
 
                     }
         
@@ -89,7 +90,6 @@ app.post('/webhook/', function (req, res) {
 
                 }); 
 
-                sendTextMessage(sender, "Here is the intent: " + intent)
 
 
 
