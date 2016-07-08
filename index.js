@@ -293,11 +293,11 @@ function getUserName(sender) {
                  requestify.get(URL).then(function(response) {
                     // Get the response body
                     var rep = response.getBody();
-                    firstName = rep.first_name
+                    sendTextMessage(sender, rep.firstName)
+                    //firstName = rep.first_name
 
                 });
 
-        sendTextMessage(sender, firstName)
 
 
 }
