@@ -43,20 +43,24 @@ app.listen(app.get('port'), function() {
  var location = ""
  var place
  var intent
- var firstName = 
+ var firstName = ""
 
 // API End Point - added by Stefan
 
 app.post('/webhook/', function (req, res) {
-    //to get the name
-
-    
-
     messaging_events = req.body.entry[0].messaging
     for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
-        getUserName(sender)
+        var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
+                 requestify.get(URL).then(function(response) {
+                    // Get the response body
+                    var rep = response.getBody();
+                    sendTextMessage(sender, rep.firstName)
+                    firstName = rep.first_name
+
+                });
+
 
         if (event.message && event.message.text) {
             text = event.message.text
