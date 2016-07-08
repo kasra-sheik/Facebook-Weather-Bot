@@ -103,7 +103,7 @@ app.post('/webhook/', function (req, res) {
                         }
                     }
                     else {
-                        sendTextMessage("I'm sorry..I'm not sure I understood what you mean..")
+                        sendTextMessage(sender, "I'm sorry..I'm not sure I understood what you mean..")
                     }
                     
     
