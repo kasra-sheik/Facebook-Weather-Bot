@@ -81,7 +81,6 @@ app.post('/webhook/', function (req, res) {
                    
 
                     if(Object.keys(rep.entities).length > 0) {
-                        sendTextMessage(sender, "entities present...")
                         if("intent" in rep.entities) {
                             intent = rep.entities.intent[0].value
                         }
