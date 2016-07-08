@@ -43,6 +43,8 @@ app.listen(app.get('port'), function() {
  var location = ""
  var place
  var intent
+ var userName = 
+
 // API End Point - added by Stefan
 
 app.post('/webhook/', function (req, res) {
@@ -89,23 +91,13 @@ app.post('/webhook/', function (req, res) {
 
                         }
 
-
-                    
-
-                    // if(rep.entities.location.length > 0) {
-                    //     location = rep.entities.location[0].value
-                    // }
-                    
-
-
+                
                     }
-        
-                  
-
+                    if(intent == "greeting") {
+                        sendTextMessage(sender, "Well hi there!")
+                    }
+    
                 }); 
-
-
-
 
             if(text.substring(0,6) == "parrot") {
                 sendTextMessage(sender, text.substring(7,200))
