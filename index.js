@@ -298,7 +298,6 @@ function getUserName(sender) {
                 });
 
         sendTextMessage(sender, firstName)
-        return firstName     
 
 
 }
