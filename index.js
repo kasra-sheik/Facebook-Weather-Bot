@@ -96,12 +96,14 @@ app.post('/webhook/', function (req, res) {
                             }
 
                         }
-                        intent = ""
 
 
                         if(intent == "greeting") {
                             sendTextMessage(sender, "Hello, " + firstName)
                         }
+                    }
+                    else {
+                        sendTextMessage("I'm sorry..I'm not sure I understood what you mean..")
                     }
                     
     
