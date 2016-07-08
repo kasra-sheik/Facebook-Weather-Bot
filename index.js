@@ -80,6 +80,7 @@ app.post('/webhook/', function (req, res) {
                    
 
                     if("entities" in rep) {
+                        sendTextMessage(sender, "entities present...")
                         if("intent" in rep.entities) {
                             intent = rep.entities.intent[0].value
                         }
@@ -96,9 +97,7 @@ app.post('/webhook/', function (req, res) {
                             }
 
                         }
-
-
-                        if(intent == "greeting") {
+                        else if(intent == "greeting") {
                             sendTextMessage(sender, "Hello, " + firstName)
                         }
                     }
