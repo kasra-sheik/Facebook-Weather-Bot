@@ -337,7 +337,7 @@ function sunny(sender, location) {
         //sendTextMessage(sender, rep.weather[0].description)    
         var weatherDescription = rep.weather[0].main
 
-        if(weatherDescription.includes('Clear')) {
+        if(weatherDescription =='Clear') {
             sendTextMessage(sender, "Yes, the sun is out.. shining with a temperature of " + rep.main.temp + " in " rep.name)
         }
         else{
