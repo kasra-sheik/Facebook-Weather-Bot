@@ -329,23 +329,23 @@ function weather(sender, location) {
 function sunny(sender, location) {
     var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + location + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
 
-    requestify.get(URL).then(function(response) {
-                    // Get the response body
+    // requestify.get(URL).then(function(response) {
+    //                 // Get the response body
 
-        var rep = response.getBody();
+    //     var rep = response.getBody();
 
-        sendTextMessage(sender, rep.weather[0].description)    
-        var weatherDescription = rep.weather[0].main
+    //     //sendTextMessage(sender, rep.weather[0].description)    
+    //     var weatherDescription = rep.weather[0].main
 
-        if(weatherDescription.includes("Clear")) {
-            sendTextMessage(sender, "Yes, the sun is out.. shining with a temperature of " + rep.main.temp + " in " rep.name)
-        }
-        else{
-            sendTextMessage(sender, "Nope. Looks like there is " + weatherDescription)
+    //     if(weatherDescription.includes("Clear")) {
+    //         sendTextMessage(sender, "Yes, the sun is out.. shining with a temperature of " + rep.main.temp + " in " rep.name)
+    //     }
+    //     else{
+    //         sendTextMessage(sender, "Nope. Looks like there is " + weatherDescription)
 
-        }    
+    //     }    
 
-    }); 
+    // }); 
 
 
 }
