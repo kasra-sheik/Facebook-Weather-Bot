@@ -85,7 +85,6 @@ app.post('/webhook/', function (req, res) {
                             intent = rep.entities.intent[0].value
                         }
 
-                        sendTextMessage(sender, "this is the intent: " + intent)
                         //grab weather
                         if(intent == "weather") {
                             sendTextMessage(sender, "We caught weather..")
@@ -338,8 +337,8 @@ function sunny(sender, location) {
         var weatherDescription = rep.weather[0].main
 
         if(weatherDescription =='Clear') {
-            //sendTextMessage(sender, "Yes, the sun is out.. shining with a temperature of " + rep.main.temp + " in " rep.name)
-            sendTextMessage(sender, "Yes")
+            sendTextMessage(sender, "Yes, the sun is out.. shining with a temperature of " + rep.main.temp + " in " rep.name)
+            //sendTextMessage(sender, "Yes")
         }
         else{
             sendTextMessage(sender, "Nope. Looks like there is " + weatherDescription)
