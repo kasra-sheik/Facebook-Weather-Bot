@@ -104,7 +104,7 @@ app.post('/webhook/', function (req, res) {
                         else if(intent = "Sunny") {
                              if("location" in rep.entities) {
                                 location = rep.entities.location[0].value
-                                weather(sender, location)
+                                sunny(sender, location)
                             }
                             else {
                                 sendTextMessage(sender, "Where exactly?")
