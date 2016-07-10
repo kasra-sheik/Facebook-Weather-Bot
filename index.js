@@ -84,6 +84,8 @@ app.post('/webhook/', function (req, res) {
                         if("intent" in rep.entities) {
                             intent = rep.entities.intent[0].value
                         }
+
+                        sendTextMessage(sender, "this is the intent: " + intent)
                         //grab weather
                         if(intent == "weather") {
                             if("location" in rep.entities) {
