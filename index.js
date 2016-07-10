@@ -97,6 +97,18 @@ app.post('/webhook/', function (req, res) {
                             }
 
                         }
+
+                        else if(intent = "Sunny") {
+                             if("location" in rep.entities) {
+                                location = rep.entities.location[0].value
+                                weather(sender, location)
+                            }
+                            else {
+                                sendTextMessage(sender, "Where exactly?")
+                            }
+
+
+                        }
                         else if(intent == "greeting") {
                             sendTextMessage(sender, "Hello, " + firstName)
                         }
@@ -306,6 +318,20 @@ function weather(sender, location) {
         var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
 
         sendTextMessage(sender, respText)   
+
+    }); 
+
+
+}
+function sunny(sender, location) {
+    var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + location + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
+
+    requestify.get(URL).then(function(response) {
+                    // Get the response body
+
+        var rep = response.getBody();
+
+        sendTextMessage(sender, rep.weather[0].description)         
 
     }); 
 
