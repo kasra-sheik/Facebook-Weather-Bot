@@ -132,21 +132,21 @@ app.post('/webhook/', function (req, res) {
                  var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + place + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"
 
 
-            //      requestify.get(URL).then(function(response) {
-            //         // Get the response body
+                 requestify.get(URL).then(function(response) {
+                    // Get the response body
 
-            //         var rep = response.getBody();
-            //         //fetching the result and then putting in an array of json objects.
-            //         // var forecastObject = []
-            //         // for(i = 0; i < rep.list.length; i++) {
-            //         //     forecastObject.push(rep.list[i]);
-            //         // }
+                    var rep = response.getBody();
+                    //fetching the result and then putting in an array of json objects.
+                    // var forecastObject = []
+                    // for(i = 0; i < rep.list.length; i++) {
+                    //     forecastObject.push(rep.list[i]);
+                    // }
 
-            //         // sendTextMessage(sender, "okay this is a test" + rep.list[0].weather[0].description)
-            //         forecastBuilder(sender, rep);
+                    // sendTextMessage(sender, "okay this is a test" + rep.list[0].weather[0].description)
+                    forecastBuilder(sender, rep);
 
 
-            //         // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
+                    // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
 
 
 
