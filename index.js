@@ -90,6 +90,7 @@ app.post('/webhook/', function (req, res) {
                             sendTextMessage(sender, "We caught weather..")
                             if("location" in rep.entities) {
                                 location = rep.entities.location[0].value
+                                place = location
                                 weather(sender, location)
 
                             }
@@ -125,6 +126,30 @@ app.post('/webhook/', function (req, res) {
             if(text.substring(0,6) == "parrot") {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
+            }
+            else if(text == "forecast") {
+
+                 var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + place + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"
+
+
+            //      requestify.get(URL).then(function(response) {
+            //         // Get the response body
+
+            //         var rep = response.getBody();
+            //         //fetching the result and then putting in an array of json objects.
+            //         // var forecastObject = []
+            //         // for(i = 0; i < rep.list.length; i++) {
+            //         //     forecastObject.push(rep.list[i]);
+            //         // }
+
+            //         // sendTextMessage(sender, "okay this is a test" + rep.list[0].weather[0].description)
+            //         forecastBuilder(sender, rep);
+
+
+            //         // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
+
+
+
             }
             // else if(text == 'hi' || text == 'hello' || text == 'hey' || text == 'whats up' || text == 'howdy') {
             //     var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
