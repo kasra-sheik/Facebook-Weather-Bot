@@ -132,6 +132,7 @@ app.post('/webhook/', function (req, res) {
                  var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + place + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"
 
 
+
                  requestify.get(URL).then(function(response) {
                     // Get the response body
 
@@ -148,6 +149,9 @@ app.post('/webhook/', function (req, res) {
 
                     // var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
 
+                  
+
+                });
 
 
             }
