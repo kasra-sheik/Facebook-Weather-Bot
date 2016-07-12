@@ -117,10 +117,10 @@ app.post('/webhook/', function (req, res) {
                             if("location" in rep.entities) {
                                 location = rep.entities.location[0].value
                                 var forecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + location + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"    
-                                sendTextMessage(sender, "we are ehere..")
                                 // forecast(sender, forecastURL)
-                                requestify.get(location).then(function(response) {
+                                requestify.get(forecastURL).then(function(response) {
                                         // Get the response body
+                                        sendTextMessage(sender, "we are ehere..")
 
                                         var forecastRep = response.getBody();
                                         //sendTextMessage(sender, "we are here...")
