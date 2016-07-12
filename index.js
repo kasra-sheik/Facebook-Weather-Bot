@@ -347,13 +347,16 @@ app.post('/webhook/', function (req, res) {
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
 
-function forecast(sender, location) {
+function forecast(sender, location) {  
+
+  sendTextMessage(sender, "hello man.")
+
   var URL = location
   requestify.get(URL).then(function(response) {
                     // Get the response body
 
         var rep = response.getBody();
-        sendTextMessage(sender, "we are here...")
+        //sendTextMessage(sender, "we are here...")
         forecastBuilder(sender, rep)
 
 
