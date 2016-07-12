@@ -117,20 +117,13 @@ app.post('/webhook/', function (req, res) {
                             if("location" in rep.entities) {
                                 location = rep.entities.location[0].value
                                 var forecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + location + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"    
+                                place = location
                                 // forecast(sender, forecastURL)
                                 requestify.get(forecastURL).then(function(response) {
-                                        // Get the response body
-                                        sendTextMessage(sender, "we are ehere..")
-
+                                        // Get the response bodyz
                                         var forecastRep = response.getBody();
-                                        //sendTextMessage(sender, "we are here...")
                                         forecastBuilder(sender, forecastRep)
-
-
-
-    });
-
-
+                                    });
                             }
                             else { 
                                 sendTextMessage(sender, "Where exactly?")
@@ -439,34 +432,34 @@ function forecastBuilder(sender, response) {
 
 
 
-for(i = 0; i < forecastObject.length; i++) {
+    for(i = 0; i < forecastObject.length; i++) {
 
-if(n == 6){n = 0;}
-var day = forecastObject[i];
-var description = day.weather[0].description
-var imageUrl = ""
+    if(n == 6){n = 0;}
+    var day = forecastObject[i];
+    var description = day.weather[0].description
+    var imageUrl = ""
 
-//image handeling
-if(description.includes("rain")) {
-    imageUrl = "https://s32.postimg.org/ftphqrki9/rainy.jpg"
-}
-else if(description.includes("cloud")) {
-    imageUrl = "https://s32.postimg.org/imipaskup/cloudy.jpg"
-}
-else {
-    imageUrl = "https://s32.postimg.org/9u1qn3zpt/sunny.jpg"
-}
+    //image handeling
+    if(description.includes("rain")) {
+        imageUrl = "https://s32.postimg.org/ftphqrki9/rainy.jpg"
+    }
+    else if(description.includes("cloud")) {
+        imageUrl = "https://s32.postimg.org/imipaskup/cloudy.jpg"
+    }
+    else {
+        imageUrl = "https://s32.postimg.org/9u1qn3zpt/sunny.jpg"
+    }
 
-elementTest.push({
-    "title": days[n] + ": " + day.weather[0].description,
-    "subtitle": "High: " + day.temp.max + " Low: " + day.temp.min + " Average: " + day.temp.day,
-    "image_url": imageUrl
-})
- n++;
-}
+    elementTest.push({
+        "title": days[n] + ": " + day.weather[0].description,
+        "subtitle": "High: " + day.temp.max + " Low: " + day.temp.min + " Average: " + day.temp.day,
+        "image_url": imageUrl
+    })
+     n++;
+    }
 
 
-elementTest.shift()
+    elementTest.shift()
 
  messageData = {
         "attachment": {
