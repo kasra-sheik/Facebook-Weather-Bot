@@ -101,7 +101,7 @@ app.post('/webhook/', function (req, res) {
 
                         }
 
-                        else if(intent = "Sunny") {
+                        else if(intent == "Sunny") {
                              if("location" in rep.entities) {
                                 location = rep.entities.location[0].value
                                 sunny(sender, location)
@@ -110,6 +110,15 @@ app.post('/webhook/', function (req, res) {
                                 sendTextMessage(sender, "Where exactly?")
                             }
 
+
+                        }
+                        else if(intent == "forecast") {
+                            if("location" in rep.entities) {
+                                location = rep.entities.location[0].value
+                                var forecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + location + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"    
+                                forecast(sender, forecastURL)
+
+                            }
 
                         }
                         else if(intent == "greeting") {
@@ -336,7 +345,21 @@ app.post('/webhook/', function (req, res) {
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
 
+function forecast(sender, location) {
+  var URL = location
+  requestify.get(URL).then(function(response) {
+                    // Get the response body
 
+        var rep = response.getBody();
+        sendTextMessage(sender, "we are here...")
+        forecastBuilder(sender, rep)
+
+
+
+    });
+
+
+}
 function weather(sender, location) { 
     var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + location + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
 
