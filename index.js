@@ -113,6 +113,18 @@ app.post('/webhook/', function (req, res) {
 
 
                         }
+                        else if(intent == "rainy") {
+                            if("location" in rep.entities) {
+                                location = rep.entities.location[0].value
+                                rainy(sender, location)
+
+                            }
+                            else {
+                                sendTextMessage(sender, "i didn't get a location")
+                            }
+
+
+                        }
                         else if(intent == "forecast") {
                             if("location" in rep.entities) {
                                 location = rep.entities.location[0].value
@@ -384,6 +396,31 @@ function weather(sender, location) {
         var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
 
         sendTextMessage(sender, respText)   
+
+    }); 
+
+
+}
+function rainy(sender, location) {
+
+ var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + location + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
+
+    requestify.get(URL).then(function(response) {
+                    // Get the response body
+
+        var rep = response.getBody();
+
+        //sendTextMessage(sender, rep.weather[0].description)    
+        var weatherDescription = rep.weather[0].main
+
+        if(weatherDescription == "Rain" || weatherDescription.includes('rain')) {
+            sendTextMessage(sender, "Yeah bruh its raining in " + rep.name)
+            //sendTextMessage(sender, "Yes")
+        }
+        else{
+            sendTextMessage(sender, "Nope. Looks like there is " + weatherDescription)
+
+        }    
 
     }); 
 
