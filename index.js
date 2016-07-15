@@ -423,7 +423,7 @@ function rainy(sender, location) {
 
             }
             else { 
-            sendTextMessage(sender, "Nope. Looks like there is " + weatherDescription)
+            sendTextMessage(sender, "Nope. Looks like it is " + weatherDescription)
             }
 
         }    
