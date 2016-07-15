@@ -146,9 +146,9 @@ app.post('/webhook/', function (req, res) {
                             sendTextMessage(sender, "Hello, " + firstName)
                         }
                     }
-                    else {
-                        sendTextMessage(sender, "I'm sorry..I'm not sure I understood what you mean..")
-                    }
+                    // else {
+                    //     sendTextMessage(sender, "I'm sorry..I'm not sure I understood what you mean..")
+                    // }
                     
     
                 }); 
@@ -200,22 +200,22 @@ app.post('/webhook/', function (req, res) {
             // }
 
 
-            //   else if(text == 'info') {
-            //     //function...
+              else if(text == 'info') {
+                //function...
 
-            //     var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
-            //      requestify.get(URL).then(function(response) {
-            //         // Get the response body
-            //         var rep = response.getBody();
-            //         //var repText = "Hello, " + rep.first_name 
-            //         //sendTextMessage(sender, repText)
-            //         startInfo(sender, rep.first_name);
+                var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
+                 requestify.get(URL).then(function(response) {
+                    // Get the response body
+                    var rep = response.getBody();
+                    //var repText = "Hello, " + rep.first_name 
+                    //sendTextMessage(sender, repText)
+                    startInfo(sender, rep.first_name);
 
-            //     });   
+                });   
 
 
 
-            // }
+            }
             // else if(text.substring(0,2) == 'in' || text.includes("what is the weather in")) {
 
             //     if(text.substring(0,2) == 'in') {
@@ -296,20 +296,20 @@ app.post('/webhook/', function (req, res) {
             //     sendTextMessage(sender, "no.")
 
             // }
-            // else if (text.includes('red dress')) {
-            //     sendTextMessage(sender, "Matching you're query for red dresses")
-            //     sendGenericMessage(sender)
-            // }
-            // else if(text == "Add to Cart") {
-            //     sendTextMessage(sender, "Great...I added your item ")
-            // }
-            // else if(text == "what is in my cart?") {
-            //     sendTextMessage(sender,"Right now here are the items in your cart: ")
-            //     for(i = 0; i < cart_items.length; i++) {
-            //         sendTextMessage(sender, cart_items[i])
-            //     }
+            else if (text.includes('red dress')) {
+                sendTextMessage(sender, "Matching you're query for red dresses")
+                sendGenericMessage(sender)
+            }
+            else if(text == "Add to Cart") {
+                sendTextMessage(sender, "Great...I added your item ")
+            }
+            else if(text == "what is in my cart?") {
+                sendTextMessage(sender,"Right now here are the items in your cart: ")
+                for(i = 0; i < cart_items.length; i++) {
+                    sendTextMessage(sender, cart_items[i])
+                }
 
-            // }
+            }
             // else if(text == "check place") {
             //     sendTextMessage(sender, place)
             // }
@@ -318,21 +318,21 @@ app.post('/webhook/', function (req, res) {
             //     continue
             // }
 
-            // else if(text == 'Shop') {
+            else if(text == 'Shop') {
 
-            //     sendTextMessage(sender,"Browse through mavatar's entire shop platform... try something like \" Show me a Red Dress\" to get started ")
-            //     //sendGenericMessage(sender)
+                sendTextMessage(sender,"Browse through mavatar's entire shop platform... try something like \" Show me a Red Dress\" to get started ")
+                //sendGenericMessage(sender)
 
-            // }
-            // else if(text.includes('checkout')) {
-            //     sendImg(sender)
-            // }
-            // else if(text.includes('Update')) {
+            }
+            else if(text.includes('checkout')) {
+                sendImg(sender)
+            }
+            else if(text.includes('Update')) {
 
-            //       sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
+                  sendTextMessage(sender, "I'm glad you've decided shop with us today.. Please enter any required info for your payment.")
 
-            //     testReceipt(sender)
-            // }
+                testReceipt(sender)
+            }
             // else {
             //     sendTextMessage(sender, "I didn't recognize your request.. search info for some ideas on how to get started")
 
