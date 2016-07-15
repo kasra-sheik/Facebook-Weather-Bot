@@ -414,11 +414,17 @@ function rainy(sender, location) {
         var weatherDescription = rep.weather[0].main
 
         if(weatherDescription == "Rain" || weatherDescription.includes('rain')) {
-            sendTextMessage(sender, "Yeah bruh its raining in " + rep.name)
+            sendTextMessage(sender, "Yes! its raining in " + rep.name)
             //sendTextMessage(sender, "Yes")
         }
         else{
+            if(weatherDescription[weatherDescription.length - 1] == 's') {
+                sendTextMessage(sender, "Nope. Looks like there are " + weatherDescription)
+
+            }
+            else { 
             sendTextMessage(sender, "Nope. Looks like there is " + weatherDescription)
+            }
 
         }    
 
