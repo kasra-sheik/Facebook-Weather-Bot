@@ -4,7 +4,8 @@ var request = require('request')
 var app = express()
 // var http = require('http')
 var requestify = require('requestify'); 
-
+var algoliasearch = require('algoliasearch');
+var client = algoliasearch('AM0SLP1KG5', '2275715c4c9af53ae3d8e3ecb0358d4a');
 // var options = {
 //     host: 'api.ipinfodb.com',
 //     path: 'v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json'
@@ -156,6 +157,15 @@ app.post('/webhook/', function (req, res) {
             if(text.substring(0,6) == "parrot") {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
+            }
+            if(text == 'test') {
+
+            var index = client.initIndex('indexName');
+            index.search('red dress', function searchDone(err, content) {
+                    console.log(err, content);
+                    sendTextMessage(sender, content)
+            });
+
             }
             // else if(text == "forecast") {
 
