@@ -419,11 +419,11 @@ function rainy(sender, location) {
         }
         else{
             if(weatherDescription[weatherDescription.length - 1] == 's') {
-                sendTextMessage(sender, "Nope. Looks like there are " + weatherDescription)
+                sendTextMessage(sender, "Nope. Looks like there are " + weatherDescription.toLowerCase())
 
             }
             else { 
-            sendTextMessage(sender, "Nope. Looks like it is " + weatherDescription)
+            sendTextMessage(sender, "Nope. Looks like it is " + weatherDescription.toLowerCase())
             }
 
         }    
@@ -448,8 +448,13 @@ function sunny(sender, location) {
             //sendTextMessage(sender, "Yes")
         }
         else{
-            sendTextMessage(sender, "Nope. Looks like there is " + weatherDescription)
+            if(weatherDescription[weatherDescription.length - 1] == 's') {
+                sendTextMessage(sender, "Nope. Looks like there are " + weatherDescription.toLowerCase())
 
+            }
+            else { 
+            sendTextMessage(sender, "Nope. Looks like it is " + weatherDescription.toLowerCase())
+            }
         }    
 
     }); 
