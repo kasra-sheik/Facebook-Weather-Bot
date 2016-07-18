@@ -162,7 +162,7 @@ app.post('/webhook/', function (req, res) {
             index.search('red dress', function searchDone(err, content) {
                     console.log(err, content);
                     var item = content.hits[0].name
-                    sendTextMessage(sender, "here is the size of the query" + content.hits.size)
+                    sendTextMessage(sender, "here is the size of the query" + content.hits.length)
             });
         }
             // else if(text == "forecast") {
