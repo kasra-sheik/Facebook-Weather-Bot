@@ -157,6 +157,7 @@ app.post('/webhook/', function (req, res) {
                 continue
             }
             if(text == 'test') {
+            sendTextMessage(sender, "we're at test")
             var index = client.initIndex('CatalogProductInfo');
             index.search('red dress', function searchDone(err, content) {
                     console.log(err, content);
