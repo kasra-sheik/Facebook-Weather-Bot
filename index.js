@@ -96,7 +96,7 @@ app.post('/webhook/', function (req, res) {
 
                                 index.search(item, function searchDone(err, content) {
                                     sendTextMessage(sender, "Absolutley. Matching your query for " + item)
-                                    mavatarItemGenerator(sender, content)
+                                    testMavatarItemGenerator(sender, content.hits[0])
                                    
                             });
 
@@ -483,6 +483,51 @@ function sunny(sender, location) {
         }    
 
     }); 
+
+
+}
+function testMavatarItemGenerator(sender, item) { 
+    elementTest = [{
+        "title": "this is a test",
+        "subtitle": "this is another test",
+        "image_url": "https://s32.postimg.org/ftphqrki9/rainy.jpg",
+    }]
+
+    elementTest.push({
+        "title": item.name,
+        "subtitle": item.descr,
+        "image_url": item.image_url
+    })
+    elementTest.shift()
+
+
+     messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": elementTest
+            } 
+        }
+    }
+     request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+
+
+
 
 
 }
