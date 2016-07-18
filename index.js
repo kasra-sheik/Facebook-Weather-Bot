@@ -88,65 +88,72 @@ app.post('/webhook/', function (req, res) {
                             //sendTextMessage(sender,"this is the intent.. " + intent)
                         }
 
-                        //grab weather
-                        if(intent == "weather") {
-                            if("location" in rep.entities) {
-                                location = rep.entities.location[0].value
-                                place = location
-                                weather(sender, location)
+                        if("intent" == "Shop") {
+                            sendTextMessage(sender, "Looks like someone is trying to shop..")
 
-                            }
-                            else {
 
-                                sendTextMessage(sender, "Where exactly?")
-                            }
 
                         }
 
-                        else if(intent == "Sunny") {
-                             if("location" in rep.entities) {
-                                location = rep.entities.location[0].value
-                                sunny(sender, location)
-                            }
-                            else {
-                                sendTextMessage(sender, "Where exactly?")
-                            }
+                        // //grab weather
+                        // if(intent == "weather") {
+                        //     if("location" in rep.entities) {
+                        //         location = rep.entities.location[0].value
+                        //         place = location
+                        //         weather(sender, location)
+
+                        //     }
+                        //     else {
+
+                        //         sendTextMessage(sender, "Where exactly?")
+                        //     }
+
+                        // }
+
+                        // else if(intent == "Sunny") {
+                        //      if("location" in rep.entities) {
+                        //         location = rep.entities.location[0].value
+                        //         sunny(sender, location)
+                        //     }
+                        //     else {
+                        //         sendTextMessage(sender, "Where exactly?")
+                        //     }
 
 
-                        }
-                        else if(intent == "rainy") {
-                            if("location" in rep.entities) {
-                                location = rep.entities.location[0].value
-                                rainy(sender, location)
+                        // }
+                        // else if(intent == "rainy") {
+                        //     if("location" in rep.entities) {
+                        //         location = rep.entities.location[0].value
+                        //         rainy(sender, location)
 
-                            }
-                            else {
-                                sendTextMessage(sender, "i didn't get a location")
-                            }
+                        //     }
+                        //     else {
+                        //         sendTextMessage(sender, "i didn't get a location")
+                        //     }
 
 
-                        }
-                        else if(intent == "forecast") {
-                            if("location" in rep.entities) {
-                                location = rep.entities.location[0].value
-                                var forecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + location + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"    
-                                place = location
-                                // forecast(sender, forecastURL)
-                                requestify.get(forecastURL).then(function(response) {
-                                        // Get the response bodyz
-                                        var forecastRep = response.getBody();
-                                        forecastBuilder(sender, forecastRep)
-                                    });
-                            }
-                            else { 
-                                sendTextMessage(sender, "Where exactly?")
+                        // }
+                        // else if(intent == "forecast") {
+                        //     if("location" in rep.entities) {
+                        //         location = rep.entities.location[0].value
+                        //         var forecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + location + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"    
+                        //         place = location
+                        //         // forecast(sender, forecastURL)
+                        //         requestify.get(forecastURL).then(function(response) {
+                        //                 // Get the response bodyz
+                        //                 var forecastRep = response.getBody();
+                        //                 forecastBuilder(sender, forecastRep)
+                        //             });
+                        //     }
+                        //     else { 
+                        //         sendTextMessage(sender, "Where exactly?")
 
-                            }
+                        //     }
 
-                        }
-                        else if(intent == "greeting") {
-                            sendTextMessage(sender, "Hello, " + firstName)
-                        }
+                        // }
+                        // else if(intent == "greeting") {
+                        //     sendTextMessage(sender, "Hello, " + firstName)
+                        // }
                     }
                     // else {
                     //     sendTextMessage(sender, "I'm sorry..I'm not sure I understood what you mean..")
