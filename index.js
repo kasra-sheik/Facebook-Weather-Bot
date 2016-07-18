@@ -73,7 +73,7 @@ app.post('/webhook/', function (req, res) {
                    urlTestText = urlTestText.replaceAt(i,"+")
                 }
             }
-          var witURL = "https://api.wit.ai/message?v=20160707&q=" + urlTestText + "&access_token=P3FOKDQK5E3MKIPS7OH6ZBJ6DYCPSAQN"
+          var witURL = "https://api.wit.ai/message?v=20160707&q=" + urlTestText + "&access_token=I64J6VXZKMXLQESP5S67JNIIKHOIXT25"
             
 
                requestify.get(witURL).then(function(response) {
