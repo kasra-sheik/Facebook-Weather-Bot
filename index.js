@@ -161,7 +161,7 @@ app.post('/webhook/', function (req, res) {
             var index = client.initIndex('CatalogProductInfo');
             index.search('red dress', function searchDone(err, content) {
                     console.log(err, content);
-                    var item = conent.hits[0].name
+                    var item = content.hits[0].name
                     sendTextMessage(sender, "here is the name " + item)
             });
         }
