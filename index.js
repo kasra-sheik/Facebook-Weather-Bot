@@ -498,7 +498,7 @@ function testMavatarItemGenerator(sender, item) {
 
     elementTest.push({
         "title": item.name,
-        "subtitle": item.descr,
+        "subtitle": item.retail_price + " " + item.descr,
         "image_url": item.image_url
     })
     elementTest.shift()
