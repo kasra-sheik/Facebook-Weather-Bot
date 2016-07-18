@@ -92,6 +92,8 @@ app.post('/webhook/', function (req, res) {
                             if("wit_item" in rep.entities){
                                 var item = rep.entities.wit_item[0].value
                                 var index = client.initIndex('CatalogProductInfo');
+                                sendTextMessage(sender, "1")
+
                                 index.search(item, function searchDone(err, content) {
                                     sendTextMessage(sender, "Absolutley. Matching your query for " + item)
                                     mavatarItemGenerator(sender, content)
