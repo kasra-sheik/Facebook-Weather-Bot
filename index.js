@@ -92,7 +92,7 @@ app.post('/webhook/', function (req, res) {
                             if("wit_item" in rep.entities){
                                 var item = rep.entities.wit_item[0].value
                                 var index = client.initIndex('CatalogProductInfo');
-                                sendTextMessage(sender, item)
+                                //sendTextMessage(sender, item)
 
                                 index.search(item, function searchDone(err, content) {
                                     sendTextMessage(sender, "Absolutley. Matching your query for " + item)
@@ -547,7 +547,7 @@ function mavatarItemGenerator(sender, response) {
         "subtitle": "this is another test",
         "image_url": "https://s32.postimg.org/ftphqrki9/rainy.jpg",
     }]
-    for(i = 0; i < itemObjects.length; i++) {
+    for(i = 0; i < 10; i++) {
         var item = itemObjects[i]
          elementTest.push({
                 "title": item.name,
