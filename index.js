@@ -96,6 +96,7 @@ app.post('/webhook/', function (req, res) {
 
                                 index.search(item, function searchDone(err, content) {
                                     sendTextMessage(sender, "Absolutley. Matching your query for " + item)
+                                    sendTextMessage(sender, content.hits[0].name)
                                     //testMavatarItemGenerator(sender, content.hits[0])
                                    
                             });
