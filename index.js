@@ -536,50 +536,50 @@ function testMavatarItemGenerator(sender, item) {
 }
 function mavatarItemGenerator(sender, response) { 
     sendTextMessage(sender, "we got here..!")
-    var itemObjects = []
-     for(i = 0; i < response.length; i++) {
-        itemObjects.push(response.hits[i]);
-    }
+ //    var itemObjects = []
+ //     for(i = 0; i < response.length; i++) {
+ //        itemObjects.push(response.hits[i]);
+ //    }
 
-     elementTest = [{
-        "title": "this is a test",
-        "subtitle": "this is another test",
-        "image_url": "https://s32.postimg.org/ftphqrki9/rainy.jpg",
-    }]
-    for(i = 0; i < 2; i++) {
-        var item = itemObjects[i]
-         elementTest.push({
-                "title": item.name,
-                "subtitle": item.descr,
-                "image_url": item.image_url
-            })
-    }
-    elementTest.shift()
+ //     elementTest = [{
+ //        "title": "this is a test",
+ //        "subtitle": "this is another test",
+ //        "image_url": "https://s32.postimg.org/ftphqrki9/rainy.jpg",
+ //    }]
+ //    for(i = 0; i < 2; i++) {
+ //        var item = itemObjects[i]
+ //         elementTest.push({
+ //                "title": item.name,
+ //                "subtitle": item.descr,
+ //                "image_url": item.image_url
+ //            })
+ //    }
+ //    elementTest.shift()
 
- messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": elementTest
-            } 
-        }
-    }
-     request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+ // messageData = {
+ //        "attachment": {
+ //            "type": "template",
+ //            "payload": {
+ //                "template_type": "generic",
+ //                "elements": elementTest
+ //            } 
+ //        }
+ //    }
+ //     request({
+ //        url: 'https://graph.facebook.com/v2.6/me/messages',
+ //        qs: {access_token:token},
+ //        method: 'POST',
+ //        json: {
+ //            recipient: {id:sender},
+ //            message: messageData,
+ //        }
+ //    }, function(error, response, body) {
+ //        if (error) {
+ //            console.log('Error sending messages: ', error)
+ //        } else if (response.body.error) {
+ //            console.log('Error: ', response.body.error)
+ //        }
+ //    })
 
 
 
