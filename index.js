@@ -535,11 +535,12 @@ function testMavatarItemGenerator(sender, item) {
 
 }
 function mavatarItemGenerator(sender, response) { 
-    sendTextMessage(sender, "we got here..!")
- //    var itemObjects = []
- //     for(i = 0; i < response.length; i++) {
- //        itemObjects.push(response.hits[i]);
- //    }
+    sendTextMessage(sender, "we got here..!" + response.length)
+    var itemObjects = []
+     for(i = 0; i < response.length; i++) {
+        itemObjects.push(response.hits[i]);
+    }
+
 
  //     elementTest = [{
  //        "title": "this is a test",
