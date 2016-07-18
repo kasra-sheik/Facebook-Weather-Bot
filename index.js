@@ -88,7 +88,7 @@ app.post('/webhook/', function (req, res) {
                             //sendTextMessage(sender,"this is the intent.. " + intent)
                         }
 
-                        if("intent" == "Shop") {
+                        if(intent == "Shop") {
                             sendTextMessage(sender, "Looks like someone is trying to shop..")
 
 
