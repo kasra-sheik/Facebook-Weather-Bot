@@ -157,10 +157,11 @@ app.post('/webhook/', function (req, res) {
                 continue
             }
             if(text == 'test') {
-            var index = client.initIndex('indexName');
-            index.search('dress', function searchDone(err, content) {
+            var index = client.initIndex('CatalogProductInfo');
+            index.search('red dress', function searchDone(err, content) {
                     console.log(err, content);
-                    sendTextMessage(sender, "I think we created a working call..?")
+                    var item = conent.hits[0].name
+                    sendTextMessage(sender, "here is the name " + item)
             });
         }
             // else if(text == "forecast") {
