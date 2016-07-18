@@ -547,11 +547,11 @@ function mavatarItemGenerator(sender, response) {
         "subtitle": "this is another test",
         "image_url": "https://s32.postimg.org/ftphqrki9/rainy.jpg",
     }]
-    for(i = 0; i < 2; i++) {
+    for(i = 0; i < itemObjects.length; i++) {
         var item = itemObjects[i]
          elementTest.push({
                 "title": item.name,
-                "subtitle": item.descr,
+                "subtitle": "$" + item.retail_price + " " + item.descr,
                 "image_url": item.image_url
             })
     }
