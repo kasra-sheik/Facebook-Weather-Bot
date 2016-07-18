@@ -485,6 +485,7 @@ function sunny(sender, location) {
 
 }
 function mavatarItemGenerator(sender, response) { 
+    sendTextMessage(sender, "we got here..!")
     var itemObjects = []
      for(i = 0; i < response.list.length; i++) {
         itemObjects.push(response.hits[i]);
