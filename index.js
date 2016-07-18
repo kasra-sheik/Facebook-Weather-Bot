@@ -94,8 +94,7 @@ app.post('/webhook/', function (req, res) {
                                 var index = client.initIndex('CatalogProductInfo');
                                 index.search(item, function searchDone(err, content) {
                                     sendTextMessage(sender, "Absolutley. Matching your query for " + item)
-                                    var itemName = content.hits[0].name
-                                    sendTextMessage(sender, "Here is the name: " + itemName)
+                                    mavatarItemGenerator(sender, content)
                                    
                             });
 
@@ -485,6 +484,57 @@ function sunny(sender, location) {
 
 
 }
+function mavatarItemGenerator(sender, response) { 
+    var itemObjects = []
+     for(i = 0; i < response.list.length; i++) {
+        itemObjects.push(response.hits[i]);
+    }
+
+     elementTest = [{
+        "title": "this is a test",
+        "subtitle": "this is another test",
+        "image_url": "https://s32.postimg.org/ftphqrki9/rainy.jpg",
+    }]
+    for(i = 0; i < itemObjects; i++) {
+        var item = itemObjects[i]
+         elementTest.push({
+                "title": item.name,
+                "subtitle": item.descr,
+                "image_url": item.image_url
+            })
+    }
+    elementTest.shift()
+
+ messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": elementTest
+            } 
+        }
+    }
+     request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+
+
+
+
+}
+
 function forecastBuilder(sender, response) {
     var forecastObject = []
     for(i = 0; i < response.list.length; i++) {
