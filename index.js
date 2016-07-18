@@ -90,9 +90,14 @@ app.post('/webhook/', function (req, res) {
 
                         if(intent == "Shop") {
                             if("wit_item" in rep.entities){
-                                sendTextMessage(sender, "we are here")
-
-                                sendTextMessage(sender, rep.entities.wit_item[0].value)
+                                var item = rep.entities.wit_item[0].value
+                                var index = client.initIndex('CatalogProductInfo');
+                                index.search(item, function searchDone(err, content) {
+                                    sendTextMessage(sender, "Absolutley. Matching your query for " + item)
+                                    var itemName = content.hits[0].name
+                                    sendTextMessage(sender, "Here is the name: " + itemName)
+                                   
+                            });
 
                             }
 
