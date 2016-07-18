@@ -96,8 +96,8 @@ app.post('/webhook/', function (req, res) {
 
                                 index.search(item, function searchDone(err, content) {
                                     sendTextMessage(sender, "Absolutley. Matching your query for " + item)
-                                    sendTextMessage(sender, content.hits[0].name)
-                                    //testMavatarItemGenerator(sender, content.hits[0])
+                                    //sendTextMessage(sender, content.hits[0].image_url)
+                                    testMavatarItemGenerator(sender, content.hits[0])
                                    
                             });
 
@@ -488,6 +488,8 @@ function sunny(sender, location) {
 
 }
 function testMavatarItemGenerator(sender, item) { 
+
+    sendTextMessage(sender, "we are here..")
     elementTest = [{
         "title": "this is a test",
         "subtitle": "this is another test",
