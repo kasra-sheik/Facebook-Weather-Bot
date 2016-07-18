@@ -89,7 +89,12 @@ app.post('/webhook/', function (req, res) {
                         }
 
                         if(intent == "Shop") {
-                            sendTextMessage(sender, "Looks like someone is trying to shop..")
+                            if("wit_item" in rep.entities){
+                                sendTextMessage(sender, "we are here")
+
+                                sendTextMessage(sender, rep.entities.wit_item[0].value)
+
+                            }
 
 
 
