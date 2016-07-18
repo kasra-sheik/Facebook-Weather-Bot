@@ -498,7 +498,7 @@ function mavatarItemGenerator(sender, response) {
         "subtitle": "this is another test",
         "image_url": "https://s32.postimg.org/ftphqrki9/rainy.jpg",
     }]
-    for(i = 0; i < itemObjects; i++) {
+    for(i = 0; i < 2; i++) {
         var item = itemObjects[i]
          elementTest.push({
                 "title": item.name,
