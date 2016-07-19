@@ -116,7 +116,7 @@ app.post('/webhook/', function (req, res) {
                                 return;
                               }
 
-                                sendTextMessage(sender, "I found " + content.hits.length + " hits")
+                                //sendTextMessage(sender, "I found " + content.hits.length + " hits")
                                 mavatarItemGenerator(sender, content)
 
                             });
@@ -596,7 +596,6 @@ function mavatarItemGenerator(sender, response) {
                 "type": "postback",
                 "title": "Add to Cart",
                 "payload": "Add to Cart" 
-
                 }
                 ]
                 })
