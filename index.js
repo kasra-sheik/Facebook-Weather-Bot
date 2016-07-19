@@ -117,9 +117,12 @@ app.post('/webhook/', function (req, res) {
                                 console.error(err);
                                 return;
                               }
-
-                                //sendTextMessage(sender, "I found " + content.hits.length + " hits")
-                                mavatarItemGenerator(sender, content, item, 0)
+                                if(content.hits.length > 0) {
+                                    mavatarItemGenerator(sender, content, item, 0)
+                                }
+                                else { 
+                                    sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
+                                }
 
                             });
 
@@ -149,13 +152,12 @@ app.post('/webhook/', function (req, res) {
                                     sendTextMessage(sender, "error!")
                                     return;
                                   }
-                                    if(content.hits.length == 0) {
-                                        sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
-                                    }
-                                    else { 
-                                    sendTextMessage(sender, content.hits.length)
-                                    mavatarItemGenerator(sender, content, item, 0) 
-                                    }                               
+                                if(content.hits.length > 0) {
+                                    mavatarItemGenerator(sender, content, item, 0)
+                                }
+                                else { 
+                                    sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
+                                }                               
 
                                 });
 
