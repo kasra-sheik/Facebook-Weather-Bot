@@ -579,12 +579,11 @@ function testMavatarItemGenerator(sender, item) {
 
 }
 function mavatarItemGenerator(sender, response) { 
-    //sendTextMessage(sender, "we got here..!")
     var itemObjects = []
      for(i = 0; i < response.hits.length; i++) {
         itemObjects.push(response.hits[i]);
     }
-
+    sendTextMessage(itemObjects.length)
 
      elementTest = [{
         "title": "this is a test",
@@ -602,7 +601,7 @@ function mavatarItemGenerator(sender, response) {
             }
             ]
     }]
-    for(i = 0; i < 11; i++) {
+    for(i = 0; i < 10; i++) {
         var item = itemObjects[i]
 
          elementTest.push({
