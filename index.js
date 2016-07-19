@@ -109,8 +109,7 @@ app.post('/webhook/', function (req, res) {
 
 
                             index.search(item, {
-                                hitsPerPage: 50,
-                                page: *
+                                hitsPerPage: 200
                             }, function searchDone(err, content) {
                               if (err) {
                                 console.error(err);
