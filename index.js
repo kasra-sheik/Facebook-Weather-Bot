@@ -44,7 +44,7 @@ app.listen(app.get('port'), function() {
  var forecast = false
  var location = ""
  var place
- var intent
+ //var intent
  var query
  var firstName = ""
 
@@ -83,6 +83,7 @@ app.post('/webhook/', function (req, res) {
                    
 
                     if(Object.keys(rep.entities).length > 0) {
+                        sendTextMessage(sender, "testing..")
 
                         if("intent" in rep.entities) {
                             intent = rep.entities.intent[0].value
@@ -132,7 +133,7 @@ app.post('/webhook/', function (req, res) {
                                 //query = item
                                 var index = client.initIndex('CatalogProductInfo');
 
-                                sendTextMessage(sender, "Some one is a picky searcher")
+                                // sendTextMessage(sender, "Some one is a picky searcher")
                                 var lessThan = true 
                                 var moneyAmount = rep.entities.amount_of_money[0].value
                                 if(rep.entities.intent[1].value == "greater") {
@@ -141,7 +142,6 @@ app.post('/webhook/', function (req, res) {
                                 if(lessThan == true){inequality = "<"}
                                 else if(lessThan == false){inequality = ">"}
                                 var numericFilter = "retail_price " + inequality + " " + moneyAmount.toString()
-                                sendTextMessage(sender, numericFilter)
                                  index.search(item, {
                                     hitsPerPage: 10,
                                     "numericFilters": [numericFilter] 
