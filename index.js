@@ -394,7 +394,9 @@ app.post('/webhook/', function (req, res) {
 
          if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
-                sendTextMessage(sender, postback_text.substring(0,3))
+                sendTextMessage(sender, postback_text.substring(2,5))
+
+                //payloads info + name of item, sends a get request to Algolia with the product name and returns info abt it
                 if(postback_text.substring(0,3) == "\"info\"") {
                     sendTextMessage(sender, "grabbing more info...")
 
