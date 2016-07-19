@@ -102,7 +102,7 @@ app.post('/webhook/', function (req, res) {
                                         mavatarItemGenerator(sender, content)
                                     }
                                     else { 
-                                        sendTextMessage(sender, "I'm sorry I couldn't find " + item + " I can only find retail items!" )
+                                        sendTextMessage(sender, "I'm sorry I couldn't find " + item + " It doesn't look mavatar's platform carries that" )
                                     }
                                    
                             });
