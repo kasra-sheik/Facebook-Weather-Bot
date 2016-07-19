@@ -96,7 +96,7 @@ app.post('/webhook/', function (req, res) {
 
                                 index.search(item, function searchDone(err, content) {
                                     sendTextMessage(sender, "Absolutley. Matching your query for " + item)
-                                    sendTextMessage(sender, "I found " + content.hits.length + " hits")
+                                    //sendTextMessage(sender, "I found " + content.hits.length + " hits")
                                     //sendTextMessage(sender, content.hits[0].image_url)
                                     mavatarItemGenerator(sender, content)
                                    
@@ -550,6 +550,7 @@ function mavatarItemGenerator(sender, response) {
     }]
     for(i = 0; i < 10; i++) {
         var item = itemObjects[i]
+
          elementTest.push({
                 "title": item.name,
                 "subtitle": "$" + item.retail_price + " " + item.descr,
