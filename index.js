@@ -394,7 +394,7 @@ app.post('/webhook/', function (req, res) {
 
          if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
-                sendTextMessage(sender, postback_text)
+                sendTextMessage(sender, postback_text.substring(0,3))
                 if(postback_text.substring(0,3) == "\"info\"") {
                     sendTextMessage(sender, "grabbing more info...")
 
