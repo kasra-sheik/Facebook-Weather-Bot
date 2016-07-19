@@ -409,7 +409,7 @@ app.post('/webhook/', function (req, res) {
                                 return;
                               }
                                 sendTextMessage(sender, content.hits[0].descr)
-                                sendTextMessage(sender, "It looks like " + content.hits[0].vendor_name + "is selling this")
+                                sendTextMessage(sender, "It looks like " + content.hits[0].vendor_name + " is selling this for a price of $ " + content.hits[0].retail_price)
 
                             });
 
