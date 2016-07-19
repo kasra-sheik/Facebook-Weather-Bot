@@ -101,19 +101,20 @@ app.post('/webhook/', function (req, res) {
                             //         mavatarItemGenerator(sender, content)
                                    
                             // });
+                            index.search('query string', {
+                                hitsPerPage: 50
+                            }, function searchDone(err, content) {
+                              if (err) {
+                                console.error(err);
+                                return;
+                              }
 
-
-                            }
-                            content = index.search(item, {
-                                hitsperpage: 50
-
-                            },function searchDone(err, content) {
-
-                                sendTextMessage(sender, content.hits.length)
-                            }
-
-
+                                sendTextMessage(sender, "I found " + content.hits.length + " hits")
                             });
+
+
+
+                            }
 
 
 
