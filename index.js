@@ -416,8 +416,20 @@ app.post('/webhook/', function (req, res) {
 
                 }
                 else if(postback_text.substring(1,5) == "more") {
-                    var pageNum = postback_text.substring(6,7)
-                    sendTextMessage(sender, pageNum)
+                    var pageNum = parseInt(postback_text.substring(6,7))
+                    var index = client.initIndex('CatalogProductInfo')
+                    var item = postback_text.substring(7,1000)
+                      index.search(item, {
+                                page: pageNum,
+                                hitsPerPage: 10
+                            }, function searchDone(err, content) {
+                              if (err) {
+                                console.error(err);
+                                return;
+                              }
+                               mavatarItemGenerator(sender, content, item, pageNum)
+                            });
+
                 }
 
                 if(postback_text == "\"Macy's Red Dress\"" || postback_text == "\"Bloomingdale's Red Dress\"" || postback_text == "\"Sak's Fifth Avenue Dress\"" ) {
