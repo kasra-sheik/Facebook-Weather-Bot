@@ -125,7 +125,7 @@ app.post('/webhook/', function (req, res) {
 
 
                         }
-                        if(intent == "greeting") {
+                        else if(intent == "greeting") {
                             sendTextMessage(sender, "Hello, " + first_name)
                         }
 
