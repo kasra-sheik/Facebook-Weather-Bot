@@ -146,9 +146,10 @@ app.post('/webhook/', function (req, res) {
                                 }, function searchDone(err, content) {
                                   if (err) {
                                     console.error(err);
+                                    sendTextMessage(sender, "error!")
                                     return;
                                   }
-
+                                    sendTextMessage(sender, content.hits.length)
                                     //sendTextMessage(sender, "I found " + content.hits.length + " hits")
                                     mavatarItemGenerator(sender, content, item, 0)
 
