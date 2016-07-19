@@ -583,7 +583,7 @@ function mavatarItemGenerator(sender, response) {
      for(i = 0; i < response.hits.length; i++) {
         itemObjects.push(response.hits[i]);
     }
-    sendTextMessage(itemObjects.length)
+    sendTextMessage(sender, itemObjects.length)
 
      elementTest = [{
         "title": "this is a test",
