@@ -132,6 +132,7 @@ app.post('/webhook/', function (req, res) {
                                 var item = ""
                                 if("wit_item" in rep.entities) {
                                     item = rep.entities.wit_item[0].value
+                                    query = item 
                                 }
                                 else {
                                     sendTextMessage(sender, "this is where we crash..?") 
