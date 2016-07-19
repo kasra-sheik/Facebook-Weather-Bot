@@ -109,7 +109,7 @@ app.post('/webhook/', function (req, res) {
 
 
                             index.search(item, {
-                                hitsPerPage: 100
+                                hitsPerPage: 10
                             }, function searchDone(err, content) {
                               if (err) {
                                 console.error(err);
@@ -117,7 +117,7 @@ app.post('/webhook/', function (req, res) {
                               }
 
                                 //sendTextMessage(sender, "I found " + content.hits.length + " hits")
-                                mavatarItemGenerator(sender, content)
+                                mavatarItemGenerator(sender, content, item)
 
                             });
 
@@ -578,12 +578,12 @@ function testMavatarItemGenerator(sender, item) {
 
 
 }
-function mavatarItemGenerator(sender, response) { 
+function mavatarItemGenerator(sender, response, query) { 
     var itemObjects = []
      for(i = 0; i < response.hits.length; i++) {
         itemObjects.push(response.hits[i]);
     }
-    sendTextMessage(sender, itemObjects.length)
+    sendTextMessage(sender, query)
 
      elementTest = [{
         "title": "this is a test",
@@ -622,7 +622,7 @@ function mavatarItemGenerator(sender, response) {
 
                 "type":"postback",
                 "title": "Show me More",
-                "payload": "more"
+                "payload": "more " + item.name
 
                 }
                 ]
