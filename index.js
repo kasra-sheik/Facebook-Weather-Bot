@@ -184,6 +184,10 @@ app.post('/webhook/', function (req, res) {
 
 
                         }
+                        else {
+                            sendTextMessage(sender, "I don't quite understand what you mean.. Try searching for an item, product, or brand")
+
+                        }
                         // else if(intent == "greeting") {
                         //     sendTextMessage(sender, "Hello, " + firstName)
                         // }
