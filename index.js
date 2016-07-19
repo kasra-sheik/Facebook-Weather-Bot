@@ -94,17 +94,30 @@ app.post('/webhook/', function (req, res) {
                                 var index = client.initIndex('CatalogProductInfo');
                                 //sendTextMessage(sender, item)
 
-                                index.search(item, function searchDone(err, content) {
-                                    //sendTextMessage(sender, "I found " + content.hits.length + " hits")
-                                    //sendTextMessage(sender, content.hits[0].image_url)
-                                    if(content.hits.length > 0) {
-                                        sendTextMessage(sender, "Absolutley. Matching your query for " + item)
-                                        mavatarItemGenerator(sender, content)
-                                    }
-                                    else { 
-                                        sendTextMessage(sender, "I'm sorry I couldn't find " + item + " It doesn't look mavatar's platform carries that" )
-                                    }
+                            //     index.search(item, function searchDone(err, content) {
+                            //         //sendTextMessage(sender, "I found " + content.hits.length + " hits")
+                            //         //sendTextMessage(sender, content.hits[0].image_url)
+                            //         if(content.hits.length > 0) {
+                            //             sendTextMessage(sender, "Absolutley. Matching your query for " + item)
+                            //             mavatarItemGenerator(sender, content)
+                            //         }
+                            //         else { 
+                            //             sendTextMessage(sender, "I'm sorry I couldn't find " + item + " It doesn't look mavatar's platform carries that" )
+                            //         }
                                    
+                            // });
+
+
+                            index.search(item, {
+                                hitsPerPage: 50
+                            }, function searchDone(err, content) {
+                              if (err) {
+                                console.error(err);
+                                return;
+                              }
+
+                            sendTextMessage(sender, "I found " + content.hits.length + " hits")
+
                             });
 
                             }
