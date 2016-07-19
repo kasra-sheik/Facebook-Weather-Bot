@@ -82,7 +82,7 @@ app.post('/webhook/', function (req, res) {
                    
 
                     if(Object.keys(rep.entities).length > 0) {
-                        
+
                         if("intent" in rep.entities) {
                             intent = rep.entities.intent[0].value
                             //sendTextMessage(sender,"this is the intent.. " + intent)
@@ -569,6 +569,17 @@ function mavatarItemGenerator(sender, response) {
         "title": "this is a test",
         "subtitle": "this is another test",
         "image_url": "https://s32.postimg.org/ftphqrki9/rainy.jpg",
+        "buttons": [{
+            "type": "postback",
+            "title": "More Info",
+            "payload": "This is a test"
+            }, {
+            "type": "postback",
+            "title": "Add to Cart",
+            "payload": "Add to Cart" 
+
+            }
+            ]
     }]
     for(i = 0; i < 10; i++) {
         var item = itemObjects[i]
@@ -576,8 +587,19 @@ function mavatarItemGenerator(sender, response) {
          elementTest.push({
                 "title": item.name,
                 "subtitle": "$" + item.retail_price + " " + item.descr,
-                "image_url": item.image_url
-            })
+                "image_url": item.image_url,
+                 "buttons": [{
+                "type": "postback",
+                "title": "More Info",
+                "payload": "This is a test"
+                }, {
+                "type": "postback",
+                "title": "Add to Cart",
+                "payload": "Add to Cart" 
+
+                }
+                ]
+                })
     }
     elementTest.shift()
 
