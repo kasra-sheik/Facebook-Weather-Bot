@@ -586,7 +586,7 @@ function mavatarItemGenerator(sender, response) {
 
          elementTest.push({
                 "title": item.name,
-                "subtitle": "$" + item.retail_price + " " + item.descr,
+                "subtitle": "$" + item.retail_price,
                 "image_url": item.image_url,
                  "buttons": [{
                 "type": "postback",
