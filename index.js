@@ -128,7 +128,7 @@ app.post('/webhook/', function (req, res) {
 
                             }
                         }
-                            else if("amount_of_money" in rep.entities) {
+                        if("amount_of_money" in rep.entities) {
                                 var item = ""
                                 if("wit_item" in rep.entities) {
                                     item = rep.entities.wit_item[0].value
