@@ -657,7 +657,11 @@ function mavatarItemGenerator(sender, response, query, pageNum) {
             ]
     }]
     for(i = 0; i < 10; i++) {
+        if(i > itemObjects.length + 1) {
+            break
+        }
         var item = itemObjects[i]
+
 
         if(i == 9) {
 
