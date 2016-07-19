@@ -45,6 +45,7 @@ app.listen(app.get('port'), function() {
  var location = ""
  var place
  var intent
+ var query
  var firstName = ""
 
 // API End Point - added by Stefan
@@ -91,6 +92,7 @@ app.post('/webhook/', function (req, res) {
                         if(intent == "Shop") {
                             if("wit_item" in rep.entities){
                                 var item = rep.entities.wit_item[0].value
+                                query = item 
                                 var index = client.initIndex('CatalogProductInfo');
                                 //sendTextMessage(sender, item)
 
@@ -106,25 +108,52 @@ app.post('/webhook/', function (req, res) {
                             //         }
                                    
                             // });
+                            if(!("amount_of_money" in rep.entities)) {
+
+                                index.search(item, {
+                                    hitsPerPage: 10
+                                }, function searchDone(err, content) {
+                                  if (err) {
+                                    console.error(err);
+                                    return;
+                                  }
+
+                                    //sendTextMessage(sender, "I found " + content.hits.length + " hits")
+                                    mavatarItemGenerator(sender, content, item, 0)
+
+                                });
+                                }
+                            else if("amount_of_money" in rep.entities) {
+                                sendTextMessage(sender, "Some one is a picky searcher")
+                                var lessThan = true 
+                                var moneyAmount = rep.entities.amount_of_money[0].value
+                                var inequality
+                                if(lessThan){inequality = "<"}
+                                else{inequality = ">"}
+                                var numericFilter = "retail_price " + inequality + " " + moneyAmount.toString()
+                                if(rep.entities.intent[1].value == "greater") {
+                                    lessThan = false
+                                }
+                                 index.search(item, {
+                                    hitsPerPage: 10,
+                                    "numericFilters": [numericFilter] 
+
+                                }, function searchDone(err, content) {
+                                  if (err) {
+                                    console.error(err);
+                                    return;
+                                  }
+
+                                    //sendTextMessage(sender, "I found " + content.hits.length + " hits")
+                                    mavatarItemGenerator(sender, content, item, 0)
+
+                                });
+                                }
 
 
-                            index.search(item, {
-                                hitsPerPage: 10
-                            }, function searchDone(err, content) {
-                              if (err) {
-                                console.error(err);
-                                return;
-                              }
 
-                                //sendTextMessage(sender, "I found " + content.hits.length + " hits")
-                                mavatarItemGenerator(sender, content, item, 0)
-
-                            });
-
+                             }
                             }
-
-
-
                         }
                         // else if(intent == "greeting") {
                         //     sendTextMessage(sender, "Hello, " + firstName)
