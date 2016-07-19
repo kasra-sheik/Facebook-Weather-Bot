@@ -117,7 +117,7 @@ app.post('/webhook/', function (req, res) {
                               }
 
                                 //sendTextMessage(sender, "I found " + content.hits.length + " hits")
-                                mavatarItemGenerator(sender, content, item)
+                                mavatarItemGenerator(sender, content, item, 0)
 
                             });
 
@@ -395,7 +395,7 @@ app.post('/webhook/', function (req, res) {
          if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
                 //sendTextMessage(sender, "info: " + postback_text.substring(1,5) + "item name: " + postback_text.substring(6, 1000)  )
-
+                sendTextMessage(sender, postback_text)
                 //payloads info + name of item, sends a get request to Algolia with the product name and returns info abt it
                 if(postback_text.substring(1,5) == "info") {
                     sendTextMessage(sender, "I found more info on this item..")
@@ -578,12 +578,11 @@ function testMavatarItemGenerator(sender, item) {
 
 
 }
-function mavatarItemGenerator(sender, response, query) { 
+function mavatarItemGenerator(sender, response, query, pageNum) { 
     var itemObjects = []
      for(i = 0; i < response.hits.length; i++) {
         itemObjects.push(response.hits[i]);
     }
-    sendTextMessage(sender, query)
 
      elementTest = [{
         "title": "this is a test",
@@ -622,7 +621,7 @@ function mavatarItemGenerator(sender, response, query) {
 
                 "type":"postback",
                 "title": "Show me More",
-                "payload": "more " + item.name
+                "payload": "more " + (pageNum + 1) + " "  + item.name
 
                 }
                 ]
