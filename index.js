@@ -127,9 +127,16 @@ app.post('/webhook/', function (req, res) {
                             });
 
                             }
-                            else if("wit_item" in rep.entities && "amount_of_money" in rep.entities) {
-                                var item = rep.entities.wit_item[0].value
-                                query = item
+                            else if("amount_of_money" in rep.entities) {
+                                var item = ""
+                                if("wit_item" in rep.entities) {
+                                    item = rep.entities.wit_item[0].value
+                                    query = item
+                                }
+                                else { 
+                                    item = query
+                                }
+
                                 var index = client.initIndex('CatalogProductInfo');
 
                                 // sendTextMessage(sender, "Some one is a picky searcher")
@@ -238,11 +245,11 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
             }
-         else if(text == 'query') {
+           else if(text == 'query' ) {
                 sendTextMessage(sender, query)
 
+            }
 
-        }
             // else if(text == "forecast") {
 
             //      var URL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + place + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"
