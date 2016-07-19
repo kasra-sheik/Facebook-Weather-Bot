@@ -129,7 +129,7 @@ app.post('/webhook/', function (req, res) {
                             }
                             else if("wit_item" in rep.entities && "amount_of_money" in rep.entities) {
                                 var item = rep.entities.wit_item[0].value
-                                //query = item
+                                query = item
                                 var index = client.initIndex('CatalogProductInfo');
 
                                 // sendTextMessage(sender, "Some one is a picky searcher")
