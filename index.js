@@ -109,14 +109,14 @@ app.post('/webhook/', function (req, res) {
 
 
                             index.search(item, {
-                                hitsPerPage: 200
+                                hitsPerPage: 100
                             }, function searchDone(err, content) {
                               if (err) {
                                 console.error(err);
                                 return;
                               }
 
-                            sendTextMessage(sender, "I found " + content.hits.length + " hits")
+                                sendTextMessage(sender, "I found " + content.hits.length + " hits")
 
                             });
 
