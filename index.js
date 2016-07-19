@@ -420,7 +420,7 @@ app.post('/webhook/', function (req, res) {
                     var index = client.initIndex('CatalogProductInfo')
                     var item = postback_text.substring(7,1000)
                       index.search(item, {
-                                page: pageNum,
+                                "page": pageNum,
                                 hitsPerPage: 10
                             }, function searchDone(err, content) {
                               if (err) {
