@@ -125,6 +125,9 @@ app.post('/webhook/', function (req, res) {
 
 
                         }
+                        if(intent == "greeting") {
+                            sendTextMessage(sender, "Hello, " + first_name)
+                        }
 
                         // //grab weather
                         // if(intent == "weather") {
