@@ -94,6 +94,7 @@ app.post('/webhook/', function (req, res) {
                                 var item = rep.entities.wit_item[0].value
                                 query = item 
                                 var index = client.initIndex('CatalogProductInfo');
+                                sendTextMessage(sender, "we are here!")
                                 //sendTextMessage(sender, item)
 
                             //     index.search(item, function searchDone(err, content) {
@@ -122,7 +123,7 @@ app.post('/webhook/', function (req, res) {
                                     mavatarItemGenerator(sender, content, item, 0)
 
                                 });
-                                }
+                            }
                             else if("amount_of_money" in rep.entities) {
                                 sendTextMessage(sender, "Some one is a picky searcher")
                                 var lessThan = true 
