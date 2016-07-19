@@ -133,7 +133,8 @@ app.post('/webhook/', function (req, res) {
                                 if("wit_item" in rep.entities) {
                                     item = rep.entities.wit_item[0].value
                                 }
-                                else { 
+                                else {
+                                    sendTextMessage(sender, "this is where we crash..?") 
                                     item = query
                                 }
 
