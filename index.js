@@ -601,7 +601,7 @@ function mavatarItemGenerator(sender, response) {
             }
             ]
     }]
-    for(i = 0; i < 10; i++) {
+    for(i = 0; i < itemObjects.length; i++) {
         var item = itemObjects[i]
         sendTextMessage(sender, i)
          elementTest.push({
