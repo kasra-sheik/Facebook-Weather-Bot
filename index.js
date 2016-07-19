@@ -394,6 +394,10 @@ app.post('/webhook/', function (req, res) {
 
          if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
+                if(postback_text.substring(0,3) == "info") {
+                    sendTextMessage(sender, "grabbing more info...")
+
+                }
 
                 if(postback_text == "\"Macy's Red Dress\"" || postback_text == "\"Bloomingdale's Red Dress\"" || postback_text == "\"Sak's Fifth Avenue Dress\"" ) {
                     sendTextMessage(sender, "Great! I added " + postback_text + " to your cart. When you're ready to checkout and pay for your order just enter \"checkout\"");
@@ -591,7 +595,7 @@ function mavatarItemGenerator(sender, response) {
                  "buttons": [{
                 "type": "postback",
                 "title": "More Info",
-                "payload": "This is a test"
+                "payload": "info " + item.name
                 }, {
                 "type": "postback",
                 "title": "Add to Cart",
