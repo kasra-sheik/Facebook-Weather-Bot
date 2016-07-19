@@ -83,7 +83,6 @@ app.post('/webhook/', function (req, res) {
                    
 
                     if(Object.keys(rep.entities).length > 0) {
-                        sendTextMessage(sender, "testing..")
 
                         if("intent" in rep.entities) {
                             intent = rep.entities.intent[0].value
@@ -239,14 +238,10 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
             }
-            if(text == 'test') {
-            sendTextMessage(sender, "we're at test")
-            var index = client.initIndex('CatalogProductInfo');
-            index.search('red dress', function searchDone(err, content) {
-                    console.log(err, content);
-                    var item = content.hits[0].name
-                    sendTextMessage(sender, "here is the size of the query" + content.hits.length)
-            });
+         else if(text == 'query') {
+                sendTextMessage(sender, query)
+
+
         }
             // else if(text == "forecast") {
 
