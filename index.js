@@ -603,7 +603,7 @@ function mavatarItemGenerator(sender, response) {
     }]
     for(i = 0; i < 10; i++) {
         var item = itemObjects[i]
-
+        sendTextMessage(sender, i)
          elementTest.push({
                 "title": item.name,
                 "subtitle": "$" + item.retail_price,
