@@ -128,6 +128,7 @@ app.post('/webhook/', function (req, res) {
 
                             }
                             else if("amount_of_money" in rep.entities) {
+                                sendTextMessage(sender, "we are here..")
                                 var item = ""
                                 if("wit_item" in rep.entities) {
                                     item = rep.entities.wit_item[0].value
@@ -136,6 +137,7 @@ app.post('/webhook/', function (req, res) {
                                     item = query
                                 }
 
+                                sendTextMessage(sender, item)
                                 var index = client.initIndex('CatalogProductInfo');
 
                                 // sendTextMessage(sender, "Some one is a picky searcher")
