@@ -132,13 +132,14 @@ app.post('/webhook/', function (req, res) {
                                 sendTextMessage(sender, "Some one is a picky searcher")
                                 var lessThan = true 
                                 var moneyAmount = rep.entities.amount_of_money[0].value
-                                var inequality
-                                if(lessThan){inequality = "<"}
-                                else{inequality = ">"}
-                                var numericFilter = "retail_price " + inequality + " " + moneyAmount.toString()
+                                var inequality = "<"
                                 if(rep.entities.intent[1].value == "greater") {
                                     lessThan = false
                                 }
+                                if(lessThan){inequality = "<"}
+                                else{inequality = ">"}
+                                var numericFilter = "retail_price " + inequality + " " + moneyAmount.toString()
+
                                  index.search(item, {
                                     hitsPerPage: 10,
                                     "numericFilters": [numericFilter] 
