@@ -145,8 +145,16 @@ app.post('/webhook/', function (req, res) {
                                 // sendTextMessage(sender, "Some one is a picky searcher")
                                 var lessThan = true 
                                 var moneyAmount = rep.entities.amount_of_money[0].value
-                                if(rep.entities.intent[1].value == "greater") {
-                                    lessThan = false
+                                if(rep.entities.intent.length > 1) {
+                                    if(rep.entities.intent[1].value == "greater") {
+                                        lessThan = false
+                                    }
+                                }
+                                else {
+                                    if(rep.entities.intent[0].value == "greater") {
+                                        lessThan = false
+                                    }
+
                                 }
                                 if(lessThan == true){inequality = "<"}
                                 else if(lessThan == false){inequality = ">"}
