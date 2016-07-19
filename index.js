@@ -601,9 +601,35 @@ function mavatarItemGenerator(sender, response) {
             }
             ]
     }]
-    for(i = 0; i < itemObjects.length; i++) {
+    for(i = 0; i < 10; i++) {
         var item = itemObjects[i]
-        sendTextMessage(sender, i)
+
+        if(i == 9) {
+
+               elementTest.push({
+                "title": item.name,
+                "subtitle": "$" + item.retail_price,
+                "image_url": item.image_url,
+                 "buttons": [{
+                "type": "postback",
+                "title": "More Info",
+                "payload": "info " + item.name
+                }, {
+                "type": "postback",
+                "title": "Add to Cart",
+                "payload": "Add to Cart" 
+                },{
+
+                "type":"postback",
+                "title": "Show me More",
+                "payload": "more"
+
+                }
+                ]
+                })
+
+            break
+        }
          elementTest.push({
                 "title": item.name,
                 "subtitle": "$" + item.retail_price,
@@ -619,7 +645,8 @@ function mavatarItemGenerator(sender, response) {
                 }
                 ]
                 })
-    }
+        }
+    //}
     elementTest.shift()
 
  messageData = {
