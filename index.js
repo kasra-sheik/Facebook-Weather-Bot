@@ -149,13 +149,13 @@ app.post('/webhook/', function (req, res) {
                                     sendTextMessage(sender, "error!")
                                     return;
                                   }
-                                    if(content.hits.length >= 9) {
+                                    if(content.hits.length > 0) {
                                     sendTextMessage(sender, content.hits.length)
                                     //sendTextMessage(sender, "I found " + content.hits.length + " hits")
                                     mavatarItemGenerator(sender, content, item, 0)
                                 }
                                 else {
-                                    sendTextMessage(sender, "not enough..")
+                                    sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
                                 }
 
                                 });
