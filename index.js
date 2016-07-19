@@ -65,9 +65,9 @@ app.post('/webhook/', function (req, res) {
 
         if (event.message && event.message.text) {
             text = event.message.text
-            if(text == "start") { 
-                sendTextMessage(sender, "Welcome " + first_name + " to the Mavatar Chat Bot. What exactly can I help you with?")
-            }
+            // if(text == "start") { 
+            //     sendTextMessage(sender, "Welcome " + first_name + " to the Mavatar Chat Bot. What exactly can I help you with?")
+            // }
 
             var urlTestText = text
             for(i = 0; i < urlTestText.length; i++) {
