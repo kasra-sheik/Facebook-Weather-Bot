@@ -135,8 +135,8 @@ app.post('/webhook/', function (req, res) {
                                 if(rep.entities.intent[1].value == "greater") {
                                     lessThan = false
                                 }
-                                if(lessThan){inequality = "<"}
-                                else{inequality = ">"}
+                                if(lessThan == true){inequality = "<"}
+                                else if(lessThan == false){inequality = ">"}
                                 var numericFilter = "retail_price " + inequality + " " + moneyAmount.toString()
                                 sendTextMessage(sender, numericFilter)
                                  index.search(item, {
