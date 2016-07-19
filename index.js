@@ -602,7 +602,7 @@ function mavatarItemGenerator(sender, response) {
             }
             ]
     }]
-    for(i = 0; i < 9; i++) {
+    for(i = 0; i < 11; i++) {
         var item = itemObjects[i]
 
          elementTest.push({
