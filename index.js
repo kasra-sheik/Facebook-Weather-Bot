@@ -98,7 +98,13 @@ app.post('/webhook/', function (req, res) {
                                     sendTextMessage(sender, "Absolutley. Matching your query for " + item)
                                     //sendTextMessage(sender, "I found " + content.hits.length + " hits")
                                     //sendTextMessage(sender, content.hits[0].image_url)
-                                    mavatarItemGenerator(sender, content)
+                                    if(content.hits.length > 0) {
+                                        sendTextMessage(sender, "Absolutley. Matching your query for " + item)
+                                        mavatarItemGenerator(sender, content)
+                                    }
+                                    else { 
+                                        sendTextMessage(sender, "I'm sorry I couldn't find " + item + " I can only find retail items!" )
+                                    }
                                    
                             });
 
