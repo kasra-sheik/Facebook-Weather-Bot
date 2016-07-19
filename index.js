@@ -409,7 +409,7 @@ app.post('/webhook/', function (req, res) {
                                 return;
                               }
 
-                                sendTextMessage(sender, content.hits[0].description)
+                                sendTextMessage(sender, content.hits[0].descr)
 
                             });
 
