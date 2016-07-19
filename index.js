@@ -94,15 +94,26 @@ app.post('/webhook/', function (req, res) {
                                 var index = client.initIndex('CatalogProductInfo');
                                 //sendTextMessage(sender, item)
 
-                                index.search(item, function searchDone(err, content) {
-                                    sendTextMessage(sender, "Absolutley. Matching your query for " + item)
-                                    sendTextMessage(sender, "I found " + content.hits.length + " hits")
-                                    //sendTextMessage(sender, content.hits[0].image_url)
-                                    mavatarItemGenerator(sender, content)
+                            //     index.search(item, function searchDone(err, content) {
+                            //         sendTextMessage(sender, "Absolutley. Matching your query for " + item)
+                            //         sendTextMessage(sender, "I found " + content.hits.length + " hits")
+                            //         //sendTextMessage(sender, content.hits[0].image_url)
+                            //         mavatarItemGenerator(sender, content)
                                    
-                            });
+                            // });
+
 
                             }
+                            content = index.search(item, {
+                                hitsperpage: 50
+
+                            },function searchDone(err, content) {
+
+                                sendTextMessage(sender, content.hits.length)
+                            }
+
+
+                            });
 
 
 
