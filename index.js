@@ -415,6 +415,10 @@ app.post('/webhook/', function (req, res) {
 
 
                 }
+                else if(postback_text.substring(1,5) == "more") {
+                    var pageNum = postback_text.substring(5,6)
+                    sendTextMessage(sender, pageNum)
+                }
 
                 if(postback_text == "\"Macy's Red Dress\"" || postback_text == "\"Bloomingdale's Red Dress\"" || postback_text == "\"Sak's Fifth Avenue Dress\"" ) {
                     sendTextMessage(sender, "Great! I added " + postback_text + " to your cart. When you're ready to checkout and pay for your order just enter \"checkout\"");
