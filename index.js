@@ -399,6 +399,20 @@ app.post('/webhook/', function (req, res) {
                 //payloads info + name of item, sends a get request to Algolia with the product name and returns info abt it
                 if(postback_text.substring(1,5) == "info") {
                     sendTextMessage(sender, "grabbing more info...")
+                    var index = client.initIndex('CatalogProductInfo')
+                    var item = postback_text.substring(6,1000)
+                      index.search(item, {
+                                hitsPerPage: 1
+                            }, function searchDone(err, content) {
+                              if (err) {
+                                console.error(err);
+                                return;
+                              }
+
+                                sendTextMessage(sender, content.hits[0].description)
+
+                            });
+
 
                 }
 
