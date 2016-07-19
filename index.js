@@ -416,7 +416,7 @@ app.post('/webhook/', function (req, res) {
 
                 }
                 else if(postback_text.substring(1,5) == "more") {
-                    var pageNum = postback_text.substring(5,6)
+                    var pageNum = postback_text.substring(6,7)
                     sendTextMessage(sender, pageNum)
                 }
 
