@@ -89,7 +89,7 @@ app.post('/webhook/', function (req, res) {
                             //sendTextMessage(sender,"this is the intent.. " + intent)
                         }
 
-                        if(intent == "Shop") {
+                        if(intent == "Shop" || intent == "less" || intent == "greater") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
                                 var item = rep.entities.wit_item[0].value
                                 query = item
@@ -127,12 +127,10 @@ app.post('/webhook/', function (req, res) {
                             });
 
                             }
-                        }
-                        if("amount_of_money" in rep.entities) {
+                            else if("amount_of_money" in rep.entities) {
                                 var item = ""
                                 if("wit_item" in rep.entities) {
                                     item = rep.entities.wit_item[0].value
-                                    query = item
                                 }
                                 else { 
                                     item = query
