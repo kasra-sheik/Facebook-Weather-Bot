@@ -636,8 +636,8 @@ function mavatarItemGenerator(sender, response, query, pageNum) {
                 },{
 
                 "type":"postback",
-                "title": "Show me More",
-                "payload": "more " + (pageNum + 1) + " "  + item.name
+                "title": "Show Me More",
+                "payload": "more " + (pageNum + 1) + " "  + query
 
                 }
                 ]
