@@ -184,10 +184,7 @@ app.post('/webhook/', function (req, res) {
 
 
                         }
-                        else {
-                            sendTextMessage(sender, "I don't quite understand what you mean.. Try searching for an item, product, or brand")
 
-                        }
                         // else if(intent == "greeting") {
                         //     sendTextMessage(sender, "Hello, " + firstName)
                         // }
@@ -448,6 +445,10 @@ app.post('/webhook/', function (req, res) {
 
 
             //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
+
+              else {
+                    sendTextMessage(sender, "I don't quite understand what you mean.. Try searching for an item, product, or brand")
+                    }
         }
 
          if(event.postback) {
