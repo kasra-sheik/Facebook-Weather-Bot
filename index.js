@@ -526,7 +526,7 @@ function generateLogin(sender) {
                     "title": "Welcome to Mavatar",
                     "buttons": [{
                         "type": "account_link",
-                        "url": "https://mavatar.com/login?return_to=%2F"
+                        "url": "https://mavatar.com/login?return_to=https://www.facebook.com/messages&account_linking_token=ARSHuTxqsW4UNSs63VcZb0yiW7-9TPxigXpdocYeXMmDebHeiNPH4EBxvvj9Fjyedjn4frc809xPEsl_WOfo7K8EiAtAwgGYZ7hjeJDUwhz7AQ&redirect_uri=https%3A%2F%2Ffacebook.com%2Fmessenger_platform%2Faccount_linking%2F%3Faccount_linking_token%3DARSHuTxqsW4UNSs63VcZb0yiW7-9TPxigXpdocYeXMmDebHeiNPH4EBxvvj9Fjyedjn4frc809xPEsl_WOfo7K8EiAtAwgGYZ7hjeJDUwhz7AQ"
 
 
                     }]
