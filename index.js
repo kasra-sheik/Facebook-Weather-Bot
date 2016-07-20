@@ -181,6 +181,7 @@ app.post('/webhook/', function (req, res) {
 
                             }
                             else if(intent == "inventory") {
+                                sendTextMessage(sender, "we seem to be here..")
                                 var item = ""
                                 if("wit_item" in rep.entities) {
                                     item = rep.entities.wit_item[0].value
