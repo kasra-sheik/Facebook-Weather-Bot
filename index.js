@@ -94,7 +94,7 @@ app.post('/webhook/', function (req, res) {
                                 var item = rep.entities.wit_item[0].value
                                 query = item
                                 var index = client.initIndex('CatalogProductInfo');
-                                sendTextMessage(sender, "not picky..")
+                                //sendTextMessage(sender, "not picky..")
 
                             //     index.search(item, function searchDone(err, content) {
                             //         //sendTextMessage(sender, "I found " + content.hits.length + " hits")
