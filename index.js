@@ -180,6 +180,35 @@ app.post('/webhook/', function (req, res) {
 
 
                             }
+                            else if(intent == "inventory") {
+                                var item = ""
+                                if("wit_item" in rep.entities) {
+                                    item = rep.entities.wit_item[0].value
+                                    query = item 
+                                    var index = client.initIndex('CatalogProductInfo');
+                                    index.search(item, {
+                                hitsPerPage: 10
+                                }, function searchDone(err, content) {
+                                  if (err) {
+                                    console.error(err);
+                                    return;
+                                  }
+                                    if(content.hits.length > 0) {
+                                        sendTextMessage(sender, "Yes, Would you like to see some?")
+                                        //mavatarItemGenerator(sender, content, item, 0)
+                                    }
+                                    else { 
+                                        sendTextMessage(sender, "Nope, I'm sorry. Type in browse for a detailed list of what we carry")
+                                    }
+
+                            });
+
+                                }
+                                else { 
+                                    sendTextMessage(sender, "what exactly are you looking for?")
+                                }
+                               
+                            }
 
 
 
