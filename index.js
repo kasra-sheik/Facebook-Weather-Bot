@@ -128,7 +128,7 @@ app.post('/webhook/', function (req, res) {
 
                             }
                             else if("amount_of_money" in rep.entities) {
-                                sendTextMessage(sender, "we are here..")
+                                //sendTextMessage(sender, "we are here..")
                                 var item = ""
                                 if("wit_item" in rep.entities) {
                                     item = rep.entities.wit_item[0].value
@@ -489,7 +489,7 @@ app.post('/webhook/', function (req, res) {
          if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
                 //sendTextMessage(sender, "info: " + postback_text.substring(1,5) + "item name: " + postback_text.substring(6, 1000)  )
-                sendTextMessage(sender, postback_text)
+                //sendTextMessage(sender, postback_text)
                 //payloads info + name of item, sends a get request to Algolia with the product name and returns info abt it
                 if(postback_text.substring(1,5) == "info") {
                     sendTextMessage(sender, "I found more info on this item..")
