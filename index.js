@@ -261,6 +261,11 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, query)
 
             }
+           else if(text == 'log in') {
+                generateLogin(sender)
+
+
+            }
 
             // else if(text == "forecast") {
 
@@ -446,9 +451,9 @@ app.post('/webhook/', function (req, res) {
 
             //sendTextMessage(sender, "parrot: " + text.substring(0, 200))
 
-              else {
-                    sendTextMessage(sender, "I don't quite understand what you mean.. Try searching for an item, product, or brand")
-                    }
+              // else {
+              //       sendTextMessage(sender, "I don't quite understand what you mean.. Try searching for an item, product, or brand")
+              //       }
         }
 
          if(event.postback) {
@@ -511,7 +516,55 @@ app.post('/webhook/', function (req, res) {
 
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
+function generateLogin(sender) {
+    messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Welcome to Mavatar",
+                    "buttons": [{
+                        "type": "account_link",
+                        "url": "https://mavatar.com/login?return_to=%2F"
 
+
+                    }]
+
+
+                }]
+
+
+
+            }
+
+
+
+
+        }
+
+
+
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+
+
+
+}
 function forecast(sender, location) {  
 
   sendTextMessage(sender, "hello man.")
