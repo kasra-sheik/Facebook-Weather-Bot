@@ -560,7 +560,7 @@ function generateLogin(sender) {
                     "title": "Welcome to Mavatar",
                     "buttons": [{
                         "type": "account_link",
-                        "url": "https://api-dev.mavatar.com/login?return_to=%2F"
+                        "url": "https://api-dev.mavatar.com/login?return_to=https://www.facebook.com/connect/login_success.html"
                     },
                     {
                         "type": "postback",
