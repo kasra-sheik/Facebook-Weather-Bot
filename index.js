@@ -630,8 +630,14 @@ function showCart(sender) {
         for(i = 0; i < rep.items.length; i++) {
             carts.push(rep.items[i].name)
         }
-        //"Which Cart did you want to view?"
+        //"Which Cart did you want to view
         var cartButtons
+        testButton = {
+            "type": "postback",
+            "title": "what a shitty test",
+            "payload": "tits"
+        }
+        cartButtons.push(testButton)
         for(i = 0; i < carts; i++) {
             var button = {
                 "type": "postback",
@@ -641,7 +647,7 @@ function showCart(sender) {
             cartButtons.push(button)
 
         }
-
+        cartButtons.shift()
         messageData = {
             "attachment": {
                 "type": "template",
