@@ -72,7 +72,7 @@ app.post('/webhook/', function (req, res) {
                 continue
             }
             if(text == "cart") { 
-                sendTextMessage(sender, "Which Cart did you want to view?")
+               // sendTextMessage(sender, "Which Cart did you want to view?")
                 showCart(sender)
             }
             var urlTestText = text
@@ -603,14 +603,82 @@ function generateLogin(sender) {
 function showCart(sender) { 
     var URL = "https://api-dev.mavatar.com/api/carts/?mav_user_api_key=MTs1QroCztjKygPrTk"
     var carts
+
+
+
+     // "attachment": {
+     //        "type": "template",
+     //        "payload": {
+     //            "template_type": "generic",
+     //            "elements": [{
+     //                "title": "Macy's Red Dress",
+     //                "subtitle": "Slick and Clean",
+     //                "image_url": "https://s32.postimg.org/4dc1rhfmt/rd1.jpg",
+     //                "buttons": [{
+     //                    "type": "web_url",
+     //                    "url": "https://mavatar.com/catalog/product?category_order=0&no=12&order=3&prev_category=852&price_from=1&price_to=8&product_id=2304585",
+     //                    "title": "Open in Browser"
+     //                }, {
+     //                    "type": "postback",
+     //                    "title": "Add to Cart",
+     //                    "payload":"Macy's Red Dress"
+     //                },],
     requestify.get(URL).then(function(response) {
                     // Get the response body
 
         var rep = response.getBody();
         for(i = 0; i < rep.items.length; i++) {
-            sendTextMessage(sender, rep.items[i].name)
+            carts.push(rep.items[i].name)
+        }
+        //"Which Cart did you want to view?"
+        var cartButtons
+        for(i = 0; i < carts; i++) {
+            var button = {
+                "type": "postback",
+                "title": carts[i],
+                "payload": "test"
+            }
+            cartButtons.push(button)
 
         }
+
+        messageData = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements" : [{
+                        "title": "Select a Cart?"
+                        "buttons": cartButtons
+
+
+
+
+                    }]
+
+                }
+
+            }
+
+
+
+        }
+        request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+
 
 
 
