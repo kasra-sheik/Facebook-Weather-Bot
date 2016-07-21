@@ -607,7 +607,7 @@ function showCart(sender) {
                     // Get the response body
 
         var rep = response.getBody();
-        for(i = 0; i < rep.items.length) {
+        for(i = 0; i < rep.items.length; i++) {
             sendTextMessage(sender, rep.items[i].name)
 
         }
