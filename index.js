@@ -69,6 +69,11 @@ app.post('/webhook/', function (req, res) {
             if(text == "start") {
                 sendTextMessage(sender, "Welcome to Mavatar. Before we get started, I'd like to see if you have an account with us so you can view your carts and pay from facebook. Do you have an account with us?")
                 generateLogin(sender)
+                continue
+            }
+            if(text == "cart") { 
+                sendTextMessage(sender, "Which Cart did you want to view?")
+                showCart(sender)
             }
             var urlTestText = text
             for(i = 0; i < urlTestText.length; i++) {
@@ -573,17 +578,8 @@ function generateLogin(sender) {
 
                 }]
 
-
-
             }
-
-
-
-
         }
-
-
-
     }
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -600,6 +596,25 @@ function generateLogin(sender) {
             console.log('Error: ', response.body.error)
         }
     })
+
+
+
+}
+function showCart(sender) { 
+    var URL = "https://api-dev.mavatar.com/api/carts/?mav_user_api_key=MTs1QroCztjKygPrTk"
+    var carts
+    requestify.get(URL).then(function(response) {
+                    // Get the response body
+
+        var rep = response.getBody();
+        for(i = 0; i < rep.items.length) {
+            sendTextMessage(sender, rep.items[i].name)
+
+        }
+
+
+
+    });
 
 
 
@@ -695,53 +710,6 @@ function sunny(sender, location) {
         }    
 
     }); 
-
-
-}
-function testMavatarItemGenerator(sender, item) { 
-
-    sendTextMessage(sender, "we are here..")
-    elementTest = [{
-        "title": "this is a test",
-        "subtitle": "this is another test",
-        "image_url": "https://s32.postimg.org/ftphqrki9/rainy.jpg",
-    }]
-
-    elementTest.push({
-        "title": item.name,
-        "subtitle": "$" + item.retail_price + " " + item.descr,
-        "image_url": item.image_url
-    })
-    elementTest.shift()
-
-
-     messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": elementTest
-            } 
-        }
-    }
-     request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-
-
-
 
 
 }
