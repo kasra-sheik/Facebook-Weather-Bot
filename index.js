@@ -649,12 +649,11 @@ function showCart(sender) {
         }
         cartButtons.shift()
         messageData = {
-            "attachment": {
                 "type": "template",
                 "payload": {
                     "template_type": "generic",
                     "elements" : [{
-                        "title": "Select a Cart?"
+                        "title": "Select a Cart?",
                         "buttons": cartButtons
 
 
@@ -663,10 +662,6 @@ function showCart(sender) {
                     }]
 
                 }
-
-            }
-
-
 
         }
         request({
