@@ -66,6 +66,10 @@ app.post('/webhook/', function (req, res) {
 
         if (event.message && event.message.text) {
             text = event.message.text
+            if(text == "start") {
+                sendTextMessage(sender, "Welcome to Mavatar. Before we get started, I'd like to see if you have an account with us so you can view your carts and pay from facebook. Do you have an account with us?")
+                generateLogin(sender)
+            }
             var urlTestText = text
             for(i = 0; i < urlTestText.length; i++) {
 
@@ -557,9 +561,14 @@ function generateLogin(sender) {
                     "buttons": [{
                         "type": "account_link",
                         "url": "https://mavatar.com/login?return_to=https://www.facebook.com/messages&account_linking_token=ARSHuTxqsW4UNSs63VcZb0yiW7-9TPxigXpdocYeXMmDebHeiNPH4EBxvvj9Fjyedjn4frc809xPEsl_WOfo7K8EiAtAwgGYZ7hjeJDUwhz7AQ&redirect_uri=https%3A%2F%2Ffacebook.com%2Fmessenger_platform%2Faccount_linking%2F%3Faccount_linking_token%3DARSHuTxqsW4UNSs63VcZb0yiW7-9TPxigXpdocYeXMmDebHeiNPH4EBxvvj9Fjyedjn4frc809xPEsl_WOfo7K8EiAtAwgGYZ7hjeJDUwhz7AQ"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "I don't have an account",
+                        "payload": "no-account"
+                    }
 
-
-                    }]
+                    ]
 
 
                 }]
