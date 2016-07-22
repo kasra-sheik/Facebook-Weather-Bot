@@ -632,11 +632,12 @@ function showCart(sender) {
             "payload": "tits"
         }
         cartButtons.push(testButton)
+        sendTextMessage(sender, rep.items[0].id)
         for(i = 0; i < carts.length; i++) {
             var button = {
                 "type": "postback",
                 "title": carts[i],
-                "payload": "cartId "
+                "payload": "cartId " + rep.items[i].id
             }
             cartButtons.push(button)
 
