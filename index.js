@@ -638,7 +638,7 @@ function showCart(sender) {
             "payload": "tits"
         }
         cartButtons.push(testButton)
-        for(i = 0; i < carts; i++) {
+        for(i = 0; i < carts.length; i++) {
             var button = {
                 "type": "postback",
                 "title": carts[i],
