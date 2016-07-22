@@ -407,6 +407,7 @@ function showCart(sender) {
 }
 function showCartItems(sender, id) {
     // sendTextMessage(sender, "this is the id.." + id)
+    console.log("ID: " + id)
     var URL = "https://api-dev.mavatar.com/api/carts/" + id+ "/items?catalog_vendor_ids,catalog_manufacturer_ids&mav_user_api_key=MTs1QroCztjKygPrTk"
 
     requestify.get(URL).then(function(response) {
