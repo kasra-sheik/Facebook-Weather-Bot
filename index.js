@@ -458,6 +458,7 @@ function showCartItems(sender, id) {
     })
  }
  else {
+    console.log("dsjasljbalsdjkfbaljb")
     var cartName = rep.items[0].cart.name
     sendTextMessage(sender, "I didn't find any items in " + cartName + ". You can add any item I can find for you or view other carts. ")
  }
