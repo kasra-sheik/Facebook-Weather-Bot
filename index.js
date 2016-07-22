@@ -605,7 +605,6 @@ function showCart(sender) {
     var carts
 
 
-    sendTextMessage(sender, "we are here!")
      // "attachment": {
      //        "type": "template",
      //        "payload": {
@@ -625,6 +624,7 @@ function showCart(sender) {
      //                },],
     requestify.get(URL).then(function(response) {
                     // Get the response body
+    sendTextMessage(sender, "we are here!")
 
         var rep = response.getBody();
         for(i = 0; i < rep.items.length; i++) {
