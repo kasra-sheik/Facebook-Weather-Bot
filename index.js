@@ -73,6 +73,7 @@ app.post('/webhook/', function (req, res) {
             }
             if(text == "cart") { 
                // sendTextMessage(sender, "Which Cart did you want to view?")
+               console.log("BIG FLAMING PIECE OF SHIT")
                 showCart(sender)
             }
             var urlTestText = text
