@@ -650,6 +650,7 @@ function showCart(sender) {
         cartButtons.shift()
         sendTextMessage(sender, cartButtons.length)
         messageData = {
+            "attachment": {
                 "type": "template",
                 "payload": {
                     "template_type": "generic",
@@ -660,6 +661,7 @@ function showCart(sender) {
                     }]
 
                 }
+            }
 
         }
         request({
