@@ -565,7 +565,7 @@ function generateLogin(sender) {
                     "title": "Welcome to Mavatar",
                     "buttons": [{
                         "type": "account_link",
-                        "url": "https://api-dev.mavatar.com/login?return_to=https://www.facebook.com/connect/login_success.html"
+                        "url": "https://mavatar.com/login?return_to=%2F"
                     },
                     {
                         "type": "postback",
@@ -655,9 +655,6 @@ function showCart(sender) {
                     "elements" : [{
                         "title": "Select a Cart?",
                         "buttons": cartButtons
-
-
-
 
                     }]
 
