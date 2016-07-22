@@ -448,6 +448,8 @@ function showCartItems(sender, id) {
     }
 
     });
+    elementTest.shift()
+    sendTextMessage(sender, elementTest.length)
  
     messageData = {
         "attachment": {
