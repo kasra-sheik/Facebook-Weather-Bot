@@ -73,7 +73,6 @@ app.post('/webhook/', function (req, res) {
             }
             if(text == "cart") { 
                // sendTextMessage(sender, "Which Cart did you want to view?")
-               console.log("BIG FLAMING PIECE OF SHIT")
                 showCart(sender)
             }
             var urlTestText = text
@@ -412,6 +411,7 @@ function showCartItems(sender, id) {
 
     requestify.get(URL).then(function(response) {
         var rep = response.getBody();
+        console.log(rep)
 
     elementTest = [{
         "title": "this is a test",
