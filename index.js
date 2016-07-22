@@ -431,6 +431,7 @@ function showCartItems(sender, id) {
     }
        elementTest.shift()
     if(elementTest.length > 0)  {
+        console.log("HERE HERE HERE")
     messageData = {
         "attachment": {
             "type": "template",
