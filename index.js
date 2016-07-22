@@ -406,12 +406,11 @@ function showCart(sender) {
     });
 }
 function showCartItems(sender, id) {
-    sendTextMessage(sender, "this is the id.." + id)
+    // sendTextMessage(sender, "this is the id.." + id)
     var URL = "https://api-dev.mavatar.com/api/carts/" + id+ "/items?catalog_vendor_ids,catalog_manufacturer_ids&mav_user_api_key=MTs1QroCztjKygPrTk"
 
     requestify.get(URL).then(function(response) {
         var rep = response.getBody();
-        console.log("This is the length: " + rep.items.length)
 
     elementTest = [{
         "title": "this is a test",
@@ -431,10 +430,7 @@ function showCartItems(sender, id) {
         //hello!
     }
        elementTest.shift()
-    sendTextMessage(sender, elementTest.length)
-    console.log("we have " + elementTest.length + " items.")
     if(elementTest.length > 0)  {
-       console.log("we got items..")
     messageData = {
         "attachment": {
             "type": "template",
