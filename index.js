@@ -538,12 +538,7 @@ app.post('/webhook/', function (req, res) {
                 else if(postback_text.includes("cartId")) {
                     sendTextMessage(sender, "we are here..")
                 }
-                
-
-
             }
-
-        
     }
     res.sendStatus(200)
 })
@@ -569,7 +564,6 @@ function generateLogin(sender) {
                     }
 
                     ]
-
 
                 }]
 
@@ -637,7 +631,7 @@ function showCart(sender) {
             var button = {
                 "type": "postback",
                 "title": carts[i],
-                "payload": "cartId " + rep.items[i].id
+                "payload": "cartId "
             }
             cartButtons.push(button)
 
