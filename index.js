@@ -628,7 +628,6 @@ function showCart(sender) {
 
         var rep = response.getBody();
         for(i = 0; i < rep.items.length; i++) {
-            sendTextMessage(sender, rep.items[i].name)
             carts.push(rep.items[i].name)
         }
         //"Which Cart did you want to view
@@ -682,7 +681,7 @@ function showCart(sender) {
 
 
     });
-
+    sendTextMessage(sender, "did we make it here..?")
 
 
 }
