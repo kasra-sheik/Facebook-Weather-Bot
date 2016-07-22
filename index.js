@@ -424,7 +424,7 @@ function showCart(sender) {
     });
 }
 function showCartItems(sender, id) {
-    var URL = "https://api-dev.mavatar.com/api/carts/138811/items?catalog_vendor_ids,catalog_manufacturer_ids&mav_user_api_key=MTs1QroCztjKygPrTk"
+    var URL = "https://api-dev.mavatar.com/api/carts/" + id+ "/items?catalog_vendor_ids,catalog_manufacturer_ids&mav_user_api_key=MTs1QroCztjKygPrTk"
 
     requestify.get(URL).then(function(response) {
         var rep = response.getBody();
