@@ -631,7 +631,7 @@ function showCart(sender) {
             carts.push(rep.items[i].name)
         }
         //"Which Cart did you want to view
-        var cartButtons
+        var cartButtons = []
         testButton = {
             "type": "postback",
             "title": "what a shitty test",
