@@ -481,9 +481,6 @@ function showCartItems(sender, id) {
 
     }
 
-
-
-}
 function mavatarItemGenerator(sender, response, query, pageNum) { 
     var itemObjects = []
      for(i = 0; i < response.hits.length; i++) {
