@@ -537,7 +537,6 @@ app.post('/webhook/', function (req, res) {
                 else if(postback_text.includes("cartId")) {
                     var cartId = postback_text.substring(7, 200)
                     cartId = cartId.substring(0, cartId.length - 1)
-                    //sendTextMessage(sender, "got here..!")
                     showCartItems(sender, cartId)
 
 
@@ -674,8 +673,17 @@ function showCart(sender) {
     });
 }
 function showCartItems(sender, id) {
-    sendTextMessage(sender, id)
+    var URL = "https://api-dev.mavatar.com/api/carts/138811/items?catalog_vendor_ids,catalog_manufacturer_ids&mav_user_api_key=MTs1QroCztjKygPrTk"
 
+    requestify.get(URL).then(function(response) {
+        var rep = response.getBody();
+        for(i = 0; i < rep.items.length; i++) {
+            sendTextMessage(sender, rep.items[i].name)
+
+
+        }
+
+    });
 
 
 
