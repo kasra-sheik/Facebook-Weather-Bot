@@ -536,7 +536,8 @@ app.post('/webhook/', function (req, res) {
 
                 }
                 else if(postback_text.includes("cartId")) {
-                    sendTextMessage(sender, "we are here..")
+                    var cartId = postback_text.substring(7, 200)
+                    sendTextMessage(sender, cartId)
                 }
             }
     }
