@@ -428,7 +428,7 @@ function showCartItems(sender, id) {
 
         }
         elementTest.push(element)
-
+        //hello!
     }
 
     });
