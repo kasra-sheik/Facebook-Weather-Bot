@@ -636,7 +636,7 @@ function showCart(sender) {
             var button = {
                 "type": "postback",
                 "title": carts[i],
-                "payload": "cartId " + carts[i].items[i].id 
+                "payload": "cartId "
             }
             cartButtons.push(button)
 
