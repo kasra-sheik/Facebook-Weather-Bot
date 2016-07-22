@@ -497,7 +497,6 @@ app.post('/webhook/', function (req, res) {
 
          if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
-                sendTextMessage(sender, postback_text)
                 //sendTextMessage(sender, "info: " + postback_text.substring(1,5) + "item name: " + postback_text.substring(6, 1000)  )
                 //sendTextMessage(sender, postback_text)
                 //payloads info + name of item, sends a get request to Algolia with the product name and returns info abt it
@@ -538,7 +537,9 @@ app.post('/webhook/', function (req, res) {
                 else if(postback_text.includes("cartId")) {
                     var cartId = postback_text.substring(7, 200)
                     cartId = cartId.substring(0, cartId.length - 1)
-                    sendTextMessage(sender, cartId)
+                    showCartItems(sender, id)
+
+
                 }
             }
     }
@@ -669,11 +670,12 @@ function showCart(sender) {
             console.log('Error: ', response.body.error)
         }
     })
-
-
-
-
     });
+}
+function showCartItems(sender, id) {
+    sendTextMessage(sender, id)
+
+
 
 
 }
