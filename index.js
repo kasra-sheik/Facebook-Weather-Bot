@@ -66,8 +66,8 @@ app.post('/webhook/', function (req, res) {
 
         if (event.message && event.message.text) {
             text = event.message.text
-            if(text == "start") {
-                sendTextMessage(sender, "Welcome to Mavatar. Before we get started, I'd like to see if you have an account with us so you can view your carts and pay from facebook. Do you have an account with us?")
+            if(text == "Get Started") {
+                sendTextMessage(sender, "Welcome to Mavatar. Lets talk about retail items. Was there anything specific you were looking for?")
                 generateLogin(sender)
                 continue
             }
@@ -100,6 +100,8 @@ app.post('/webhook/', function (req, res) {
 
                         if(intent == "Shop" || intent == "less" || intent == "greater") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
+
+                                sendTextMessage(sender, "Let's try these.. ")
                                 var item = rep.entities.wit_item[0].value
                                 query = item
                                 var index = client.initIndex('CatalogProductInfo');
@@ -432,16 +434,15 @@ function showCartItems(sender, id) {
     }
        elementTest.shift()
     if(elementTest.length > 0)  {
-        console.log("HERE HERE HERE")
-    messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": elementTest
-            } 
+        messageData = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": elementTest
+                } 
+            }
         }
-    }
      request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token:token},
@@ -568,8 +569,7 @@ function mavatarItemGenerator(sender, response, query, pageNum) {
         }
     })
 
-
-
+     sendTextMessage(sender, "Did you find what you were looking for?")
 
 }
 function startInfo(sender, name) {
