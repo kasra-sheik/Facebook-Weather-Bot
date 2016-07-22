@@ -602,7 +602,6 @@ function generateLogin(sender) {
 }
 function showCart(sender) { 
     var URL = "https://api-dev.mavatar.com/api/carts/?mav_user_api_key=MTs1QroCztjKygPrTk"
-    var carts
 
 
      // "attachment": {
@@ -625,11 +624,12 @@ function showCart(sender) {
     requestify.get(URL).then(function(response) {
                     // Get the response body
     sendTextMessage(sender, "we are here!")
+        var carts
 
         var rep = response.getBody();
         for(i = 0; i < rep.items.length; i++) {
             sendTextMessage(sender, rep.items[i].name)
-            //carts.push(rep.items[i].name)
+            carts.push(rep.items[i].name)
         }
         //"Which Cart did you want to view
         var cartButtons
