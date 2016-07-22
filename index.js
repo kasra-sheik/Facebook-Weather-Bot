@@ -436,7 +436,7 @@ function showCartItems(sender, id) {
     sendTextMessage(sender, elementTest.length)
  
     if(elementTest.length > 0)  {
-       console.log(sender, "we got items..")
+       console.log("we got items..")
     messageData = {
         "attachment": {
             "type": "template",
