@@ -448,8 +448,8 @@ function showCartItems(sender, id) {
     }
 
     });
+ 
     messageData = {
-         messageData = {
         "attachment": {
             "type": "template",
             "payload": {
@@ -476,7 +476,7 @@ function showCartItems(sender, id) {
 
 
 
-        
+
     }
 
 
