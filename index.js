@@ -411,7 +411,7 @@ function showCartItems(sender, id) {
 
     requestify.get(URL).then(function(response) {
         var rep = response.getBody();
-        console.log("This is the length: " + rep.items.length)
+        //console.log("This is the length: " + rep.items.length)
 
     elementTest = [{
         "title": "this is a test",
@@ -433,8 +433,7 @@ function showCartItems(sender, id) {
 
     });
     elementTest.shift()
-    sendTextMessage(sender, elementTest.length)
- 
+    console.log("we have " + elementTest.length + " items.")
     if(elementTest.length > 0)  {
        console.log("we got items..")
     messageData = {
