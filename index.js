@@ -648,6 +648,7 @@ function showCart(sender) {
 
         }
         cartButtons.shift()
+        sendTextMessage(sender, cartButtons.length)
         messageData = {
                 "type": "template",
                 "payload": {
