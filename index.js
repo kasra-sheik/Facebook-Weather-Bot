@@ -632,7 +632,7 @@ function showCart(sender) {
         }
         //"Which Cart did you want to view
         var cartButtons
-        sendTextMessage(sender, carts[0])
+        sendTextMessage(sender, carts.length)
     //     testButton = {
     //         "type": "postback",
     //         "title": "what a shitty test",
