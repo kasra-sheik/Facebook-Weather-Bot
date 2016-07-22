@@ -628,11 +628,11 @@ function showCart(sender) {
 
         var rep = response.getBody();
         for(i = 0; i < rep.items.length; i++) {
+            sendTextMessage(sender, rep.items[i].name)
             carts.push(rep.items[i].name)
         }
         //"Which Cart did you want to view
         var cartButtons
-        sendTextMessage(sender, carts.length)
     //     testButton = {
     //         "type": "postback",
     //         "title": "what a shitty test",
