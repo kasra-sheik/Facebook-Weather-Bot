@@ -605,7 +605,7 @@ function showCart(sender) {
     var carts
 
 
-
+    sendTextMessage(sender, "we are here!")
      // "attachment": {
      //        "type": "template",
      //        "payload": {
@@ -633,50 +633,50 @@ function showCart(sender) {
         //"Which Cart did you want to view
         var cartButtons
         sendTextMessage(sender, carts[0])
-        testButton = {
-            "type": "postback",
-            "title": "what a shitty test",
-            "payload": "tits"
-        }
-        cartButtons.push(testButton)
-        for(i = 0; i < carts; i++) {
-            var button = {
-                "type": "postback",
-                "title": carts[i],
-                "payload": "test"
-            }
-            cartButtons.push(button)
+    //     testButton = {
+    //         "type": "postback",
+    //         "title": "what a shitty test",
+    //         "payload": "tits"
+    //     }
+    //     cartButtons.push(testButton)
+    //     for(i = 0; i < carts; i++) {
+    //         var button = {
+    //             "type": "postback",
+    //             "title": carts[i],
+    //             "payload": "test"
+    //         }
+    //         cartButtons.push(button)
 
-        }
-        cartButtons.shift()
-        messageData = {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements" : [{
-                        "title": "Select a Cart?",
-                        "buttons": cartButtons
+    //     }
+    //     cartButtons.shift()
+    //     messageData = {
+    //             "type": "template",
+    //             "payload": {
+    //                 "template_type": "generic",
+    //                 "elements" : [{
+    //                     "title": "Select a Cart?",
+    //                     "buttons": cartButtons
 
-                    }]
+    //                 }]
 
-                }
+    //             }
 
-        }
-        request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+    //     }
+    //     request({
+    //     url: 'https://graph.facebook.com/v2.6/me/messages',
+    //     qs: {access_token:token},
+    //     method: 'POST',
+    //     json: {
+    //         recipient: {id:sender},
+    //         message: messageData,
+    //     }
+    // }, function(error, response, body) {
+    //     if (error) {
+    //         console.log('Error sending messages: ', error)
+    //     } else if (response.body.error) {
+    //         console.log('Error: ', response.body.error)
+    //     }
+    // })
 
 
 
