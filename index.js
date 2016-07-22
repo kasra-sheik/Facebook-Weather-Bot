@@ -411,7 +411,7 @@ function showCartItems(sender, id) {
 
     requestify.get(URL).then(function(response) {
         var rep = response.getBody();
-        console.log(rep)
+        console.log("This is the length: " + rep.items.length)
 
     elementTest = [{
         "title": "this is a test",
