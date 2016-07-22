@@ -429,10 +429,8 @@ function showCartItems(sender, id) {
         }
         elementTest.push(element)
         //hello!
-    }
 
-    });
-    elementTest.shift()
+         elementTest.shift()
     console.log("we have " + elementTest.length + " items.")
     if(elementTest.length > 0)  {
        console.log("we got items..")
@@ -460,6 +458,10 @@ function showCartItems(sender, id) {
             console.log('Error: ', response.body.error)
         }
     })
+    }
+
+    });
+   
  }
  else {
     var cartName = rep.items[0].cart.name
