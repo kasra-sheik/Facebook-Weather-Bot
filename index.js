@@ -116,13 +116,14 @@ app.post('/webhook/', function (req, res) {
                                     thatSomeOneElse = rep._text.substring(index + 6, 200)
                                     console.log(thatSomeOneElse)
                                     console.log("some one else..")
+                                    query = item
                                 }
                                 else {
-                                    console.log("you fucked up .")
                                     item = rep.entities.wit_item[0].value + " " + gender
+                                    query = rep.entities.wit_item[0].value
+
                                 }
 
-                                query = item
                                 var index = client.initIndex('CatalogProductInfo');
                                 
 
