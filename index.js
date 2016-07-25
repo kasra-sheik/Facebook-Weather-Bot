@@ -47,6 +47,7 @@ app.listen(app.get('port'), function() {
  //var intent
  var query
  var firstName = ""
+ var gender = ""
 
 // API End Point - added by Stefan
 
@@ -60,7 +61,8 @@ app.post('/webhook/', function (req, res) {
                     // Get the response body
                     var rep = response.getBody();
                     firstName = rep.first_name
-                    console.log("HERE WE ARE YEAH " + firstName)
+                    gender = rep.gender
+                    console.log("HERE WE ARE YEAH " + gender)
 
                 });
 
@@ -99,7 +101,7 @@ app.post('/webhook/', function (req, res) {
                             //sendTextMessage(sender,"this is the intent.. " + intent)
                         }
                         if("wit_greeting" in rep.entities) { 
-                            sendTextMessage(sender, "Well hello there " + firstName)
+                            sendTextMessage(sender, "Hello " + firstName ", Welcome to Mavatar")
                         }
 
                         if(intent == "Shop" || intent == "less" || intent == "greater" || intent == "greeting") {
