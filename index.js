@@ -62,7 +62,6 @@ app.post('/webhook/', function (req, res) {
                     var rep = response.getBody();
                     firstName = rep.first_name
                     gender = rep.gender
-                    console.log(gender)
 
                 });
 
@@ -104,8 +103,10 @@ app.post('/webhook/', function (req, res) {
                             sendTextMessage(sender, "Hello " + firstName + ", welcome to Mavatar")
                         }
 
-                        if(intent == "Shop" || intent == "less" || intent == "greater" || intent == "greeting") {
+                        if(intent == "Shop" || intent == "less" || intent == "greater") {
+                            console.log("RIGHT HERE" + gender)
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
+                                cons
                                 var item = rep.entities.wit_item[0].value
                                 query = item
                                 var index = client.initIndex('CatalogProductInfo');
