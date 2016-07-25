@@ -117,6 +117,7 @@ app.post('/webhook/', function (req, res) {
                                     console.log("some one else..")
                                 }
                                 else {
+                                    console.log("you fucked up .")
                                     item = rep.entities.wit_item[0].value + " " + gender
                                 }
 
