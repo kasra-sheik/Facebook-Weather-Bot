@@ -362,7 +362,6 @@ function showCart(sender) {
         }
         cartButtons.push(testButton)
         for(i = 0; i < carts.length; i++) {
-            sendTextMessage(sender, )
             var button = {
                 "type": "postback",
                 "title": carts[i],
