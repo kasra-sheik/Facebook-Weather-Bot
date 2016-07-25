@@ -94,6 +94,7 @@ app.post('/webhook/', function (req, res) {
                    
 
                     if(Object.keys(rep.entities).length > 0) {
+                        console.log(query)
 
                         if("intent" in rep.entities) {
                             intent = rep.entities.intent[0].value
