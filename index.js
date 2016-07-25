@@ -244,7 +244,7 @@ app.post('/webhook/', function (req, res) {
 
          if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
-                sendTextMessage(sender, postback_text)
+                //sendTextMessage(sender, postback_text)
                 //sendTextMessage(sender, "info: " + postback_text.substring(1,5) + "item name: " + postback_text.substring(6, 1000)  )
                 //sendTextMessage(sender, postback_text)
                 //payloads info + name of item, sends a get request to Algolia with the product name and returns info abt it
@@ -285,6 +285,9 @@ app.post('/webhook/', function (req, res) {
                 else if(postback_text.includes("cartId")) {
                     var cartId = postback_text.substring(7,200)
                     showCartItems(sender, cartId)
+                }
+                else if(postback_text == "DEVELOPER_DEFINED_PAYLOAD_FOR_HELP") {
+                    sendTextMessage(sender, "we are here..")
                 }
                 
 
