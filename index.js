@@ -150,7 +150,7 @@ app.post('/webhook/', function (req, res) {
                                 //sendTextMessage(sender, "we are here..")
                                 var item = ""
                                 if("wit_item" in rep.entities) {
-                                    item = rep.entities.wit_item[0].value
+                                    item = rep.entities.wit_item[0].value + " " + gender
                                     query = item 
                                 }
                                 else {
