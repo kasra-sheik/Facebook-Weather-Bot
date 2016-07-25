@@ -112,7 +112,7 @@ app.post('/webhook/', function (req, res) {
                                     item = rep.entities.wit_item[0].value
                                     someOneElse = true
                                     var index = rep._text.indexOf("for my")
-                                    thatSomeOneElse = rep._text.substring(index + 6, 200)
+                                    thatSomeOneElse = rep._text.substring(index + 5, 200)
                                     console.log(thatSomeOneElse)
                                     console.log("some one else..")
                                 }
