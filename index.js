@@ -60,6 +60,7 @@ app.post('/webhook/', function (req, res) {
                     // Get the response body
                     var rep = response.getBody();
                     firstName = rep.first_name
+                    console.log("HERE WE ARE " + firstName)
 
                 });
 
@@ -97,8 +98,11 @@ app.post('/webhook/', function (req, res) {
                             intent = rep.entities.intent[0].value
                             //sendTextMessage(sender,"this is the intent.. " + intent)
                         }
+                        if("wit_greeting" in rep.entities) { 
+                            sendTextMessage(sender, "Well hello there " + firstName)
+                        }
 
-                        if(intent == "Shop" || intent == "less" || intent == "greater") {
+                        if(intent == "Shop" || intent == "less" || intent == "greater" || intent == "greeting") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
                                 var item = rep.entities.wit_item[0].value
                                 query = item
@@ -311,7 +315,7 @@ function generateLogin(sender) {
                     "title": "Welcome to Mavatar",
                     "buttons": [{
                         "type": "account_link",
-                        "url": "https://mavatar.com/login?return_to=%2F"
+                        "url": "https://mavatar.com/login"
                     },
                     {
                         "type": "postback",
