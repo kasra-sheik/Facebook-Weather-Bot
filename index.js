@@ -77,7 +77,8 @@ app.post('/webhook/', function (req, res) {
                // sendTextMessage(sender, "Which Cart did you want to view?")
                 showCart(sender)
             }
-            if(text.inclues("most expensive item")) {
+            if(text.includes("most expensive item")) {
+                console.log("quick! we got a rich dude!")
                 sendTextMessage(sender, "One with such expensive taste is someone I would love to get to know. Hello gorgeous. I am the Mavatar BOT")
                 var index = client.initIndex('CatalogProductInfo_by_price_desc');
                 index.search(" ", {
