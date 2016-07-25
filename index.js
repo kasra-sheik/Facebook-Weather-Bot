@@ -154,7 +154,7 @@ app.post('/webhook/', function (req, res) {
                                     query = item 
                                 }
                                 else {
-                                    sendTextMessage(sender, "this is where we crash..?") 
+                                    //sendTextMessage(sender, "this is where we crash..?") 
                                     item = query
                                 }
 
@@ -499,6 +499,7 @@ function showCart(sender) {
 }
 function mavatarItemGenerator(sender, response, query, pageNum) { 
     var itemObjects = []
+    console.log("HERE BITCH: " + query)
      for(i = 0; i < response.hits.length; i++) {
         itemObjects.push(response.hits[i]);
     }
