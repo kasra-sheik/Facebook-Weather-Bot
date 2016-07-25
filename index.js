@@ -283,7 +283,7 @@ app.post('/webhook/', function (req, res) {
 
                 }
                 else if(postback_text.includes("cartId")) {
-                    sendTextMessage(sender, "we are here..")
+                    showCartItems(sender, cartId)
                 }
                 
 
@@ -338,6 +338,67 @@ function generateLogin(sender) {
             console.log('Error: ', response.body.error)
         }
     })
+
+
+
+}
+function showCartItems(sender, cartId) {
+    var URL = "https://api-dev.mavatar.com/api/carts/" + cartId + "items?mav_user_api_key=MTs1QroCztjKygPrTk"
+
+    requestify.get(URL).then(function(response) {
+        var rep = response.getBody();
+
+         
+        elementTest = [{
+            "title": "test",
+            "subtitle": "shitty test",
+            "image_url": "fake Image"
+
+        }]
+
+         for(i = 0; i < rep.items.length; i++) {
+            var cartItem = rep.items[i]
+            element = {
+                "title": cartItem.short_description,
+                "subtitle": cartItem.long_description,
+                "image_url": cartItem.vendor_image_url
+            }
+            elementTest.push(element)
+        }
+
+        elementTest.shift()
+
+
+         messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": elementTest
+            } 
+        }
+    }
+
+     request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+
+
+    });
+
+
 
 
 
