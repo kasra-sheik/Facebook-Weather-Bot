@@ -105,7 +105,7 @@ app.post('/webhook/', function (req, res) {
 
                         if(intent == "Shop" || intent == "less" || intent == "greater") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
-                                console.log(rep.text)
+                                console.log(rep._text)
 
                                 var item = rep.entities.wit_item[0].value + " " + gender
                                 query = item
