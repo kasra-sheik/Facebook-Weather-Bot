@@ -105,9 +105,21 @@ app.post('/webhook/', function (req, res) {
 
                         if(intent == "Shop" || intent == "less" || intent == "greater") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
-                                console.log(rep._text)
+                                var item = ""
+                                someOneElse = false
+                                thatSomeOneElse = ""
+                                if(rep._text.includes("for my"))  {
+                                    item = rep.entities.wit_item[0].value
+                                    someOneElse = true
+                                    var index = rep._text.IndexOf("for my")
+                                    thatSomeOneElse = rep._text.substring(index + 6, 200)
+                                    console.log(thatSomeOneElse)
+                                    console.log("some one else..")
+                                }
+                                else {
+                                    item = rep.entities.wit_item[0].value + " " + gender
+                                }
 
-                                var item = rep.entities.wit_item[0].value + " " + gender
                                 query = item
                                 var index = client.initIndex('CatalogProductInfo');
                                 
@@ -121,6 +133,7 @@ app.post('/webhook/', function (req, res) {
                                 return;
                               }
                                 if(content.hits.length > 0) {
+                                    if(someOneElse){sendTextMessage(sender, "I think I found some items your " + thatSomeOneElse + " will like!")}
                                     mavatarItemGenerator(sender, content, item, 0)
                                 }
                                 else { 
