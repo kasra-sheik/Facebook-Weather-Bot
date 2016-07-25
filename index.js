@@ -105,6 +105,11 @@ app.post('/webhook/', function (req, res) {
 
                         if(intent == "Shop" || intent == "less" || intent == "greater") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
+                                if(rep.entities.wit_item[0].value.includes("for my")) {
+                                    var index = rep.entities.wit_item[0].value.indexOf("my")
+                                    console.log(index)
+
+                                }
                                 var item = rep.entities.wit_item[0].value + " " + gender
                                 query = item
                                 var index = client.initIndex('CatalogProductInfo');
