@@ -101,7 +101,7 @@ app.post('/webhook/', function (req, res) {
                             //sendTextMessage(sender,"this is the intent.. " + intent)
                         }
                         if("wit_greeting" in rep.entities) { 
-                            sendTextMessage(sender, "Hello " + firstName ", Welcome to Mavatar")
+                            sendTextMessage(sender, "Hello " + firstName + ", Welcome to Mavatar")
                         }
 
                         if(intent == "Shop" || intent == "less" || intent == "greater" || intent == "greeting") {
