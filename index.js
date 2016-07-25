@@ -62,7 +62,7 @@ app.post('/webhook/', function (req, res) {
                     var rep = response.getBody();
                     firstName = rep.first_name
                     gender = rep.gender
-                    console.log("HERE WE ARE YEAH " + gender)
+                    console.log(rep)
 
                 });
 
@@ -101,7 +101,7 @@ app.post('/webhook/', function (req, res) {
                             //sendTextMessage(sender,"this is the intent.. " + intent)
                         }
                         if("wit_greeting" in rep.entities) { 
-                            sendTextMessage(sender, "Hello " + firstName + ", Welcome to Mavatar")
+                            sendTextMessage(sender, "Hello " + firstName + ", welcome to Mavatar")
                         }
 
                         if(intent == "Shop" || intent == "less" || intent == "greater" || intent == "greeting") {
