@@ -170,6 +170,15 @@ app.post('/webhook/', function (req, res) {
                             });
 
                             }
+                            else if(intent == "Shop" && !("wit_item" in rep.entities)) {
+                                if(query != undefined) {
+                                    console.log("we got a query")
+                                    
+
+                                }
+
+
+                            }
                             else if("amount_of_money" in rep.entities) {
                                 //sendTextMessage(sender, "we are here..")
                                 var item = ""
