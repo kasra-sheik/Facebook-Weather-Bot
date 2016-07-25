@@ -344,7 +344,7 @@ function generateLogin(sender) {
 
 }
 function showCartItems(sender, cartId) {
-    var URL = "https://api-dev.mavatar.com/api/carts/" + cartId + "items?mav_user_api_key=MTs1QroCztjKygPrTk"
+    var URL = "https://api-dev.mavatar.com/api/carts/" + cartId + "/items?mav_user_api_key=MTs1QroCztjKygPrTk"
 
     requestify.get(URL).then(function(response) {
         var rep = response.getBody();
