@@ -62,7 +62,7 @@ app.post('/webhook/', function (req, res) {
                     var rep = response.getBody();
                     firstName = rep.first_name
                     gender = rep.gender
-                    console.log(rep)
+                    console.log(sender)
 
                 });
 
