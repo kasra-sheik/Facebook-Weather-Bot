@@ -71,7 +71,7 @@ app.post('/webhook/', function (req, res) {
                 generateLogin(sender)
                 continue
             }
-            if(text == "cart") { 
+            if(text.includes("cart")) { 
                // sendTextMessage(sender, "Which Cart did you want to view?")
                 showCart(sender)
             }
