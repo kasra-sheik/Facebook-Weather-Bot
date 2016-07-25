@@ -113,7 +113,7 @@ app.post('/webhook/', function (req, res) {
                                     item = rep.entities.wit_item[0].value
                                     someOneElse = true
                                     var index = rep._text.indexOf("for my")
-                                    thatSomeOneElse = rep._text.substring(index + 5, 200)
+                                    thatSomeOneElse = rep._text.substring(index + 6, 200)
                                     console.log(thatSomeOneElse)
                                     console.log("some one else..")
                                 }
@@ -135,7 +135,7 @@ app.post('/webhook/', function (req, res) {
                                 return;
                               }
                                 if(content.hits.length > 0) {
-                                    if(someOneElse){sendTextMessage(sender, "I think I found some items your " + thatSomeOneElse + " will like!")}
+                                    if(someOneElse){sendTextMessage(sender, "I think I found some items your " + thatSomeOneElse + "will like!")}
                                     mavatarItemGenerator(sender, content, item, 0)
                                 }
                                 else { 
