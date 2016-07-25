@@ -283,6 +283,7 @@ app.post('/webhook/', function (req, res) {
 
                 }
                 else if(postback_text.includes("cartId")) {
+                    var cartId = postback_text.substring(7,200)
                     showCartItems(sender, cartId)
                 }
                 
