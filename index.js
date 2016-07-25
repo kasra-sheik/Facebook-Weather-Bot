@@ -77,6 +77,28 @@ app.post('/webhook/', function (req, res) {
                // sendTextMessage(sender, "Which Cart did you want to view?")
                 showCart(sender)
             }
+            if(text.inclues("most expensive item")) {
+                sendTextMessage(sender, "One with such expensive taste is someone I would love to get to know. Hello gorgeous. I am the Mavatar BOT")
+                var index = client.initIndex('CatalogProductInfo_by_price_desc');
+                index.search(" ", {
+                                hitsPerPage: 10
+                            }, function searchDone(err, content) {
+                              if (err) {
+                                console.error(err);
+                                return;
+                              }
+                                if(content.hits.length > 0) {
+                                    mavatarItemGenerator(sender, content, " ", 0)
+                                }
+                                else { 
+                                    sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
+                                }
+
+                            });
+
+
+
+            }
             var urlTestText = text
             for(i = 0; i < urlTestText.length; i++) {
 
