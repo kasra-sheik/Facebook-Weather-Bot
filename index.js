@@ -127,10 +127,10 @@ app.post('/webhook/', function (req, res) {
                         if("wit_greeting" in rep.entities) { 
                             sendTextMessage(sender, "Hello " + firstName + ", welcome to Mavatar")
                             //
-                            continue
+                            
                         }
 
-                        if(intent == "Shop" || intent == "less" || intent == "greater") {
+                        else if(intent == "Shop" || intent == "less" || intent == "greater") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
                                 var item = ""
                                 someOneElse = false
