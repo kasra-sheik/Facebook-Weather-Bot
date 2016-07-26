@@ -173,8 +173,41 @@ app.post('/webhook/', function (req, res) {
                             else if(intent == "Shop" && !("wit_item" in rep.entities)) {
                                 if(query != undefined) {
                                     console.log("we got a query")
-                                    
+                                    var item = query
+                                    var thatSomeOneElse
+                                    var someOneElse = false
+                                    if(rep._text.includes("for my"))  {
+                                        someOneElse = true
+                                        var indexNum = rep._text.indexOf("for my")
+                                        thatSomeOneElse = rep._text.substring(indexNum + 6, 200)
+                                        item += thatSomeOneElse
+                                    }
+                                    var index = client.initIndex('CatalogProductInfo');
+                                
 
+
+                                index.search(item, {
+                                    hitsPerPage: 10
+                                }, function searchDone(err, content) {
+                                  if (err) {
+                                    console.error(err);
+                                    return;
+                                  }
+                                    if(content.hits.length > 0) {
+                                        if(someOneElse){sendTextMessage(sender, "I think I found some items your " + thatSomeOneElse + "will like!")}
+                                        mavatarItemGenerator(sender, content, item, 0)
+                                    }
+                                    else { 
+                                        sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
+                                    }
+
+                                });
+
+
+
+                                }
+                                else {
+                                     sendTextMessage(sender, "what exactly were you looking for..?")
                                 }
 
 
