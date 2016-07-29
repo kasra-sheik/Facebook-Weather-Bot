@@ -54,12 +54,10 @@ app.listen(app.get('port'), function() {
 app.post('/webhook/', function (req, res) {
     messaging_events = req.body.entry[0].messaging
     sendAGreeting(messaging_events)
-    console.log("SHIT " + messaging_events)
 
     for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
-        console.log("FUCK " + event)
 
 
 
@@ -410,6 +408,11 @@ app.post('/webhook/', function (req, res) {
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
 function sendAGreeting(messaging_events) {
+    event = req.body.entry[0].messaging[0]
+    sender = event.sender.id
+
+    sendTextMessage(sender, "test test test")
+
 
 
 }
