@@ -83,15 +83,20 @@ app.post('/webhook/', function (req, res) {
                 if(firstTime) {
                     setSearchPreferences(sender)
                     firstTime = false
-                } 
-                sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
-
+                }
+                else { 
+                    sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
+                }
             }
             if(text == "Sure") {
                 genderSpecific = true
+                sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
+
             }
             if(text == "No Thanks") {
                 genderSpecific = false
+                sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
+
             }
 
             // if(text.includes("most expensive item")) {
@@ -149,7 +154,7 @@ app.post('/webhook/', function (req, res) {
 
                         else if(intent == "Shop" || intent == "less" || intent == "greater") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
-                               
+
                                 var item = ""
                                 someOneElse = false
                                 thatSomeOneElse = ""
