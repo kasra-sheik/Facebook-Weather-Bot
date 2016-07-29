@@ -383,6 +383,12 @@ app.post('/webhook/', function (req, res) {
                 else if(postback_text == "\"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP\"") {
                     showOptions(sender)
                 }
+                else if(postback_text == "\"shop_payload\"") {
+                    sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
+                }
+                else if(postback_text == "\"cart_payload\"") {
+                    sendTextMessage(sender, "I got you..")
+                }
                 
 
 
@@ -686,16 +692,9 @@ function showOptions(sender) {
 
             {
             "content_type": "text",
-            "title": "View Carts",
-            "payload": "cart_payload"
-            },
-             {
-            "content_type": "text",
-            "title": "Hottest Deals",
+            "title": "View User Carts",
             "payload": "cart_payload"
             }
-
-
             ]
     }
     request({
