@@ -47,6 +47,8 @@ app.listen(app.get('port'), function() {
  //var intent
  var query
  var firstName = ""
+ var firstTime = true
+ var genderSpecific = false
  var gender = ""
 
 app.post('/webhook/', function (req, res) {
@@ -77,9 +79,19 @@ app.post('/webhook/', function (req, res) {
                // sendTextMessage(sender, "Which Cart did you want to view?")
                 showCart(sender)
             }
-            if(text == "Shop") { 
+            if(text == "Shop") {
+                if(firstTime) {
+                    setSearchPreferences(sender)
+                    firstTime = false
+                } 
                 sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
 
+            }
+            if(text == "Sure") {
+                genderSpecific = true
+            }
+            if(text == "No Thanks") {
+                genderSpecific = false
             }
 
             // if(text.includes("most expensive item")) {
@@ -137,6 +149,7 @@ app.post('/webhook/', function (req, res) {
 
                         else if(intent == "Shop" || intent == "less" || intent == "greater") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
+                               
                                 var item = ""
                                 someOneElse = false
                                 thatSomeOneElse = ""
@@ -401,6 +414,40 @@ app.post('/webhook/', function (req, res) {
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
 
+function setSearchPreferences(sender) {
+   messageData = {
+
+        "text": "I found that you are a " + gender + ". Do you want me to set your search preferences to only show items for " + gender + "s?",
+        "quick_replies": [{
+            "content_type": "text",
+            "title": "Sure",
+            "payload": "does this matter?"
+            },
+
+            {
+            "content_type": "text",
+            "title": "No Thanks",
+            "payload": "doubt it "
+            }
+            ]
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+
+}
 
 function generateLogin(sender) {
     messageData = {
