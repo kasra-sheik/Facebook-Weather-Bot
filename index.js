@@ -49,11 +49,12 @@ app.listen(app.get('port'), function() {
  var firstName = ""
  var gender = ""
 
+
 // API End Point - added by Stefan
 
 app.post('/webhook/', function (req, res) {
+    console.log("we're here")
     messaging_events = req.body.entry[0].messaging
-    sendAGreeting(messaging_events)
 
     for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
@@ -407,15 +408,6 @@ app.post('/webhook/', function (req, res) {
 
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
-function sendAGreeting(messaging_events) {
-    event = req.body.entry[0].messaging[0]
-    sender = event.sender.id
-
-    sendTextMessage(sender, "test test test")
-
-
-
-}
 
 
 function generateLogin(sender) {
