@@ -127,6 +127,9 @@ app.post('/webhook/', function (req, res) {
                         }
                         if("wit_greeting" in rep.entities) { 
                             sendTextMessage(sender, "Hello " + firstName + ", welcome to Mavatar")
+                            var d = new Date();
+                            var n = d.getDay();
+                            sendTextMessage(sender, n)
                             //
                             
                         }
