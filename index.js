@@ -53,15 +53,21 @@ app.listen(app.get('port'), function() {
 
 app.post('/webhook/', function (req, res) {
     messaging_events = req.body.entry[0].messaging
+    sendAGreeting(messaging_events)
+    console.log("SHIT " + messaging_events)
+
     for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
+        console.log("FUCK " + event)
 
-        if(i == 0) {
-            var d = new Date();
-            var n = d.getDay();
-            sendTextMessage(sender, "happy friday :-)")
-        }
+
+
+        // if(i == 0) {
+        //     var d = new Date();
+        //     var n = d.getDay();
+        //     sendTextMessage(sender, "happy friday :-)")
+        // }
 
 
         var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name,gender&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
@@ -402,6 +408,12 @@ app.post('/webhook/', function (req, res) {
 })
 
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
+
+function sendAGreeting(messaging_events) {
+
+
+}
+
 
 function generateLogin(sender) {
     messageData = {
