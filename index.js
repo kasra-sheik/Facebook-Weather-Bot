@@ -55,6 +55,13 @@ app.listen(app.get('port'), function() {
 app.post('/webhook/', function (req, res) {
     console.log("we're here")
     messaging_events = req.body.entry[0].messaging
+    event = req.body.entry[0].messaging[0]
+    sender = event.sender.id
+    var d = new Date();
+    var n = d.getDay();
+    if(n == 5) {
+        sendTextMessage(sender, "Happy Friday :-)")
+    }
 
     for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
@@ -63,8 +70,7 @@ app.post('/webhook/', function (req, res) {
 
 
         // if(i == 0) {
-        //     var d = new Date();
-        //     var n = d.getDay();
+        //     
         //     sendTextMessage(sender, "happy friday :-)")
         // }
 
