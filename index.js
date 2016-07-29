@@ -71,9 +71,7 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             text = event.message.text
             if(text == "start") {
-                sendTextMessage(sender, "Welcome to Mavatar. Before we get started, I'd like to see if you have an account with us so you can view your carts and pay from facebook. Do you have an account with us?")
-                generateLogin(sender)
-                continue
+                showOptions(sender)
             }
             if(text.includes("cart")) { 
                // sendTextMessage(sender, "Which Cart did you want to view?")
@@ -152,12 +150,6 @@ app.post('/webhook/', function (req, res) {
                         else if(intent == "Shop" || intent == "less" || intent == "greater") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
                                 var item = ""
-                                if(firstTime) {
-                                    setSearchPreferences(sender)
-                                    firstTime = false
-                                    continue
-                                }
-                                //
                                 if(genderSpecific) {
                                     item = rep.entities.wit_item[0].value + " " + gender
                                     query = rep.entities.wit_item[0].value
