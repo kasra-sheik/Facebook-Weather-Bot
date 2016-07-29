@@ -684,7 +684,7 @@ function showOptions(sender) {
              "payload": "shop_payload"
             },
             {
-             "conten_type": "text",
+             "content_type": "text",
              "title": "Show me some carts",
              "payload": "cart_payload"   
             }
