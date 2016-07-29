@@ -49,31 +49,12 @@ app.listen(app.get('port'), function() {
  var firstName = ""
  var gender = ""
 
-
-// API End Point - added by Stefan
-
 app.post('/webhook/', function (req, res) {
     console.log("we're here")
     messaging_events = req.body.entry[0].messaging
-    event = req.body.entry[0].messaging[0]
-    sender = event.sender.id
-    var d = new Date();
-    var n = d.getDay();
-    if(n == 5) {
-        sendTextMessage(sender, "Happy Friday :-)")
-    }
-
     for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
-
-
-
-        // if(i == 0) {
-        //     
-        //     sendTextMessage(sender, "happy friday :-)")
-        // }
-
 
         var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name,gender&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
                  requestify.get(URL).then(function(response) {
@@ -400,7 +381,8 @@ app.post('/webhook/', function (req, res) {
                     showCartItems(sender, cartId)
                 }
                 else if(postback_text == "\"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP\"") {
-                    sendTextMessage(sender, "How Can I help you Today, " + firstName)
+                    sendTextMessage(sender, "What would you like to do, " + firstName)
+                    showOptions(sender)
                 }
                 
 
@@ -690,6 +672,41 @@ function mavatarItemGenerator(sender, response, query, pageNum) {
     })
 
 
+
+
+}
+function showOptions(sender) {
+    messageData = {
+        "quick_replies": [{
+            "content_type": "text",
+            "title": "Shop",
+             "payload": "shop_payload"
+            },
+            {
+             "content": "text",
+             "title": "Show me some carts",
+             "payload": "cart_payload"   
+            }
+
+        ]
+
+
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
 
 
 }
