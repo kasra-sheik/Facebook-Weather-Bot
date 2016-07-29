@@ -90,12 +90,12 @@ app.post('/webhook/', function (req, res) {
             }
             if(text == "Sure") {
                 genderSpecific = true
-                sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
+                sendTextMessage(sender, "Cool, Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
 
             }
             if(text == "No Thanks") {
                 genderSpecific = false
-                sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
+                sendTextMessage(sender, "Cool, Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
 
             }
 
@@ -147,31 +147,26 @@ app.post('/webhook/', function (req, res) {
                             //sendTextMessage(sender,"this is the intent.. " + intent)
                         }
                         if("wit_greeting" in rep.entities) { 
-                            sendTextMessage(sender, "Hello " + firstName + ", welcome to Mavatar")
-
-                            
+                            sendTextMessage(sender, "Hello " + firstName + ", welcome to Mavatar")    
                         }
-
                         else if(intent == "Shop" || intent == "less" || intent == "greater") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
-
                                 var item = ""
-                                someOneElse = false
-                                thatSomeOneElse = ""
-                                if(rep._text.includes("for my"))  {
-                                    item = rep.entities.wit_item[0].value
-                                    someOneElse = true
-                                    var index = rep._text.indexOf("for my")
-                                    thatSomeOneElse = rep._text.substring(index + 6, 200)
-                                    console.log(thatSomeOneElse)
-                                    console.log("some one else..")
-                                    query = item
+                                if(firstTime) {
+                                    setSearchPreferences(sender)
+                                    firstTime = false
+                                }
+
+                                if(genderSpecific) {
+                                    item = rep.entities.wit_item[0].value + " " + gender
+                                    query = rep.entities.wit_item[0].value
                                 }
                                 else {
-                                    item = rep.entities.wit_item[0].value + " " + gender
+                                    item = rep.entities.wit_item[0].value
                                     query = rep.entities.wit_item[0].value
 
                                 }
+                            
 
                                 var index = client.initIndex('CatalogProductInfo');
                                 
@@ -197,7 +192,6 @@ app.post('/webhook/', function (req, res) {
                             }
                             else if(intent == "Shop" && !("wit_item" in rep.entities)) {
                                 if(query != undefined) {
-                                    console.log("we got a query")
                                     var item = query
                                     var thatSomeOneElse
                                     var someOneElse = false
@@ -422,7 +416,7 @@ var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p
 function setSearchPreferences(sender) {
    messageData = {
 
-        "text": "I found that you are a " + gender + ". Do you want me to set your search preferences to only show items for " + gender + "s?",
+        "text": "I see that you are a " + gender + ". Do you want me to set your search preferences to only show items for " + gender + "s? You can change this at anytime just by changing your preferences in the help menu.",
         "quick_replies": [{
             "content_type": "text",
             "title": "Sure",
