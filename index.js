@@ -338,6 +338,7 @@ app.post('/webhook/', function (req, res) {
 
          if(event.postback) {
                 var postback_text = JSON.stringify(event.postback.payload)
+                console.log("slihdbfldsb: " + postback_text)
                 //sendTextMessage(sender, postback_text)
                 //sendTextMessage(sender, "info: " + postback_text.substring(1,5) + "item name: " + postback_text.substring(6, 1000)  )
                 //sendTextMessage(sender, postback_text)
@@ -383,7 +384,7 @@ app.post('/webhook/', function (req, res) {
                 else if(postback_text == "\"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP\"") {
                     showOptions(sender)
                 }
-                else if(postback_text == "\"shop_payload\"") {
+                else if(postback_text == "shop_payload") {
                     sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
                 }
                 else if(postback_text == "\"cart_payload\"") {
