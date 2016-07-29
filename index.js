@@ -728,9 +728,15 @@ function showOptions(sender) {
 
             {
             "content_type": "text",
-            "title": "View User Carts",
+            "title": "My Carts",
+            "payload": "cart_payload"
+            },
+            {
+            "content_type": "text",
+            "title": "Featured Carts",
             "payload": "cart_payload"
             }
+
             ]
     }
     request({
