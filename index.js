@@ -77,30 +77,35 @@ app.post('/webhook/', function (req, res) {
                // sendTextMessage(sender, "Which Cart did you want to view?")
                 showCart(sender)
             }
-            if(text.includes("most expensive item")) {
-                console.log("quick! we got a rich dude!")
-                sendTextMessage(sender, "One with such expensive taste is someone I would love to get to know. Hello gorgeous. I am the Mavatar BOT")
-                var index = client.initIndex('CatalogProductInfo_by_price_desc');
-                index.search(" ", {
-                                hitsPerPage: 10
-                            }, function searchDone(err, content) {
-                              if (err) {
-                                console.error(err);
-                                return;
-                              }
-                                if(content.hits.length > 0) {
-                                    mavatarItemGenerator(sender, content, " ", 0)
-                                }
-                                else { 
-                                    sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
-                                }
-
-                            });
-                continue
-
-
+            if(text == "Shop") { 
+                sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
 
             }
+
+            // if(text.includes("most expensive item")) {
+            //     console.log("quick! we got a rich dude!")
+            //     sendTextMessage(sender, "One with such expensive taste is someone I would love to get to know. Hello gorgeous. I am the Mavatar BOT")
+            //     var index = client.initIndex('CatalogProductInfo_by_price_desc');
+            //     index.search(" ", {
+            //                     hitsPerPage: 10
+            //                 }, function searchDone(err, content) {
+            //                   if (err) {
+            //                     console.error(err);
+            //                     return;
+            //                   }
+            //                     if(content.hits.length > 0) {
+            //                         mavatarItemGenerator(sender, content, " ", 0)
+            //                     }
+            //                     else { 
+            //                         sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
+            //                     }
+
+            //                 });
+            //     continue
+
+
+
+            // }
             var urlTestText = text
             for(i = 0; i < urlTestText.length; i++) {
 
@@ -384,14 +389,7 @@ app.post('/webhook/', function (req, res) {
                 else if(postback_text == "\"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP\"") {
                     showOptions(sender)
                 }
-                else if(postback_text == "shop_payload") {
-                    sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
-                }
-                else if(postback_text == "\"cart_payload\"") {
-                    sendTextMessage(sender, "I got you..")
-                }
-                
-
+               
 
             }
 
