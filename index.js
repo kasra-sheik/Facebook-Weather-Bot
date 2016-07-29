@@ -54,9 +54,10 @@ app.listen(app.get('port'), function() {
 app.post('/webhook/', function (req, res) {
     messaging_events = req.body.entry[0].messaging
     for (i = 0; i < messaging_events.length; i++) {
-        sendTextMessage(sender, "yo")
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
+        sendTextMessage(sender, "yo")
+
         var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name,gender&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
                  requestify.get(URL).then(function(response) {
                     // Get the response body
