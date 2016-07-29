@@ -156,7 +156,7 @@ app.post('/webhook/', function (req, res) {
                                     setSearchPreferences(sender)
                                     firstTime = false
                                 }
-
+                                //hi
                                 if(genderSpecific) {
                                     item = rep.entities.wit_item[0].value + " " + gender
                                     query = rep.entities.wit_item[0].value
@@ -166,8 +166,6 @@ app.post('/webhook/', function (req, res) {
                                     query = rep.entities.wit_item[0].value
 
                                 }
-                            
-
                                 var index = client.initIndex('CatalogProductInfo');
                                 
 
