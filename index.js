@@ -381,7 +381,6 @@ app.post('/webhook/', function (req, res) {
                     showCartItems(sender, cartId)
                 }
                 else if(postback_text == "\"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP\"") {
-                    sendTextMessage(sender, "What would you like to do?")
                     showOptions(sender)
                 }
                 
