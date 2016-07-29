@@ -382,7 +382,7 @@ app.post('/webhook/', function (req, res) {
                 }
                 else if(postback_text == "\"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP\"") {
                     sendTextMessage(sender, "What would you like to do, " + firstName)
-                    showOptions(sender)
+                    //showOptions(sender)
                 }
                 
 
