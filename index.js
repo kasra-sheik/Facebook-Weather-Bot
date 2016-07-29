@@ -677,6 +677,7 @@ function mavatarItemGenerator(sender, response, query, pageNum) {
 }
 function showOptions(sender) {
     messageData = {
+        "text": "Will this work?",
         "quick_replies": [{
             "content_type": "text",
             "title": "Shop",
