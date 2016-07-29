@@ -676,22 +676,28 @@ function mavatarItemGenerator(sender, response, query, pageNum) {
 
 }
 function showOptions(sender) {
-    messageData = {
-        "text": "Will this work?",
+  messageData = {
+
+        "text": "Hello, Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?",
         "quick_replies": [{
             "content_type": "text",
             "title": "Shop",
-             "payload": "shop_payload"
+            "payload": "shop_payload"
             },
+
             {
-             "content_type": "text",
-             "title": "Show me some carts",
-             "payload": "cart_payload"   
+            "content_type": "text",
+            "title": "View Carts",
+            "payload": "cart_payload"
+            },
+             {
+            "content_type": "text",
+            "title": "Hottest Deals",
+            "payload": "cart_payload"
             }
 
-        ]
 
-
+            ]
     }
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
