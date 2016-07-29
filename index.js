@@ -57,6 +57,13 @@ app.post('/webhook/', function (req, res) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
 
+        if(i == 0) {
+            var d = new Date();
+            var n = d.getDay();
+            sendTextMessage(sender, "happy friday :-)")
+        }
+
+
         var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name,gender&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
                  requestify.get(URL).then(function(response) {
                     // Get the response body
@@ -127,10 +134,7 @@ app.post('/webhook/', function (req, res) {
                         }
                         if("wit_greeting" in rep.entities) { 
                             sendTextMessage(sender, "Hello " + firstName + ", welcome to Mavatar")
-                            var d = new Date();
-                            var n = d.getDay();
-                            sendTextMessage(sender, n)
-                            //
+
                             
                         }
 
