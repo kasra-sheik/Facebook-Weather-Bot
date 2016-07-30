@@ -64,7 +64,7 @@ app.post('/webhook/', function (req, res) {
     for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
-        console.log(sender)
+
 
         var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name,gender&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
                  requestify.get(URL).then(function(response) {
@@ -415,7 +415,7 @@ app.post('/webhook/', function (req, res) {
 
 var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
-
+console.log("KDSBFLKSBFDLSKDBFLKJSDBFLKS")
 function setSearchPreferences(sender) {
    messageData = {
 
