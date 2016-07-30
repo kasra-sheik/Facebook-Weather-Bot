@@ -52,6 +52,8 @@ app.listen(app.get('port'), function() {
  var gender = ""
  var sender 
 
+
+
 app.post('/webhook/', function (req, res) {
     console.log("we're here")
     messaging_events = req.body.entry[0].messaging
@@ -399,10 +401,7 @@ app.post('/webhook/', function (req, res) {
                
 
             }
-             else {
-
-                showOptions(sender, "I'm not sure I understand what you're trying to say... these are somethings I can help you with.")
-            }
+           
 
         
     }
