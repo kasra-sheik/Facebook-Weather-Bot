@@ -71,7 +71,8 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             text = event.message.text
             if(text == "start") {
-                showOptions(sender)
+                greetingText = "Hello, Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?"
+                showOptions(sender, greetingText)
             }
             if(text.includes("cart")) { 
                // sendTextMessage(sender, "Which Cart did you want to view?")
@@ -313,8 +314,13 @@ app.post('/webhook/', function (req, res) {
 
                         }
                     }
+                    else {
+
+                        showOptions(sender, "I'm not sure I understand what you're trying to say... these are somethings I can help you with.")
+                    }
                    
                 }); 
+
             if(text.substring(0,6) == "parrot") {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
@@ -342,6 +348,7 @@ app.post('/webhook/', function (req, res) {
                 });   
 
             }
+
         }
 
          if(event.postback) {
@@ -390,7 +397,7 @@ app.post('/webhook/', function (req, res) {
                     showCartItems(sender, cartId)
                 }
                 else if(postback_text == "\"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP\"") {
-                    showOptions(sender)
+                    showOptions(sender, "What can I do for you today?")
                 }
                
 
@@ -716,10 +723,10 @@ function mavatarItemGenerator(sender, response, query, pageNum) {
 
 
 }
-function showOptions(sender) {
+function showOptions(sender, greetingText) {
   messageData = {
 
-        "text": "Hello, Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?",
+        "text": greetingText,
         "quick_replies": [{
             "content_type": "text",
             "title": "Shop",
@@ -729,7 +736,7 @@ function showOptions(sender) {
             {
             "content_type": "text",
             "title": "My Carts",
-            "payload": "cart_payload"
+            "payload": "my_cart_payload"
             },
             {
             "content_type": "text",
