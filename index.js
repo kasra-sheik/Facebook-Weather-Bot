@@ -314,10 +314,6 @@ app.post('/webhook/', function (req, res) {
 
                         }
                     }
-                    else {
-
-                        showOptions(sender, "I'm not sure I understand what you're trying to say... these are somethings I can help you with.")
-                    }
                    
                 }); 
 
@@ -401,6 +397,10 @@ app.post('/webhook/', function (req, res) {
                 }
                
 
+            }
+             else {
+
+                showOptions(sender, "I'm not sure I understand what you're trying to say... these are somethings I can help you with.")
             }
 
         
