@@ -50,6 +50,7 @@ app.listen(app.get('port'), function() {
  var firstTime = true
  var genderSpecific = false
  var gender = ""
+ var sender 
 
 app.post('/webhook/', function (req, res) {
     console.log("we're here")
