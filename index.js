@@ -480,6 +480,8 @@ function showFeaturedCarts(sender, cartIds) {
         "image_url": "One More Test"
 
     }]
+    console.log("1: " cart.length)
+
     for(i = 0; i < cartIds.length; i++) {
 
         var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?mav_user_api_key=MTs1QroCztjKygPrTk"
@@ -501,6 +503,7 @@ function showFeaturedCarts(sender, cartIds) {
 
 
     cart.shift()
+    console.log("2: " cart.length)
 
          messageData = {
         "attachment": {
