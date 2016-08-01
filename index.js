@@ -484,7 +484,7 @@ function showFeaturedCarts(sender, cartIds) {
     console.log("1: " + cart.length)
 
     for(i = 0; i < cartIds.length; i++) {
-
+        console.log("FUCKKK")
         var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?mav_user_api_key=MTs1QroCztjKygPrTk"
         requestify.get(URL).then(function(response) {
             var rep = response.getBody();
