@@ -82,11 +82,11 @@ app.post('/webhook/', function (req, res) {
                 greetingText = "Hello, Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?"
                 showOptions(sender, greetingText)
             }
-            if(text.includes("cart")) { 
+            else if(text.includes("cart")) { 
                // sendTextMessage(sender, "Which Cart did you want to view?")
                 showCart(sender)
             }
-            if(text == "Shop") {
+            else if(text == "Shop") {
                 if(firstTime) {
                     setSearchPreferences(sender)
                     firstTime = false
@@ -96,15 +96,14 @@ app.post('/webhook/', function (req, res) {
                 }
                 continue
             }
-            if(text == "Sure") {
+            else if(text == "Sure") {
                 genderSpecific = true
                 sendTextMessage(sender, "Cool, Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
 
             }
-            if(text == "No Thanks") {
+            else if(text == "No Thanks") {
                 genderSpecific = false
                 sendTextMessage(sender, "Cool, Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
-                continue
 
             }
 
