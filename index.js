@@ -92,7 +92,7 @@ app.post('/webhook/', function (req, res) {
                 console.log("cart view")
                 var cartIds = [49659, 14452,14181]
                 showFeaturedCarts(sender, cartIds)
-                //continue 
+                continue 
 
             }
             else if(text == "Shop") {
