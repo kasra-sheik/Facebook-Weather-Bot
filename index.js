@@ -507,7 +507,7 @@ function showFeaturedCarts(sender, cartIds) {
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": elementTest
+                "elements": cart
             } 
         }
     }
