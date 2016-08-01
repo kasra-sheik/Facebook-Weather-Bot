@@ -183,6 +183,7 @@ app.post('/webhook/', function (req, res) {
                               }
                                 if(content.hits.length > 0) {
                                     if(someOneElse){sendTextMessage(sender, "I think I found some items your " + thatSomeOneElse + "will like!")}
+                                    sendTextMessage(sender, "I think I found some items you might like..")
                                     mavatarItemGenerator(sender, content, item, 0)
                                 }
                                 else { 
