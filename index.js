@@ -545,7 +545,6 @@ function showCartItems(sender, cartId) {
          messageData = {
         "attachment": {
             "type": "template",
-            "title", "Cart Name",
             "payload": {
                 "template_type": "generic",
                 "elements": elementTest
