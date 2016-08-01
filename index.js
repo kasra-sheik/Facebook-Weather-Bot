@@ -112,6 +112,9 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, "Cool, Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
                 continue
             }
+            else if(text == "log in") {
+                generateLogin(sender)
+            }
 
             // if(text.includes("most expensive item")) {
             //     console.log("quick! we got a rich dude!")
