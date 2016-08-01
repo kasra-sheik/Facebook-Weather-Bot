@@ -498,7 +498,7 @@ function showFeaturedCarts(sender, cartIds) {
         });
     }
     
-    //cart.shift()
+    cart.shift()
     console.log("PENAUT " + cart.length)
     messageData = {
         "attachment": {
