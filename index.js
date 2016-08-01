@@ -251,6 +251,7 @@ app.post('/webhook/', function (req, res) {
                                     item = query
                                     //item += (" " + gender)
                                     //hello
+                                    //fuck
                                 }
 
                                 sendTextMessage(sender, item)
