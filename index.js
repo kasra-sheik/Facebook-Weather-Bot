@@ -94,6 +94,7 @@ app.post('/webhook/', function (req, res) {
                 else { 
                     sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
                 }
+                continue
             }
             if(text == "Sure") {
                 genderSpecific = true
@@ -103,6 +104,7 @@ app.post('/webhook/', function (req, res) {
             if(text == "No Thanks") {
                 genderSpecific = false
                 sendTextMessage(sender, "Cool, Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
+                continue
 
             }
 
