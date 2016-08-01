@@ -82,7 +82,7 @@ app.post('/webhook/', function (req, res) {
                 greetingText = "Hello, Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?"
                 showOptions(sender, greetingText)
             }
-            else if(text.includes("cart")) { 
+            else if(text.includes("cart") || text == "My Carts") { 
                // sendTextMessage(sender, "Which Cart did you want to view?")
                 showCart(sender)
                 continue
