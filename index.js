@@ -501,7 +501,7 @@ function showFeaturedCarts(sender, cartIds) {
         });
         break
     }
-    console.log(jsonArray)
+    console.log(jsonArray.length)
     cart.shift()
     console.log("PENAUT " + cart.length)
     messageData = {
