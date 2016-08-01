@@ -497,7 +497,6 @@ function showFeaturedCarts(sender, cartIds) {
             cart.push(FeaturedCart) 
             console.log("YUMMY: " + cart.length)
 
-            continue
 
 
         });
