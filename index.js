@@ -322,10 +322,13 @@ app.post('/webhook/', function (req, res) {
 
                         }
                     }
+                    else {
+                        sendTextMessage(sender, "didn't understand you clit..")
+                    }
                    
                 }); 
 
-            else if(text.substring(0,6) == "parrot") {
+            if(text.substring(0,6) == "parrot") {
                 sendTextMessage(sender, text.substring(7,200))
                 continue
             }
