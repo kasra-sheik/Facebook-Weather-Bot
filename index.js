@@ -493,6 +493,7 @@ function showFeaturedCarts(sender, cartIds) {
                 "image_url": rep.items[0].cart.image_url 
 
             }
+            console.log("pushing..")
             cart.push(FeaturedCart) 
         });
     }
