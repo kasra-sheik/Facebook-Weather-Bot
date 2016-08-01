@@ -90,7 +90,7 @@ app.post('/webhook/', function (req, res) {
             else if(text == "Featured Carts") {
                 //sendTextMessage(sender, "Summer is here and its time to get up to date with the latest summer trends! Check some of these carts out.")
                 console.log("cart view")
-                var cartIds = [162814, 152292, 14452]
+                var cartIds = [49659, 14452,14181]
                 showFeaturedCarts(sender, cartIds)
                 //continue 
 
