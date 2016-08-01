@@ -484,11 +484,11 @@ function showFeaturedCarts(sender, cartIds) {
     console.log("1: " + cart.length)
 
     for(i = 0; i < cartIds.length; i++) {
-        console.log("FUCKKK")
-        var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?mav_user_api_key=MTs1QroCztjKygPrTk"
+        console.log(cartIds[i])
+        var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?"
         requestify.get(URL).then(function(response) {
             var rep = response.getBody();
-            console.log(rep.items[0].cart.name)
+            console.log("HERE: " + rep.items[0].cart.name)
             // FeaturedCart = {
             //     "title": rep.items[0].cart.name,
             //     "subtitle": "nill",
