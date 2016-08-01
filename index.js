@@ -88,8 +88,8 @@ app.post('/webhook/', function (req, res) {
                 continue
             }
             else if(text.includes("Featured Carts")) {
-                sendTextMessage(sender, name + ", Summer is here and its time to get up to date with the latest summer trends! Check some of these carts out.")
-                var summerCartId 
+                sendTextMessage(sender, "Summer is here and its time to get up to date with the latest summer trends! Check some of these carts out.")
+                //var summerCartId 
 
             }
             else if(text == "Shop") {
