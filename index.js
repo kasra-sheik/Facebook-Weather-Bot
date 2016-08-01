@@ -488,14 +488,15 @@ function showFeaturedCarts(sender, cartIds) {
         var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?mav_user_api_key=MTs1QroCztjKygPrTk"
         requestify.get(URL).then(function(response) {
             var rep = response.getBody();
-            FeaturedCart = {
-                "title": rep.items[0].cart.name,
-                "subtitle": "nill",
-                "image_url": rep.items[0].cart.image_url 
+            console.log(rep.items[0].cart.name)
+            // FeaturedCart = {
+            //     "title": rep.items[0].cart.name,
+            //     "subtitle": "nill",
+            //     "image_url": rep.items[0].cart.image_url 
 
-            }
-            cart.push(FeaturedCart) 
-            console.log("YUMMY: " + cart.length)
+            // }
+            // cart.push(FeaturedCart) 
+            // console.log("YUMMY: " + cart.length)
 
 
 
