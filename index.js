@@ -474,13 +474,12 @@ function setSearchPreferences(sender) {
 }
 
 function showFeaturedCarts(sender, cartIds) {
-    var cart 
-    cartItem  = {
+    cart = [{
         "title": "test",
         "subtitle": "also a test",
         "image_url": "One More Test"
 
-    }
+    }]
     cart.push(cartItem)
     for(i = 0; i < cartIds.length; i++) {
 
