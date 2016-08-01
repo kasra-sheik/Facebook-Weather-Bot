@@ -500,7 +500,7 @@ function showFeaturedCarts(sender, cartIds) {
 
 
         });
-
+        break
 
     }
 
