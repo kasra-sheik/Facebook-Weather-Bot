@@ -474,15 +474,12 @@ function setSearchPreferences(sender) {
 }
 
 function showFeaturedCarts(sender, cartIds) {
-    console.log("cart id num: " + cartIds.length)
     cart = [{
         "title": "test",
         "subtitle": "also a test",
         "image_url": "One More Test"
 
     }]
-    console.log("1: " + cart.length)
-
     for(i = 0; i < cartIds.length; i++) {
         console.log(cartIds[i])
         var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?"
@@ -490,27 +487,18 @@ function showFeaturedCarts(sender, cartIds) {
         requestify.get(URL).then(function(response) {
             var rep = response.getBody();
             console.log("HERE: " + rep.items[0].cart.name)
-            // FeaturedCart = {
-            //     "title": rep.items[0].cart.name,
-            //     "subtitle": "nill",
-            //     "image_url": rep.items[0].cart.image_url 
+            FeaturedCart = {
+                "title": rep.items[0].cart.name,
+                "subtitle": "nill",
+                "image_url": rep.items[0].cart.image_url 
 
-            // }
-            // cart.push(FeaturedCart) 
-            // console.log("YUMMY: " + cart.length)
-
-
-
+            }
+            cart.push(FeaturedCart) 
         });
-        break
-
     }
-
-
+    
     cart.shift()
-    console.log("2: " + cart.length)
-
-         messageData = {
+    messageData = {
         "attachment": {
             "type": "template",
             "payload": {
@@ -519,8 +507,7 @@ function showFeaturedCarts(sender, cartIds) {
             } 
         }
     }
-
-     request({
+    request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token:token},
         method: 'POST',
