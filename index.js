@@ -495,6 +495,7 @@ function showFeaturedCarts(sender, cartIds) {
 
             }
             cart.push(FeaturedCart) 
+            console.log("HERE")
 
 
         });
