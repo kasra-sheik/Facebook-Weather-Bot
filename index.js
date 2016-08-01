@@ -87,6 +87,11 @@ app.post('/webhook/', function (req, res) {
                 showCart(sender)
                 continue
             }
+            else if(text.includes("Featured Carts")) {
+                sendTextMessage(sender, name + ", Summer is here and its time to get up to date with the latest summer trends! Check some of these carts out.")
+                var summerCartId 
+
+            }
             else if(text == "Shop") {
                 if(firstTime) {
                     setSearchPreferences(sender)
@@ -244,7 +249,7 @@ app.post('/webhook/', function (req, res) {
                                 else {
                                     //sendTextMessage(sender, "this is where we crash..?") 
                                     item = query
-                                    item += (" " + gender)
+                                    //item += (" " + gender)
                                     //hello
                                 }
 
