@@ -486,6 +486,7 @@ function showFeaturedCarts(sender, cartIds) {
     for(i = 0; i < cartIds.length; i++) {
         console.log(cartIds[i])
         var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?"
+        console.log(URL)
         requestify.get(URL).then(function(response) {
             var rep = response.getBody();
             console.log("HERE: " + rep.items[0].cart.name)
