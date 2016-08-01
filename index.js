@@ -480,7 +480,6 @@ function showFeaturedCarts(sender, cartIds) {
         "image_url": "One More Test"
 
     }]
-    cart.push(cartItem)
     for(i = 0; i < cartIds.length; i++) {
 
         var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?"
