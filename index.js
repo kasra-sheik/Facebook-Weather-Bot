@@ -85,6 +85,7 @@ app.post('/webhook/', function (req, res) {
             else if(text.includes("cart")) { 
                // sendTextMessage(sender, "Which Cart did you want to view?")
                 showCart(sender)
+                continue
             }
             else if(text == "Shop") {
                 if(firstTime) {
@@ -99,12 +100,12 @@ app.post('/webhook/', function (req, res) {
             else if(text == "Sure") {
                 genderSpecific = true
                 sendTextMessage(sender, "Cool, Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
-
+                continue
             }
             else if(text == "No Thanks") {
                 genderSpecific = false
                 sendTextMessage(sender, "Cool, Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
-
+                continue
             }
 
             // if(text.includes("most expensive item")) {
