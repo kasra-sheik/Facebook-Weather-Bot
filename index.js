@@ -498,6 +498,7 @@ function showFeaturedCarts(sender, cartIds) {
     }
     
     cart.shift()
+    console.log("PENAUT " + cart.length)
     messageData = {
         "attachment": {
             "type": "template",
