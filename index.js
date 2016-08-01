@@ -482,7 +482,7 @@ function showFeaturedCarts(sender, cartIds) {
     }]
     for(i = 0; i < cartIds.length; i++) {
 
-        var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?"
+        var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?mav_user_api_key=MTs1QroCztjKygPrTk"
         requestify.get(URL).then(function(response) {
             var rep = response.getBody()
             FeaturedCart = {
