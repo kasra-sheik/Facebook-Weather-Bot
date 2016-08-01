@@ -323,7 +323,7 @@ app.post('/webhook/', function (req, res) {
                         }
                     }
                     else {
-                        sendTextMessage(sender, "didn't understand you clit..")
+                        showOptions(sender, "I'm not sure I understand what you're trying to say. These are somethings I can help you with..")
                     }
                    
                 }); 
