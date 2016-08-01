@@ -474,6 +474,7 @@ function setSearchPreferences(sender) {
 }
 
 function showFeaturedCarts(sender, cartIds) {
+    console.log("cart id num: " + cartIds.length)
     cart = [{
         "title": "test",
         "subtitle": "also a test",
@@ -486,7 +487,7 @@ function showFeaturedCarts(sender, cartIds) {
 
         var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?mav_user_api_key=MTs1QroCztjKygPrTk"
         requestify.get(URL).then(function(response) {
-            var rep = response.getBody()
+            var rep = response.getBody();
             FeaturedCart = {
                 "title": rep.items[0].cart.name,
                 "subtitle": "nill",
