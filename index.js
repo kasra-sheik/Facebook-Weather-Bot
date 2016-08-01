@@ -89,7 +89,9 @@ app.post('/webhook/', function (req, res) {
             }
             else if(text.includes("Featured Carts")) {
                 sendTextMessage(sender, "Summer is here and its time to get up to date with the latest summer trends! Check some of these carts out.")
-                //var summerCartId 
+                var cartIds = ["162814", "152292", "14452"]
+                showFeaturedCarts(sender, cartIds)
+                continue 
 
             }
             else if(text == "Shop") {
@@ -467,6 +469,66 @@ function setSearchPreferences(sender) {
             console.log('Error: ', response.body.error)
         }
     })
+
+}
+
+function showFeaturedCarts(sender, cartIds) {
+    var cart 
+    var cartItem  = {
+        "title": "test",
+        "subtitle": "also a test",
+        "image_url": "One More Test"
+
+    }
+    cart.push(cartItem)
+    for(i = 0; i < cartIds.length; i++) {
+
+        var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?"
+        requestify.get(URL).then(function(response) {
+            var rep = response.getBody()
+            var FeaturedCart = {
+                "title": rep.items[0].cart.name,
+                "subtitle": "nill",
+                "image_url": rep.items[0].cart.image_url 
+
+            }
+            cart.push(FeaturedCart) 
+
+
+        });
+
+
+    }
+
+
+    cart.shift()
+
+         messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": elementTest
+            } 
+        }
+    }
+
+     request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+
 
 }
 
