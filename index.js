@@ -494,6 +494,7 @@ function showFeaturedCarts(sender, cartIds) {
                 "title": rep.items[0].cart.name,
                 "subtitle": "nill",
                 "image_url": rep.items[0].cart.image_url 
+                //
 
             }
             console.log("pushing..")
