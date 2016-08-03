@@ -503,7 +503,8 @@ function showFeaturedCarts(sender, cartIds) {
             }
             console.log("pushing..")
         });
-        cart.push(FeaturedCart) 
+        cart.push(FeaturedCart)
+        console.log(cart[0]) 
 
         break
     }
