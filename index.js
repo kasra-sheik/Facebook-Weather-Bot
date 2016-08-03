@@ -489,6 +489,7 @@ function showFeaturedCarts(sender, cartIds) {
         console.log(cartIds[i])
         var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?"
         console.log(URL)
+        var FeaturedCart
         requestify.get(URL).then(function(response) {
             var rep = response.getBody();
 
@@ -501,8 +502,9 @@ function showFeaturedCarts(sender, cartIds) {
 
             }
             console.log("pushing..")
-            cart.push(FeaturedCart) 
         });
+        cart.push(FeaturedCart) 
+
         break
     }
     cart.shift()
