@@ -89,14 +89,14 @@ app.post('/webhook/', function (req, res) {
                 showCart(sender)
                 continue
             }
-            // else if(text == "Featured Carts") {
-            //     //sendTextMessage(sender, "Summer is here and its time to get up to date with the latest summer trends! Check some of these carts out.")
-            //     console.log("cart view")
-            //     var cartIds = [49659, 14452,14181]
-            //     //showFeaturedCarts(sender, cartIds)
-            //     continue 
+            else if(text == "Featured Carts") {
+                //sendTextMessage(sender, "Summer is here and its time to get up to date with the latest summer trends! Check some of these carts out.")
+                console.log("cart view")
+                var cartIds = ["49659", "14452", "14181"]
+               	showFeaturedCarts(sender, cartIds)
+                continue 
 
-            // }
+            }
             else if(text == "Shop") {
                 if(firstTime) {
                     setSearchPreferences(sender)
@@ -198,6 +198,7 @@ app.post('/webhook/', function (req, res) {
                                     if(someOneElse){sendTextMessage(sender, "I think I found some items your " + thatSomeOneElse + "will like!")}
                                     sendTextMessage(sender, "I think I found some items you might like..")
                                     mavatarItemGenerator(sender, content, item, 0)
+                                    sendTextMessage()
                                 }
                                 else { 
                                     sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
