@@ -536,8 +536,8 @@ function showFeaturedCarts(sender, cartIds) {
 
 			   }
 	    
-            	
-            }
+
+            
 
         });
 
