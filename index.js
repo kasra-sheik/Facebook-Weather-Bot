@@ -7,6 +7,7 @@ var requestify = require('requestify');
 var algoliasearch = require('algoliasearch');
 var client = algoliasearch('AM0SLP1KG5', '2275715c4c9af53ae3d8e3ecb0358d4a');
 
+
 // var options = {
 //     host: 'api.ipinfodb.com',
 //     path: 'v3/ip-city/?key=57a270e806c9470043d95781a3fcef13a6b86fa75c05ffd6908308d0dd1e4143&ip=74.125.45.100&format=json'
@@ -502,39 +503,45 @@ function showFeaturedCarts(sender, cartIds) {
 
             }
             console.log("pushing..")
+            cart.push(FeaturedCart)
+
+
+            if(i == cartIds.length -1) {
+            	 cart.shift()
+		    	messageData = {
+			        "attachment": {
+			            "type": "template",
+			            "payload": {
+			                "template_type": "generic",
+			                "elements": cart
+			            } 
+			        }
+			    }
+		    	request({
+			        url: 'https://graph.facebook.com/v2.6/me/messages',
+			        qs: {access_token:token},
+			        method: 'POST',
+			        json: {
+			            recipient: {id:sender},
+			            message: messageData,
+			        }
+			    }, function(error, response, body) {
+			        if (error) {
+			            console.log('Error sending messages: ', error)
+			        } else if (response.body.error) {
+			            console.log('Error: ', response.body.error)
+			        }
+			    })
+			 
+
+			   }
+	    
+            	
+            }
+
         });
-        cart.push(FeaturedCart)
-        console.log(cart[0]) 
 
-        break
-    }
-    cart.shift()
-    console.log("PENAUT " + cart.length)
-    messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": cart
-            } 
-        }
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-
+       
 
 }
 
