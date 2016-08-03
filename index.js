@@ -485,14 +485,12 @@ function showFeaturedCarts(sender, cartIds) {
         "image_url": "One More Test"
 
     }]
-    var jsonArray
     for(i = 0; i < cartIds.length; i++) {
         console.log(cartIds[i])
         var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?"
         console.log(URL)
         requestify.get(URL).then(function(response) {
             var rep = response.getBody();
-            jsonArray.push(rep)
 
             console.log("HERE: " + rep.items[0].cart.image_url )
             FeaturedCart = {
@@ -507,7 +505,6 @@ function showFeaturedCarts(sender, cartIds) {
         });
         break
     }
-    console.log(jsonArray.length)
     cart.shift()
     console.log("PENAUT " + cart.length)
     messageData = {
