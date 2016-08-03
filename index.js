@@ -493,10 +493,10 @@ function showFeaturedCarts(sender, cartIds) {
         requestify.get(URL).then(function(response) {
             var rep = response.getBody();
 
-            console.log("HERE: " + rep.items[0].cart.image_url )
+            console.log("HERE: " + rep.items[0].cart.name )
             FeaturedCart = {
                 "title": rep.items[0].cart.name,
-                "subtitle": "nill",
+                "subtitle": "here's a test!",
                 "image_url": rep.items[0].cart.image_url 
                 //
 
