@@ -91,10 +91,10 @@ app.post('/webhook/', function (req, res) {
                 continue
             }
             else if(text == "Featured Carts") {
-                //sendTextMessage(sender, "Summer is here and its time to get up to date with the latest summer trends! Check some of these carts out.")
+                sendTextMessage(sender, "Summer is here and its time to get up to date with the latest summer trends! Check some of these carts out.")
                 console.log("cart view")
                 var cartIds = ["49659", "14452", "14181"]
-               	showFeaturedCarts(sender, cartIds)
+               	// showFeaturedCarts(sender, cartIds)
                 continue 
 
             }
@@ -479,64 +479,64 @@ function setSearchPreferences(sender) {
 
 }
 
-function showFeaturedCarts(sender, cartIds) {
-    cart = [{
-        "title": "test",
-        "subtitle": "also a test",
-        "image_url": "One More Test"
+// function showFeaturedCarts(sender, cartIds) {
+//     cart = [{
+//         "title": "test",
+//         "subtitle": "also a test",
+//         "image_url": "One More Test"
 
-    }]
-    for(i = 0; i < cartIds.length; i++) {
-        console.log(cartIds[i])
-        var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?"
-        console.log(URL)
-        var FeaturedCart
-        requestify.get(URL).then(function(response) {
-            var rep = response.getBody();
+//     }]
+//     for(i = 0; i < cartIds.length; i++) {
+//         console.log(cartIds[i])
+//         var URL = "https://api-dev.mavatar.com/api/carts/" + cartIds[i] + "/items?"
+//         console.log(URL)
+//         var FeaturedCart
+//         requestify.get(URL).then(function(response) {
+//             var rep = response.getBody();
 
-            console.log("HERE: " + rep.items[0].cart.name )
-            FeaturedCart = {
-                "title": rep.items[0].cart.name,
-                "subtitle": "here's a test!",
-                "image_url": rep.items[0].cart.image_url 
-                //
+//             console.log("HERE: " + rep.items[0].cart.name )
+//             FeaturedCart = {
+//                 "title": rep.items[0].cart.name,
+//                 "subtitle": "here's a test!",
+//                 "image_url": rep.items[0].cart.image_url 
+//                 //
 
-            }
-            console.log("pushing..")
-        });
-        cart.push(FeaturedCart)
-        console.log(cart[0]) 
+//             }
+//             console.log("pushing..")
+//         });
+//         cart.push(FeaturedCart)
+//         console.log(cart[0]) 
 
-        break
-    }
-    cart.shift()
-    messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": cart
-            } 
-        }
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-//
+//         break
+//     }
+//     cart.shift()
+//     messageData = {
+//         "attachment": {
+//             "type": "template",
+//             "payload": {
+//                 "template_type": "generic",
+//                 "elements": cart
+//             } 
+//         }
+//     }
+//     request({
+//         url: 'https://graph.facebook.com/v2.6/me/messages',
+//         qs: {access_token:token},
+//         method: 'POST',
+//         json: {
+//             recipient: {id:sender},
+//             message: messageData,
+//         }
+//     }, function(error, response, body) {
+//         if (error) {
+//             console.log('Error sending messages: ', error)
+//         } else if (response.body.error) {
+//             console.log('Error: ', response.body.error)
+//         }
+//     })
+// //
 
-}
+// }
 
 function generateLogin(sender) {
     messageData = {
