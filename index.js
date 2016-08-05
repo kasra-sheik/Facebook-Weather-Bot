@@ -138,8 +138,14 @@ app.post('/webhook/', function (req, res) {
                    urlTestText = urlTestText.replaceAt(i,"+")
                 }
             }
-          var witURL = "https://api.wit.ai/message?v=20160707&q=" + urlTestText + "&access_token=I64J6VXZKMXLQESP5S67JNIIKHOIXT25"
-            
+            var witURL
+            if(breakDownSearch == false) {
+          		witURL = "https://api.wit.ai/message?v=20160707&q=" + urlTestText + "&access_token=I64J6VXZKMXLQESP5S67JNIIKHOIXT25"
+          	}
+          	else {
+          		witURL = "https://api.wit.ai/message?v=20160707&q=" + urlTestText + "&access_token=ICC5UJQZXDKCLNFGYXI7NN4ZNXOI27XD"
+          	}
+            console.log("HELLO! " + witURL)
 
                requestify.get(witURL).then(function(response) {
                     // Get the response body
@@ -157,7 +163,7 @@ app.post('/webhook/', function (req, res) {
                         if("wit_greeting" in rep.entities) { 
                             sendTextMessage(sender, "Hello " + firstName + ", welcome to Mavatar")    
                         }
-                        else if(intent == "Shop" || intent == "less" || intent == "greater") {
+                        else if(intent == "Shop") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
                                 var item = ""
                                 if(genderSpecific) {
@@ -193,135 +199,7 @@ app.post('/webhook/', function (req, res) {
                             });
 
                             }
-                            else if(intent == "Shop" && !("wit_item" in rep.entities)) {
-                                if(query != undefined) {
-                                    var item = query
-                                    var thatSomeOneElse
-                                    var someOneElse = false
-                                    if(rep._text.includes("for my"))  {
-                                        someOneElse = true
-                                        var indexNum = rep._text.indexOf("for my")
-                                        thatSomeOneElse = rep._text.substring(indexNum + 6, 200)
-                                        item += thatSomeOneElse
-                                    }
-                                    var index = client.initIndex('CatalogProductInfo');
-                                
-
-
-                                index.search(item, {
-                                    hitsPerPage: 10
-                                }, function searchDone(err, content) {
-                                  if (err) {
-                                    console.error(err);
-                                    return;
-                                  }
-                                    if(content.hits.length > 0) {
-                                        if(someOneElse){sendTextMessage(sender, "I think I found some items your " + thatSomeOneElse + "will like!")}
-                                        mavatarItemGenerator(sender, content, item, 0)
-                                    }
-                                    else { 
-                                        sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
-                                    }
-
-                                });
-
-
-
-                                }
-                                else {
-                                     sendTextMessage(sender, "what exactly were you looking for..?")
-                                }
-
-
-                            }
-                            else if("amount_of_money" in rep.entities) {
-                                //sendTextMessage(sender, "we are here..")
-                                var item = ""
-                                if("wit_item" in rep.entities) {
-                                    item = rep.entities.wit_item[0].value + " " + gender
-                                    query = item 
-                                }
-                                else {
-                                    //sendTextMessage(sender, "this is where we crash..?") 
-                                    item = query
-                                    //item += (" " + gender)
-                                    //hello
-                                    //fuck
-                                }
-
-                                sendTextMessage(sender, item)
-                                var index = client.initIndex('CatalogProductInfo');
-
-                                // sendTextMessage(sender, "Some one is a picky searcher")
-                                var lessThan = true 
-                                var moneyAmount = rep.entities.amount_of_money[0].value
-                                if(rep.entities.intent.length > 1) {
-                                    if(rep.entities.intent[1].value == "greater") {
-                                        lessThan = false
-                                    }
-                                }
-                                else {
-                                    if(rep.entities.intent[0].value == "greater") {
-                                        lessThan = false
-                                    }
-
-                                }
-                                if(lessThan == true){inequality = "<"}
-                                else if(lessThan == false){inequality = ">"}
-                                var numericFilter = "retail_price " + inequality + " " + moneyAmount.toString()
-                                console.log("filter: " + numericFilter)
-                                 index.search(item, {
-                                    hitsPerPage: 10,
-                                    "numericFilters": [numericFilter] 
-
-                                }, function searchDone(err, content) {
-                                  if (err) {
-                                    console.error(err);
-                                    sendTextMessage(sender, "error!")
-                                    return;
-                                  }
-                                if(content.hits.length > 0) {
-                                    mavatarItemGenerator(sender, content, item, 0)
-                                }
-                                else { 
-                                    sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
-                                }                               
-
-                                });
-
-
-                            }
-                            else if(intent == "inventory") {
-                                sendTextMessage(sender, "we seem to be here..")
-                                var item = ""
-                                if("wit_item" in rep.entities) {
-                                    item = rep.entities.wit_item[0].value
-                                    query = item 
-                                    var index = client.initIndex('CatalogProductInfo');
-                                    index.search(item, {
-                                hitsPerPage: 10
-                                }, function searchDone(err, content) {
-                                  if (err) {
-                                    console.error(err);
-                                    return;
-                                  }
-                                    if(content.hits.length > 0) {
-                                        sendTextMessage(sender, "Yes, Would you like to see some?")
-                                        //mavatarItemGenerator(sender, content, item, 0)
-                                    }
-                                    else { 
-                                        sendTextMessage(sender, "Nope, I'm sorry. Type in browse for a detailed list of what we carry")
-                                    }
-
-                            });
-
-                                }
-                                else { 
-                                    sendTextMessage(sender, "what exactly are you looking for?")
-                                }
-                               
-                            }
-
+                       
 
 
                         }
