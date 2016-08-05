@@ -87,7 +87,7 @@ app.post('/webhook/', function (req, res) {
                 greetingText = "Hello, Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?"
                 showOptions(sender, greetingText)
             }
-            if(text == "search") {
+            if(text == "switch") {
             	if(breakDownSearch == false) {
             		breakDownSearch = true
             	}
@@ -205,9 +205,16 @@ app.post('/webhook/', function (req, res) {
                         else if(intent == "shop") {
                         	var facet_filters = []
                         	if("color" in rep.entities) {
-                        		 var facet_string = "product_colors:" + rep.entities.color[0].value
-                        		 console.log(facet_string)
-                        		 facet_filters.push(facet_string)
+                        		 var color_facet_string = "product_colors:" + rep.entities.color[0].value
+                        		 facet_filters.push(color_facet_string)
+                        	}
+                        	if("store_name" in rep.entities) {
+                        		var store_facet_string = "catalog_vendor_name:" + rep.entities.store_name[0].value
+                        		facet_filters.push(store_facet_string)
+                        	}
+                        	if("product_size" in rep.entities) {
+                        		var size_facet_string = "product_sizes:" + rep.entities.product_size[0].value
+                        		facet_filters.push(size_facet_string)
                         	}
 
                         	var item = rep.entities.item_type[0].value
