@@ -68,7 +68,7 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id
 
 
-        if(gender == null) {
+        if(gender == "") {
         	console.log("grabbing user info")
 	        var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name,gender&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 	                 requestify.get(URL).then(function(response) {
