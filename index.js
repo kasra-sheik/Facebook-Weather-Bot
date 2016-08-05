@@ -205,16 +205,35 @@ app.post('/webhook/', function (req, res) {
                         else if(intent == "shop") {
                         	var facet_filters = []
                         	if("color" in rep.entities) {
-                        		sendTextMessage(sender, "Here is your color: " + rep.entities.color[0].value)
+                        		 var facet_string = "product_colors:" + rep.entities.color[0].value
+                        		 facet_filters.push(facet_string)
                         	}
 
+                        	var index = client.initIndex('CatalogProductInfo');
+                        	   index.search(item, {
+                                hitsPerPage: 10,
+                                "facetFilters": facet_filters
+                            }, function searchDone(err, content) {
+                              if (err) {
+                                console.error(err);
+                                return;
+                              }
+                                if(content.hits.length > 0) {
+                                    sendTextMessage(sender, "I think I found some items you might like..")
+                                    mavatarItemGenerator(sender, content, item, 0)
+                                }
+                                else { 
+                                    sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
+                                }
+
+                            });
 
 
                         }
                     }
-                    else {
-                        showOptions(sender, "I'm not sure I understand what you're trying to say. These are somethings I can help you with..")
-                    }
+                    // else {
+                    //     showOptions(sender, "I'm not sure I understand what you're trying to say. These are somethings I can help you with..")
+                    // }
                    
                 }); 
 
