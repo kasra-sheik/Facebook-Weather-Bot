@@ -154,7 +154,6 @@ app.post('/webhook/', function (req, res) {
                    
 
                     if(Object.keys(rep.entities).length > 0) {
-                        console.log("query: " + query)
 
                         if("intent" in rep.entities) {
                             intent = rep.entities.intent[0].value
@@ -166,15 +165,17 @@ app.post('/webhook/', function (req, res) {
                         else if(intent == "Shop") {
                             if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
                                 var item = ""
-                                if(genderSpecific) {
-                                    item = rep.entities.wit_item[0].value + " " + gender
-                                    query = rep.entities.wit_item[0].value
-                                }
-                                else {
-                                    item = rep.entities.wit_item[0].value
-                                    query = rep.entities.wit_item[0].value
+                                // if(genderSpecific) {
+                                //     item = rep.entities.wit_item[0].value + " " + gender
+                                //     query = rep.entities.wit_item[0].value
+                                // }
+                                // else {
+                                //     item = rep.entities.wit_item[0].value
+                                //     query = rep.entities.wit_item[0].value
 
-                                }
+                                // }
+                                item = rep.entities.wit_item[0].value
+                                query = rep.entities.wit_item[0].value
                                 var index = client.initIndex('CatalogProductInfo');
                                 
 
@@ -200,6 +201,15 @@ app.post('/webhook/', function (req, res) {
 
                             }
                        
+
+
+                        }
+                        else if(intent == "shop") {
+                        	var facet_filters = []
+                        	if("color" in rep.entities) {
+                        		sendTextMessage(sender, "Here is your color: " + rep.entities.color[0])
+                        	}
+
 
 
                         }
