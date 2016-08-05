@@ -210,7 +210,7 @@ app.post('/webhook/', function (req, res) {
                         		 facet_filters.push(facet_string)
                         	}
 
-                        	console.log(facet_filters.length)
+                        	var item = rep.entities.item_type[0].value
                         	var index = client.initIndex('CatalogProductInfo');
                         	   index.search(item, {
                                 hitsPerPage: 10,
