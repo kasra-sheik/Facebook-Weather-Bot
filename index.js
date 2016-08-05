@@ -206,9 +206,11 @@ app.post('/webhook/', function (req, res) {
                         	var facet_filters = []
                         	if("color" in rep.entities) {
                         		 var facet_string = "product_colors:" + rep.entities.color[0].value
+                        		 console.log(facet_string)
                         		 facet_filters.push(facet_string)
                         	}
 
+                        	console.log(facet_filters.length)
                         	var index = client.initIndex('CatalogProductInfo');
                         	   index.search(item, {
                                 hitsPerPage: 10,
