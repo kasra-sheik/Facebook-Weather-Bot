@@ -52,6 +52,7 @@ app.listen(app.get('port'), function() {
  var genderSpecific = false
  var gender = ""
  var sender
+ var breakDownSearch = false
  var d = new Date();
  var n = d.getDay(); 
 
@@ -67,23 +68,33 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id
 
 
-        var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name,gender&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
-                 requestify.get(URL).then(function(response) {
-                    // Get the response body
-                    var rep = response.getBody();
-                    firstName = rep.first_name
-                    gender = rep.gender
+        if(gender == null) {
+        	console.log("grabbing user info")
+	        var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name,gender&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
+	                 requestify.get(URL).then(function(response) {
+	                    // Get the response body
+	                    var rep = response.getBody();
+	                    firstName = rep.first_name
+	                    gender = rep.gender
 
-                });
+	                });
+             }
 
 
         if (event.message && event.message.text) {
             text = event.message.text
 
-            console.log(text)
             if(text == "start") {
                 greetingText = "Hello, Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?"
                 showOptions(sender, greetingText)
+            }
+            if(text == "search") {
+            	if(breakDownSearch == false) {
+            		breakDownSearch = true
+            	}
+            	else {
+            		breakDownSearch = false
+            	}
             }
             else if(text.includes("cart") || text == "My Carts") { 
                // sendTextMessage(sender, "Which Cart did you want to view?")
@@ -121,32 +132,7 @@ app.post('/webhook/', function (req, res) {
             else if(text == "log in") {
                 generateLogin(sender)
             }
-
-            // if(text.includes("most expensive item")) {
-            //     console.log("quick! we got a rich dude!")
-            //     sendTextMessage(sender, "One with such expensive taste is someone I would love to get to know. Hello gorgeous. I am the Mavatar BOT")
-            //     var index = client.initIndex('CatalogProductInfo_by_price_desc');
-            //     index.search(" ", {
-            //                     hitsPerPage: 10
-            //                 }, function searchDone(err, content) {
-            //                   if (err) {
-            //                     console.error(err);
-            //                     return;
-            //                   }
-            //                     if(content.hits.length > 0) {
-            //                         mavatarItemGenerator(sender, content, " ", 0)
-            //                     }
-            //                     else { 
-            //                         sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
-            //                     }
-
-            //                 });
-            //     continue
-
-
-
-            // }
-            var urlTestText = text
+	        var urlTestText = text
             for(i = 0; i < urlTestText.length; i++) {
 
                 if(text[i] == " ") {
