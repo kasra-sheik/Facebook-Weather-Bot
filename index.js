@@ -83,7 +83,6 @@ app.post('/webhook/', function (req, res) {
 
         if (event.message && event.message.text) {
             text = event.message.text
-            sendTextMessage(sender, "Hello!")
             if(text == "start") {
                 greetingText = "Hello, Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?"
                 showOptions(sender, greetingText)
