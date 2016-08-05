@@ -205,7 +205,7 @@ app.post('/webhook/', function (req, res) {
                         else if(intent == "shop") {
                         	var facet_filters = []
                         	if("color" in rep.entities) {
-                        		sendTextMessage(sender, "Here is your color: " + rep.entities.color[0])
+                        		sendTextMessage(sender, "Here is your color: " + rep.entities.color[0].value)
                         	}
 
 
