@@ -68,211 +68,79 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id
 
 
-        if(gender == "") {
-        	console.log("grabbing user info")
-	        var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name,gender&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
-	                 requestify.get(URL).then(function(response) {
-	                    // Get the response body
-	                    var rep = response.getBody();
-	                    firstName = rep.first_name
-	                    gender = rep.gender
+        var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name,gender&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
+                     requestify.get(URL).then(function(response) {
+                        // Get the response body
+                        var rep = response.getBody();
+                        firstName = rep.first_name
+                        gender = rep.gender
 
-	                });
-             }
-
+            });
+        }
 
         if (event.message && event.message.text) {
             text = event.message.text
-            if(text == "start") {
-                greetingText = "Hello, Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?"
-                showOptions(sender, greetingText)
-            }
-            if(text == "switch") {
-            	if(breakDownSearch == false) {
-            		breakDownSearch = true
-            	}
-            	else {
-            		breakDownSearch = false
-            	}
-            }
-            else if(text.includes("cart") || text == "My Carts") { 
-               // sendTextMessage(sender, "Which Cart did you want to view?")
-                showCart(sender)
-                continue
-            }
-            else if(text == "Featured Carts") {
-                sendTextMessage(sender, "Summer is here and its time to get up to date with the latest summer trends! Check some of these carts out.")
-                console.log("cart view")
-                var cartIds = ["49659", "14452", "14181"]
-               	// showFeaturedCarts(sender, cartIds)
-                continue 
-
-            }
-            else if(text == "Shop") {
-                if(firstTime) {
-                    setSearchPreferences(sender)
-                    firstTime = false
-                }
-                else { 
-                    sendTextMessage(sender, "Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
-                }
-                continue
-            }
-            else if(text == "Sure") {
-                genderSpecific = true
-                sendTextMessage(sender, "Cool, Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
-                continue
-            }
-            else if(text == "No Thanks") {
-                genderSpecific = false
-                sendTextMessage(sender, "Cool, Browse through our entire inventory of retail items. Start with something like \"show me a black dress\" to get started.")
-                continue
-            }
-            else if(text == "log in") {
-                generateLogin(sender)
-            }
+            //generate string to make http request..
 	        var urlTestText = text
             for(i = 0; i < urlTestText.length; i++) {
-
                 if(text[i] == " ") {
                    urlTestText = urlTestText.replaceAt(i,"+")
                 }
             }
-            var witURL
-            if(breakDownSearch == false) {
-          		witURL = "https://api.wit.ai/message?v=20160707&q=" + urlTestText + "&access_token=I64J6VXZKMXLQESP5S67JNIIKHOIXT25"
-          	}
-          	else {
-          		witURL = "https://api.wit.ai/message?v=20160707&q=" + urlTestText + "&access_token=ICC5UJQZXDKCLNFGYXI7NN4ZNXOI27XD"
-          	}
-            console.log("HELLO! " + witURL)
 
-               requestify.get(witURL).then(function(response) {
+            var witURL = "https://api.wit.ai/message?v=20161019&q=" + urlTestText + "&access_token=P3FOKDQK5E3MKIPS7OH6ZBJ6DYCPSAQN"
+            
+
+            requestify.get(witURL).then(function(response) {
                     // Get the response body
                     var rep = response.getBody();
                     //sendTextMessage(sender, rep.entities.length)
-                   
-
                     if(Object.keys(rep.entities).length > 0) {
 
                         if("intent" in rep.entities) {
                             intent = rep.entities.intent[0].value
                             //sendTextMessage(sender,"this is the intent.. " + intent)
                         }
-                        if("wit_greeting" in rep.entities) { 
-                            sendTextMessage(sender, "Hello " + firstName + ", welcome to Mavatar")    
+                        if(intent == "greeting") {
+                            sendTextMessage("Hey there " + firstName + "!")
                         }
-                        else if(intent == "Shop") {
-                            if("wit_item" in rep.entities && !("amount_of_money" in rep.entities)){
-                                var item = ""
-                                // if(genderSpecific) {
-                                //     item = rep.entities.wit_item[0].value + " " + gender
-                                //     query = rep.entities.wit_item[0].value
-                                // }
-                                // else {
-                                //     item = rep.entities.wit_item[0].value
-                                //     query = rep.entities.wit_item[0].value
-
-                                // }
-                                item = rep.entities.wit_item[0].value
-                                query = rep.entities.wit_item[0].value
-                                var index = client.initIndex('CatalogProductInfo');
-                                
-
-
-                            index.search(item, {
-                                hitsPerPage: 10
-                            }, function searchDone(err, content) {
-                              if (err) {
-                                console.error(err);
-                                return;
-                              }
-                                if(content.hits.length > 0) {
-                                    sendTextMessage(sender, "I think I found some items you might like..")
-                                    mavatarItemGenerator(sender, content, item, 0)
-                                }
-                                else { 
-                                    sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
-                                }
-
-                            });
-
+                        else if("weather" in rep.entities) {
+                            if(!("location" in rep.entities)) {
+                                sendTextMessage("where exactly?")
+                                continue
                             }
+
+                            var location = rep.entities.location[0].value
+                            weather(sender, location)
+
+                        }
+                        else if("rainy" in rep.entities) {
+                            if(!("location" in rep.entities)) {
+                                sendTextMessage("where exactly?")
+                                continue
+                            }
+
+                            var location = rep.entities.location[0].value
+                            rainy(sender, location)
+
+                        }
+                        else if("Sunny" in rep.entities) {
+                            if(!("location" in rep.entities)) {
+                                sendTextMessage("where exactly?")
+                                continue
+                            }
+
+                            var location = rep.entities.location[0].value
+                            sunny(sender, location)
+                            continue
+
+                        }
+
                        
-
-
-                        }
-                        else if(intent == "shop") {
-                        	var facet_filters = []
-                        	if("color" in rep.entities) {
-                        		 var color_facet_string = "product_colors:" + rep.entities.color[0].value
-                        		 facet_filters.push(color_facet_string)
-                        	}
-                        	if("store_name" in rep.entities) {
-                        		var store_facet_string = "catalog_vendor_name:" + rep.entities.store_name[0].value
-                        		facet_filters.push(store_facet_string)
-                        	}
-                        	if("product_size" in rep.entities) {
-                        		var size_facet_string = "product_sizes:" + rep.entities.product_size[0].value
-                        		facet_filters.push(size_facet_string)
-                        	}
-
-                        	var item = rep.entities.item_type[0].value
-                        	var index = client.initIndex('CatalogProductInfo');
-                        	   index.search(item, {
-                                hitsPerPage: 10,
-                                "facetFilters": facet_filters
-                            }, function searchDone(err, content) {
-                              if (err) {
-                                console.error(err);
-                                return;
-                              }
-                                if(content.hits.length > 0) {
-                                    sendTextMessage(sender, "I think I found some items you might like..")
-                                    mavatarItemGenerator(sender, content, item, 0)
-                                }
-                                else { 
-                                    sendTextMessage(sender, "I'm sorry I couldn't find what you were looking for.. try broadening your search.")
-                                }
-
-                            });
-
-
-                        }
                     }
-                    // else {
-                    //     showOptions(sender, "I'm not sure I understand what you're trying to say. These are somethings I can help you with..")
-                    // }
+                }
                    
-                }); 
-
-            if(text.substring(0,6) == "parrot") {
-                sendTextMessage(sender, text.substring(7,200))
-                continue
-            }
-           else if(text == 'query' ) {
-                sendTextMessage(sender, query)
-
-            }
-           else if(text == 'log in') {
-                generateLogin(sender)
-
-
-            }
-            else if(text == 'info') {
-                //function...
-
-                var URL = "https://graph.facebook.com/v2.6/" + sender + "?fields=first_name&access_token=EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
-                 requestify.get(URL).then(function(response) {
-                    // Get the response body
-                    var rep = response.getBody();
-                    //var repText = "Hello, " + rep.first_name 
-                    //sendTextMessage(sender, repText)
-                    startInfo(sender, rep.first_name);
-
-                });   
-
-            }
+            }); 
 
         }
 
@@ -338,291 +206,52 @@ app.post('/webhook/', function (req, res) {
 
 var token = "EAANGyeqRbP4BAO5yNNPoSBaQvStEjPWSG9RdMbmooOych5dP8DkwrED7wdfgxYZC9IOu0PrtcrmCAkUgEyY9C8WjWzP2dEJo6PEiMCrRhwlEfkIgrZAuonY58iYDgnuki4e3KVwZAtylqOebAwkhCZBjwNEUb0TeZBjZADg2aCGwZDZD"
 
-if(n==6){
-    if(sender != null) {
-        sendTextMessage(sender, "here's an update for ya")
-    }
-}
-function setSearchPreferences(sender) {
-   messageData = {
-
-        "text": "I see that you are a " + gender + ". Do you want me to set your search preferences to only show items for " + gender + "s? You can change this at anytime just by changing your preferences in the help menu.",
-        "quick_replies": [{
-            "content_type": "text",
-            "title": "Sure",
-            "payload": "does this matter?"
-            },
-
-            {
-            "content_type": "text",
-            "title": "No Thanks",
-            "payload": "doubt it "
-            }
-            ]
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-
-}
-function generateLogin(sender) {
-    messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
-                    "title": "Welcome to Mavatar",
-                    "buttons": [{
-                        "type": "account_link",
-                        "url": "https://mavatar.com/login"
-                    },
-                    {
-                        "type": "postback",
-                        "title": "I don't have an account",
-                        "payload": "no-account"
-                    }
-
-                    ]
-
-
-                }]
-
-            }
-        }
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-
-
-
-}
-function showCartItems(sender, cartId) {
-    var URL = "https://api-dev.mavatar.com/api/carts/" + cartId + "/items?mav_user_api_key=MTs1QroCztjKygPrTk"
-
-    requestify.get(URL).then(function(response) {
-        var rep = response.getBody();
-
-         
-        elementTest = [{
-            "title": "test",
-            "subtitle": "shitty test",
-            "image_url": "fake Image"
-
-        }]
-
-         for(i = 0; i < rep.items.length; i++) {
-            var cartItem = rep.items[i]
-            element = {
-                "title": cartItem.short_description,
-                "subtitle": cartItem.long_description,
-                "image_url": cartItem.vendor_image_url
-            }
-            elementTest.push(element)
-        }
-
-        elementTest.shift()
-
-
-         messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": elementTest
-            } 
-        }
+function forecastBuilder(sender, response) {
+    var forecastObject = []
+    for(i = 0; i < response.list.length; i++) {
+        forecastObject.push(response.list[i]);
     }
 
-     request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+    sendTextMessage(sender, "Alright, here's your forecast in " + place +  " for the next " + forecastObject.length + " days"); 
+    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    var d = new Date();
+    var n = d.getDay();
 
-
-    });
-
-
-
-
-
-}
-function showCart(sender) { 
-    var URL = "https://api-dev.mavatar.com/api/carts/?mav_user_api_key=MTs1QroCztjKygPrTk"
-
-    requestify.get(URL).then(function(response) {
-                    // Get the response body
-        var carts = []
-
-        var rep = response.getBody();
-        for(i = 0; i < rep.items.length; i++) {
-            carts.push(rep.items[i].name)
-        }
-        //"Which Cart did you want to view
-        var cartButtons = []
-        testButton = {
-            "type": "postback",
-            "title": "what a shitty test",
-            "payload": "paylooooad"
-        }
-        cartButtons.push(testButton)
-        for(i = 0; i < carts.length; i++) {
-            var button = {
-                "type": "postback",
-                "title": carts[i],
-                "payload": "cartId " + rep.items[i].id
-            }
-            cartButtons.push(button)
-
-        }
-        cartButtons.shift()
-        messageData = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements" : [{
-                        "title": "Which Cart did you Want to View?",
-                        "buttons": cartButtons
-
-                    }]
-
-                }
-            }
-
-        }
-        request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
-
-
-
-
-    });
-
-
-}
-function mavatarItemGenerator(sender, response, query, pageNum) { 
-    var itemObjects = []
-    console.log("HERE BITCH: " + query)
-     for(i = 0; i < response.hits.length; i++) {
-        itemObjects.push(response.hits[i]);
-    }
-
-     elementTest = [{
+    elementTest = [{
         "title": "this is a test",
         "subtitle": "this is another test",
         "image_url": "https://s32.postimg.org/ftphqrki9/rainy.jpg",
-        "buttons": [{
-            "type": "postback",
-            "title": "More Info",
-            "payload": "This is a test"
-            }, {
-            "type": "postback",
-            "title": "Add to Cart",
-            "payload": "Add to Cart" 
-
-            }
-            ]
     }]
-    for(i = 0; i < 10; i++) {
-        if(i > itemObjects.length + 1) {
-            break
-        }
-        var item = itemObjects[i]
 
 
-        if(i == 9) {
 
-               elementTest.push({
-                "title": item.name,
-                "subtitle": "$" + item.retail_price,
-                "image_url": item.image_url,
-                 "buttons": [{
-                "type": "postback",
-                "title": "More Info",
-                "payload": "info " + item.name
-                }, {
-                "type": "postback",
-                "title": "Add to Cart",
-                "payload": "Add to Cart" 
-                },{
+    for(i = 0; i < forecastObject.length; i++) {
 
-                "type":"postback",
-                "title": "Show Me More",
-                "payload": "more " + (pageNum + 1) + " "  + query
+    if(n == 6){n = 0;}
+    var day = forecastObject[i];
+    var description = day.weather[0].description
+    var imageUrl = ""
 
-                }
-                ]
-                })
+    //image handeling
+    if(description.includes("rain")) {
+        imageUrl = "https://s32.postimg.org/ftphqrki9/rainy.jpg"
+    }
+    else if(description.includes("cloud")) {
+        imageUrl = "https://s32.postimg.org/imipaskup/cloudy.jpg"
+    }
+    else {
+        imageUrl = "https://s32.postimg.org/9u1qn3zpt/sunny.jpg"
+    }
 
-            break
-        }
-         elementTest.push({
-                "title": item.name,
-                "subtitle": "$" + item.retail_price,
-                "image_url": item.image_url,
-                 "buttons": [{
-                "type": "postback",
-                "title": "More Info",
-                "payload": "info " + item.name
-                }, {
-                "type": "postback",
-                "title": "Add to Cart",
-                "payload": "Add to Cart" 
-                }
-                ]
-                })
-        }
-    //}
+    elementTest.push({
+        "title": days[n] + ": " + day.weather[0].description,
+        "subtitle": "High: " + day.temp.max + " Low: " + day.temp.min + " Average: " + day.temp.day,
+        "image_url": imageUrl
+    })
+     n++;
+    }
+
+
     elementTest.shift()
 
  messageData = {
@@ -654,90 +283,85 @@ function mavatarItemGenerator(sender, response, query, pageNum) {
 
 
 }
-function showOptions(sender, greetingText) {
-  messageData = {
+function weather(sender, location) { 
+    var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + location + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
 
-        "text": greetingText,
-        "quick_replies": [{
-            "content_type": "text",
-            "title": "Shop",
-            "payload": "shop_payload"
-            },
+    requestify.get(URL).then(function(response) {
+                    // Get the response body
 
-            {
-            "content_type": "text",
-            "title": "My Carts",
-            "payload": "my_cart_payload"
-            },
-            {
-            "content_type": "text",
-            "title": "Featured Carts",
-            "payload": "cart_payload"
-            }
+        var rep = response.getBody();
 
-            ]
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+
+        var respText = "The weather in " + rep.name + " is " + rep.main.temp + " degrees fahrenheit" 
+
+        sendTextMessage(sender, respText)   
+
+    }); 
 
 
 }
-function startInfo(sender, name) {
+function rainy(sender, location) {
 
-    messageData = {
+ var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + location + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
 
-        "text": "Hello " + name + ", Welcome to the Mavatar TestBot. Where you can instantly shop for retail clothes, create and share trendy carts, and find the best possible deals on your favorite items! How would you like to start out today?",
-        "quick_replies": [{
-            "content_type": "text",
-            "title": "Shop",
-            "payload": "shop_payload"
-            },
+    requestify.get(URL).then(function(response) {
+                    // Get the response body
 
-            {
-            "content_type": "text",
-            "title": "View Carts",
-            "payload": "cart_payload"
-            },
-             {
-            "content_type": "text",
-            "title": "Hottest Deals",
-            "payload": "cart_payload"
+        var rep = response.getBody();
+
+        //sendTextMessage(sender, rep.weather[0].description)    
+        var weatherDescription = rep.weather[0].main
+
+        if(weatherDescription == "Rain" || weatherDescription.includes('rain')) {
+            sendTextMessage(sender, "Yes! its raining in " + rep.name)
+            //sendTextMessage(sender, "Yes")
+        }
+        else{
+            if(weatherDescription[weatherDescription.length - 1] == 's') {
+                sendTextMessage(sender, "Nope. Looks like there are " + weatherDescription.toLowerCase())
+
+            }
+            else { 
+            sendTextMessage(sender, "Nope. Looks like it is " + weatherDescription.toLowerCase())
             }
 
+        }    
 
-            ]
-    }
-     request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+    }); 
 
 
 }
+function sunny(sender, location) {
+    var URL = 'http://api.openweathermap.org/data/2.5/weather?q= ' + location + '&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial'
+
+    requestify.get(URL).then(function(response) {
+                    // Get the response body
+
+        var rep = response.getBody();
+
+        //sendTextMessage(sender, rep.weather[0].description)    
+        var weatherDescription = rep.weather[0].main
+
+        if(weatherDescription =='Clear') {
+            sendTextMessage(sender, "Yes, the sun is out.. shining with a temperature of " + rep.main.temp + " in " + rep.name)
+            //sendTextMessage(sender, "Yes")
+        }
+        else{
+            if(weatherDescription[weatherDescription.length - 1] == 's') {
+                sendTextMessage(sender, "Nope. Looks like there are " + weatherDescription.toLowerCase())
+
+            }
+            else { 
+            sendTextMessage(sender, "Nope. Looks like it is " + weatherDescription.toLowerCase())
+            }
+        }    
+
+    }); 
+
+
+}
+
+
 function sendTextMessage(sender, text) {
     messageData = {
         text:text

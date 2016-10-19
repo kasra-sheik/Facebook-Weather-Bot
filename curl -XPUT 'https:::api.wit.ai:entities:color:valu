@@ -1,0 +1,34 @@
+curl -XPUT 'https://api.wit.ai/entities/color/values?v=20160810' \
+  -H 'Authorization: Bearer ICC5UJQZXDKCLNFGYXI7NN4ZNXOI27XD' \
+  -H 'Content-Type: application/json' \
+  -d '{"values":[{"value":"a"},{"value":"b"}]}'
+
+
+  curl -XGET 'https://api.wit.ai/entities/brand_name?v=20160810' \
+  -H "Authorization: Bearer ICC5UJQZXDKCLNFGYXI7NN4ZNXOI27XD"
+
+curl -XPOST 'https://api.wit.ai/entities/brand_name/values?v=20160810' \
+  -H 'Authorization: Bearer ICC5UJQZXDKCLNFGYXI7NN4ZNXOI27XD' \
+  -H 'Content-Type: application/json' \
+  -d '{"value":"gucci"}'
+
+
+headers = {
+  'Content-Type': 'application/json'
+}
+request = Request('https://api-dev.mavatar.com/password_resets/password_reset_token.json', data=values, headers=headers)
+request.get_method = lambda: 'PUT'
+
+response_body = urlopen(request).read()
+print response_body
+
+
+  curl -XPUT 'https://api.wit.ai/entities/brand_name?v=20160810' \
+  -H 'Authorization: Bearer ICC5UJQZXDKCLNFGYXI7NN4ZNXOI27XD' \
+  -H 'Content-Type: application/json' \
+  -d '{"values":[
+       {"value": "Baby Cargo"},{"value": "Dora & Friends"},{"value": "Dreambaby"},{"value": "Vinci"},{"value": "Russell"}]}'
+
+
+
+
