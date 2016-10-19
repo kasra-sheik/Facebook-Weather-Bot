@@ -99,6 +99,7 @@ app.post('/webhook/', function (req, res) {
 
                         if("intent" in rep.entities) {
                             intent = rep.entities.intent[0].value
+                            console.log(intent)
                             //sendTextMessage(sender,"this is the intent.. " + intent)
                         }
                         if(intent == "greeting") {
