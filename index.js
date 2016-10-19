@@ -107,32 +107,32 @@ app.post('/webhook/', function (req, res) {
                         else if("weather" in rep.entities) {
                             if(!("location" in rep.entities)) {
                                 sendTextMessage("where exactly?")
-                                continue
+                                
                             }
-
+                            else { 
                             var location = rep.entities.location[0].value
                             weather(sender, location)
+                            }
 
                         }
                         else if("rainy" in rep.entities) {
                             if(!("location" in rep.entities)) {
                                 sendTextMessage("where exactly?")
-                                continue
                             }
-
+                            else {
                             var location = rep.entities.location[0].value
                             rainy(sender, location)
+                         }
 
                         }
                         else if("Sunny" in rep.entities) {
                             if(!("location" in rep.entities)) {
                                 sendTextMessage("where exactly?")
-                                continue
                             }
-
+                            else {
                             var location = rep.entities.location[0].value
                             sunny(sender, location)
-                            continue
+                            }
 
                         }
 
