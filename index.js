@@ -76,7 +76,7 @@ app.post('/webhook/', function (req, res) {
                         gender = rep.gender
 
             });
-        }
+        
 
         if (event.message && event.message.text) {
             text = event.message.text
@@ -138,69 +138,15 @@ app.post('/webhook/', function (req, res) {
 
                        
                     }
-                }
+                
                    
             }); 
 
         }
-
-         if(event.postback) {
-                var postback_text = JSON.stringify(event.postback.payload)
-                console.log("slihdbfldsb: " + postback_text)
-                //sendTextMessage(sender, postback_text)
-                //sendTextMessage(sender, "info: " + postback_text.substring(1,5) + "item name: " + postback_text.substring(6, 1000)  )
-                //sendTextMessage(sender, postback_text)
-                //payloads info + name of item, sends a get request to Algolia with the product name and returns info abt it
-                if(postback_text.substring(1,5) == "info") {
-                    sendTextMessage(sender, "I found more info on this item..")
-                    var index = client.initIndex('CatalogProductInfo')
-                    var item = postback_text.substring(6,1000)
-                      index.search(item, {
-                                hitsPerPage: 1
-                            }, function searchDone(err, content) {
-                              if (err) {
-                                console.error(err);
-                                return;
-                              }
-                                sendTextMessage(sender, content.hits[0].descr)
-                                sendTextMessage(sender, "It looks like " + content.hits[0].vendor_name + " is selling this for a price of $ " + content.hits[0].retail_price)
-
-                            });
-
-
-                }
-                else if(postback_text.substring(1,5) == "more") {
-                    var pageNum = parseInt(postback_text.substring(6,7))
-                    var index = client.initIndex('CatalogProductInfo')
-                    var item = postback_text.substring(7,1000)
-                      index.search(item, {
-                                "page": pageNum,
-                                hitsPerPage: 10
-                            }, function searchDone(err, content) {
-                              if (err) {
-                                console.error(err);
-                                return;
-                              }
-                               mavatarItemGenerator(sender, content, item, pageNum)
-                            });
-
-                }
-                else if(postback_text.includes("cartId")) {
-                    var cartId = postback_text.substring(7,200)
-                    showCartItems(sender, cartId)
-                }
-                else if(postback_text == "\"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP\"") {
-                    showOptions(sender, "What can I do for you today?")
-                }
-               
-
-            }
-           
-
         
     }
     res.sendStatus(200)
-})
+}
 
 // var token = "EAANGyeqRbP4BAL4qOjj2EgeiTCEEoNDg8OeuykOmTnHZC8P2VpEmVMKpAvCVLxF50p7ZARtahrYbMcvV14oH2VIOQDk5srjgQlQxKbEsZArbUZCZCUBkKaZA2IReylaHxY2Av0Be2exmqfjcZAo7RJZAdroNg1SAOsCceomp0y8pJgZDZD"
 
