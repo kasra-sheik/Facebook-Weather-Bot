@@ -89,7 +89,7 @@ app.post('/webhook/', function (req, res) {
             }
 
             var witURL = "https://api.wit.ai/message?v=20161019&q=" + urlTestText + "&access_token=P3FOKDQK5E3MKIPS7OH6ZBJ6DYCPSAQN"
-            
+            var previousIntent 
 
             requestify.get(witURL).then(function(response) {
                     // Get the response body
@@ -97,9 +97,36 @@ app.post('/webhook/', function (req, res) {
                     //sendTextMessage(sender, rep.entities.length)
                     if(Object.keys(rep.entities).length > 0) {
 
+
+                        //if location is given but no weather 
+                        if(!("intent" in rep.entities) && "location" in rep.entities) {
+                            var location = rep.entities.location[0].value
+                            if(previousIntent == "weather"){
+                                weather(sender, location)
+                            }
+                            else if(previousIntent == "rainy"){
+                                rainy(sender, location)
+                            }
+                            else if(previousIntent == "Sunny"){
+                                sunny(sender, location)
+                            }
+                            else if(previousIntent == "forecast"){
+                            var forecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + location + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"    
+                             requestify.get(forecastURL).then(function(response) {
+                                // Get the response bodyz
+                                var forecastRep = response.getBody();
+                                forecastBuilder(sender, forecastRep)
+                            });
+                            }
+                            else {
+                                sendTextMessage(sender, "I would love to go there sometime!")
+                            }
+
+
+                        } 
+
                         if("intent" in rep.entities) {
                             intent = rep.entities.intent[0].value
-                            console.log(intent)
                             //sendTextMessage(sender,"this is the intent.. " + intent)
                         }
                         if(intent == "greeting") {
@@ -108,8 +135,9 @@ app.post('/webhook/', function (req, res) {
                         else if(intent == "weather") {
                             console.log("someone is searching for weather..")
                             if(!("location" in rep.entities)) {
-                                sendTextMessage(sender, "where exactly?")
-                                
+                                previousIntent = "weather"
+                                sendTextMessage(sender, "where exactly?") 
+
                             }
                             else { 
                             var location = rep.entities.location[0].value
@@ -119,6 +147,7 @@ app.post('/webhook/', function (req, res) {
                         }
                         else if(intent == "rainy") {
                             if(!("location" in rep.entities)) {
+                                previousIntent = "rainy"
                                 sendTextMessage(sender, "where exactly?")
                             }
                             else {
@@ -129,6 +158,7 @@ app.post('/webhook/', function (req, res) {
                         }
                         else if(intent == "Sunny") {
                             if(!("location" in rep.entities)) {
+                                previousIntent = "Sunny"
                                 sendTextMessage(sender, "where exactly?")
                             }
                             else {
@@ -139,6 +169,7 @@ app.post('/webhook/', function (req, res) {
                         }
                         else if(intent == "forecast") {
                             if(!("location" in rep.entities)) {
+                                previousIntent = "forecast"
                                 sendTextMessage(sender, "where exactly?")
                             }
                             else {
