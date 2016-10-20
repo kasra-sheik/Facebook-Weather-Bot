@@ -105,7 +105,7 @@ app.post('/webhook/', function (req, res) {
                         if(intent == "greeting") {
                             sendTextMessage(sender, "Hey there " + firstName + "!")
                         }
-                        else if("weather" in rep.entities) {
+                        else if(intent == "weather") {
                             console.log("someone is searching for weather..")
                             if(!("location" in rep.entities)) {
                                 sendTextMessage(sender, "where exactly?")
