@@ -178,7 +178,7 @@ function forecastBuilder(sender, response) {
         forecastObject.push(response.list[i]);
     }
 
-    sendTextMessage(sender, "Alright, here's your forecast in " + place +  " for the next " + forecastObject.length + " days"); 
+    sendTextMessage(sender, "Alright, here's your forecast in " + location +  " for the next " + forecastObject.length + " days"); 
     var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     var d = new Date();
     var n = d.getDay();
