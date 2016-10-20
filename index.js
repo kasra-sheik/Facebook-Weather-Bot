@@ -151,6 +151,9 @@ app.post('/webhook/', function (req, res) {
                             });
                             }
                         }
+                        else {
+                            sendTextMessage(sender, "I'm sorry. I didn't understand your message. I am curretly only programmed to find weather. Try something like \"Is is sunny in Miami?\"")
+                        }
 
                        
                     }
