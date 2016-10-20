@@ -137,6 +137,20 @@ app.post('/webhook/', function (req, res) {
                             }
 
                         }
+                        else if(intent == "forecast") {
+                            if(!("location" in rep.entities)) {
+                                sendTextMessage(sender, "where exactly?")
+                            }
+                            else {
+                            var location = rep.entities.location[0].value
+                            var forecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + location + "&APPID=2ddd57c19f8c98af663921918a7507ab&units=imperial&cnt=5"    
+                             requestify.get(forecastURL).then(function(response) {
+                                // Get the response bodyz
+                                var forecastRep = response.getBody();
+                                forecastBuilder(sender, forecastRep)
+                            });
+                            }
+                        }
 
                        
                     }
